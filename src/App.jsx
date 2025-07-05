@@ -42,7 +42,6 @@ function App() {
     }
   }, [currentLesson, lessons]);
 
-  // Handle Escape key to close modal
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -101,37 +100,32 @@ function App() {
   };
 
   return (
-    <div className="p-2 max-w-4xl mx-auto">
-      {/* Progress indicator */}
+    <div className="container">
       <div className="bg-gray-50 p-2 mb-2">
         <p className="text-lg font-semibold">
           Lesson {currentLesson + 1} of {lessons.lessons.length}
         </p>
       </div>
 
-      {/* Lesson title */}
       <div className="bg-off-white p-2 mb-2">
         <h1 className="text-3xl font-bold">{lesson.title || 'No title available'}</h1>
       </div>
 
-      {/* Introduction */}
       <div className="bg-gray-blue-50 p-2 mb-2">
         <p className="text-lg">{lesson.introduction || 'No introduction available'}</p>
       </div>
 
-      {/* Core concept */}
       <div className="bg-blue-gray-50 p-2 mb-2">
         <p className="text-lg">{lesson.coreConcept || 'No core concept available'}</p>
       </div>
 
-      {/* Table rendering */}
       {lesson.table && Array.isArray(lesson.table) && lesson.table.length > 0 && lesson.table.every(row => typeof row === 'object') ? (
-        <div className="mb-2">
+        <div className="mb-2 overflow-x-auto">
           <table className="table-auto w-full border-collapse">
             <thead>
               <tr className="bg-gray-200">
                 {Object.keys(lesson.table[0]).map((key) => (
-                  <th key={key} className="border px-4 py-1.5 text-left">{key}</th>
+                  <th key={key} className="border text-left">{key}</th>
                 ))}
               </tr>
             </thead>
@@ -139,7 +133,7 @@ function App() {
               {lesson.table.map((row, index) => (
                 <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
                   {Object.values(row).map((value, i) => (
-                    <td key={i} className="border px-4 py-1.5">{value}</td>
+                    <td key={i} className="border">{value}</td>
                   ))}
                 </tr>
               ))}
@@ -152,7 +146,6 @@ function App() {
         </div>
       )}
 
-      {/* Diagram rendering */}
       {lesson.diagram && typeof lesson.diagram === 'string' ? (
         <div className="bg-gray-800 p-2 mb-2">
           <h2 className="text-xl font-semibold mb-2 text-white">Diagram</h2>
@@ -166,7 +159,6 @@ function App() {
         </div>
       )}
 
-      {/* MCQ rendering */}
       {lesson.mcq && Array.isArray(lesson.mcq.options) && lesson.mcq.options.length > 0 && lesson.mcq.question && lesson.mcq.correctAnswer ? (
         <div className="bg-light-gray p-2 mb-2">
           <h2 className="text-xl font-semibold mb-2">{lesson.mcq.question}</h2>
@@ -174,7 +166,7 @@ function App() {
             {lesson.mcq.options.map((option, index) => (
               <li key={index} className="ml-4">
                 <button
-                  className={`inline-block max-w-md text-left px-4 py-1.5 rounded border ${
+                  className={`inline-block max-w-md text-left px-4 py-1.5 rounded border w-full ${
                     selectedOption === index
                       ? isSubmitted
                         ? isCorrect
@@ -193,7 +185,7 @@ function App() {
           </ul>
           {!isSubmitted && (
             <button
-              className="nav-button"
+              className="nav-button mt-2 w-full"
               onClick={handleSubmit}
               disabled={selectedOption === null}
             >
@@ -210,7 +202,7 @@ function App() {
               </p>
               <p>Explanation: {lesson.mcq.explanation || 'No explanation available'}</p>
               <button
-                className="nav-button"
+                className="nav-button mt-2 w-full"
                 onClick={handleReset}
               >
                 Try Again
@@ -224,23 +216,22 @@ function App() {
         </div>
       )}
 
-      {/* Navigation buttons */}
-      <div className="bg-faint-blue p-2 mb-2 flex justify-between items-center gap-2">
+      <div className="bg-faint-blue p-2 mb-2 nav-container items-center">
         <button
-          className={`nav-button ${currentLesson === 0 ? 'nav-button-disabled' : ''}`}
+          className={`nav-button w-full ${currentLesson === 0 ? 'nav-button-disabled' : ''}`}
           onClick={() => setCurrentLesson((prev) => Math.max(0, prev - 1))}
           disabled={currentLesson === 0}
         >
           Previous
         </button>
         <button
-          className="nav-button"
+          className="nav-button w-full"
           onClick={() => setIsModalOpen(true)}
         >
           Show References 📚
         </button>
         <button
-          className={`nav-button ${currentLesson === lessons.lessons.length - 1 ? 'nav-button-disabled' : ''}`}
+          className={`nav-button w-full ${currentLesson === lessons.lessons.length - 1 ? 'nav-button-disabled' : ''}`}
           onClick={() => setCurrentLesson((prev) => Math.min(lessons.lessons.length - 1, prev + 1))}
           disabled={currentLesson === lessons.lessons.length - 1}
         >
@@ -248,7 +239,6 @@ function App() {
         </button>
       </div>
 
-      {/* Modal for references */}
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
@@ -272,7 +262,7 @@ function App() {
               <p className="mb-4">No references available</p>
             )}
             <button
-              className="modal-close"
+              className="modal-close w-full"
               onClick={() => setIsModalOpen(false)}
             >
               Close
