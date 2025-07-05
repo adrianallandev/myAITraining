@@ -1,0 +1,1731 @@
+{
+  "lessons": [
+    {
+      "title": "Day 1: Introduction to Artificial Intelligence",
+      "introduction": "Artificial Intelligence (AI) involves creating systems that mimic human intelligence. This lesson covers the basics, history, and applications of AI.",
+      "coreConcept": "Artificial Intelligence (AI) is the simulation of human intelligence processes by machines, enabling tasks like learning, reasoning, and self-correction. It spans narrow AI, which excels in specific tasks like image recognition, to aspirational general AI, capable of performing any intellectual task a human can. For example, AI powers virtual assistants like Siri, which interpret voice commands and respond intelligently.",
+      "table": [
+        {
+          "Type": "Narrow AI",
+          "Description": "Designed for specific tasks with high efficiency",
+          "Examples": "Siri, Netflix recommendations",
+          "Applications": "Voice assistants, spam filters"
+        },
+        {
+          "Type": "General AI",
+          "Description": "Capable of broad, human-like intelligence",
+          "Examples": "Not yet achieved",
+          "Applications": "Theoretical universal problem-solving"
+        },
+        {
+          "Type": "Super AI",
+          "Description": "Surpasses human intelligence",
+          "Examples": "Hypothetical",
+          "Applications": "Advanced scientific discovery"
+        }
+      ],
+      "diagram": "AI Hierarchy:\n  Super AI\n  ↑\n  General AI\n  ↑\n  Narrow AI\n    └─ Task-specific (e.g., Siri -> Voice recognition -> Response generation)",
+      "mcq": {
+        "question": "What distinguishes Narrow AI from General AI?",
+        "options": [
+          "Narrow AI is task-specific, General AI is versatile",
+          "Narrow AI is more intelligent",
+          "General AI is used in smartphones",
+          "No difference exists"
+        ],
+        "correctAnswer": "a",
+        "explanation": "Narrow AI performs specific tasks, while General AI aims to handle any intellectual task."
+      },
+      "references": [
+        {
+          "title": "Coursera: AI For Everyone",
+          "description": "An online course by Andrew Ng covering AI fundamentals.",
+          "url": "https://www.coursera.org/learn/ai-for-everyone"
+        }
+      ]
+    },
+    {
+      "title": "Day 2: Machine Learning Basics",
+      "introduction": "Machine Learning (ML) enables systems to learn from data. This lesson explores ML types and algorithms.",
+      "coreConcept": "Machine Learning (ML) is a subset of AI where algorithms improve through experience without explicit programming. It includes supervised learning for labeled data, unsupervised learning for finding patterns, and reinforcement learning for reward-based decisions. For instance, ML powers email spam filters by learning from examples of spam and non-spam emails.",
+      "table": [
+        {
+          "ML Type": "Supervised",
+          "Description": "Trains on labeled data for prediction",
+          "Examples": "Linear regression, SVM",
+          "Use Cases": "House price prediction, image classification"
+        },
+        {
+          "ML Type": "Unsupervised",
+          "Description": "Finds patterns in unlabeled data",
+          "Examples": "K-Means, PCA",
+          "Use Cases": "Customer segmentation, anomaly detection"
+        },
+        {
+          "ML Type": "Reinforcement",
+          "Description": "Learns via rewards and penalties",
+          "Examples": "Q-Learning, DQN",
+          "Use Cases": "Game playing, robotics navigation"
+        }
+      ],
+      "diagram": "ML Types:\n  Machine Learning\n  ├─ Supervised\n  │   └─ Labeled Data -> Prediction (e.g., Spam filter)\n  ├─ Unsupervised\n  │   └─ Unlabeled Data -> Patterns (e.g., Clustering)\n  └─ Reinforcement\n      └─ Rewards -> Optimal Actions (e.g., Game AI)",
+      "mcq": {
+        "question": "Which ML type uses labeled data?",
+        "options": [
+          "Supervised Learning",
+          "Unsupervised Learning",
+          "Reinforcement Learning",
+          "All of the above"
+        ],
+        "correctAnswer": "a",
+        "explanation": "Supervised Learning uses labeled data to train models."
+      },
+      "references": [
+        {
+          "title": "edX: Machine Learning with Python",
+          "description": "A course by IBM on ML fundamentals.",
+          "url": "https://www.edx.org/course/machine-learning-with-python-a-practical-introduction"
+        }
+      ]
+    },
+    {
+      "title": "Day 3: Deep Learning Fundamentals",
+      "introduction": "Deep Learning uses neural networks with many layers. This lesson introduces its principles and applications.",
+      "coreConcept": "Deep Learning is a subset of ML that uses multi-layered neural networks to model complex patterns in data, such as images or text. It excels in tasks like speech recognition due to its ability to automatically learn features from raw data. For example, deep learning powers facial recognition systems by identifying patterns in pixel data.",
+      "table": [
+        {
+          "Component": "Input Layer",
+          "Function": "Receives raw data (e.g., pixels)",
+          "Example": "Image pixels for classification"
+        },
+        {
+          "Component": "Hidden Layers",
+          "Function": "Extract features via weights",
+          "Example": "Edge detection in images"
+        },
+        {
+          "Component": "Output Layer",
+          "Function": "Produces final prediction",
+          "Example": "Class probabilities"
+        }
+      ],
+      "diagram": "Neural Network Structure:\n  Input Layer (e.g., Image Pixels)\n  ↓\n  Hidden Layer 1 (Feature Extraction: Edges)\n  ↓\n  Hidden Layer 2 (Feature Combination: Shapes)\n  ↓\n  Output Layer (Prediction: Class Scores)",
+      "mcq": {
+        "question": "What is a key feature of deep learning?",
+        "options": [
+          "Uses single-layer networks",
+          "Requires manual feature engineering",
+          "Uses multi-layered neural networks",
+          "Works with small datasets"
+        ],
+        "correctAnswer": "c",
+        "explanation": "Deep Learning uses multiple neural network layers to learn features automatically."
+      },
+      "references": [
+        {
+          "title": "DeepLearning.AI: Deep Learning Specialization",
+          "description": "Courses by Andrew Ng on deep learning.",
+          "url": "https://www.deeplearning.ai/courses/deep-learning-specialization/"
+        }
+      ]
+    },
+    {
+      "title": "Day 4: Neural Networks in Depth",
+      "introduction": "Neural Networks power deep learning. This lesson covers their structure and training process.",
+      "coreConcept": "Neural Networks are computational models with interconnected nodes that process data through weighted connections and activation functions, trained via backpropagation to minimize errors. They mimic biological neurons to solve tasks like image classification. For example, a neural network can classify handwritten digits by learning patterns in pixel intensities.",
+      "table": [
+        {
+          "Component": "Neuron",
+          "Function": "Processes input with weights and activation",
+          "Example": "Sigmoid activation for binary output"
+        },
+        {
+          "Component": "Layer",
+          "Function": "Groups neurons for computation",
+          "Example": "Dense layer in a network"
+        },
+        {
+          "Component": "Loss Function",
+          "Function": "Measures prediction error",
+          "Example": "Mean Squared Error for regression"
+        }
+      ],
+      "diagram": "Training Process:\n  Forward Pass:\n    Input -> Weights -> Activation -> Output\n  Backward Pass (Backpropagation):\n    Output -> Loss -> Gradient -> Update Weights",
+      "mcq": {
+        "question": "What does backpropagation do in neural networks?",
+        "options": [
+          "Designs network architecture",
+          "Adjusts weights based on error",
+          "Collects training data",
+          "Visualizes the network"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Backpropagation adjusts weights to minimize prediction errors."
+      },
+      "references": [
+        {
+          "title": "Neural Networks and Deep Learning",
+          "description": "A free online book by Michael Nielsen.",
+          "url": "http://neuralnetworksanddeeplearning.com/"
+        }
+      ]
+    },
+    {
+      "title": "Day 5: Ethics in AI",
+      "introduction": "AI raises ethical concerns like bias and privacy. This lesson explores responsible AI development.",
+      "coreConcept": "Ethical AI ensures fairness, transparency, and privacy in AI systems to prevent harm and promote trust. It addresses issues like biased algorithms, which can discriminate if trained on skewed data, and ensures compliance with regulations like GDPR. For example, ethical AI practices are critical in hiring algorithms to avoid gender or racial bias.",
+      "table": [
+        {
+          "Issue": "Bias",
+          "Impact": "Unfair outcomes in decisions",
+          "Mitigation": "Diverse training data"
+        },
+        {
+          "Issue": "Privacy",
+          "Impact": "Data misuse risks",
+          "Mitigation": "Differential privacy"
+        },
+        {
+          "Issue": "Transparency",
+          "Impact": "Lack of trust",
+          "Mitigation": "Explainable AI models"
+        }
+      ],
+      "diagram": "Ethical AI Framework:\n  Principles\n  ├─ Fairness (Unbiased Data)\n  ├─ Transparency (Explainable Models)\n  └─ Privacy (Secure Data Handling)",
+      "mcq": {
+        "question": "What is a key ethical concern in AI?",
+        "options": [
+          "Increasing model size",
+          "Reducing training time",
+          "Addressing bias in algorithms",
+          "Improving hardware efficiency"
+        ],
+        "correctAnswer": "c",
+        "explanation": "Bias in algorithms can lead to unfair outcomes, a critical ethical concern."
+      },
+      "references": [
+        {
+          "title": "Google AI: Responsible AI Practices",
+          "description": "Guidelines for ethical AI by Google.",
+          "url": "https://ai.google/responsibility/principles/"
+        }
+      ]
+    },
+    {
+      "title": "Day 6: Supervised Learning Techniques",
+      "introduction": "Supervised learning uses labeled data to predict outcomes. This lesson covers key algorithms.",
+      "coreConcept": "Supervised learning trains models on labeled datasets to predict outcomes for tasks like regression and classification. It relies on input-output pairs to learn patterns, such as predicting house prices from features like size and location. For example, logistic regression is used in spam detection to classify emails based on labeled examples.",
+      "table": [
+        {
+          "Algorithm": "Linear Regression",
+          "Task": "Regression",
+          "Use Case": "Predicting house prices",
+          "Strength": "Simple, interpretable"
+        },
+        {
+          "Algorithm": "Logistic Regression",
+          "Task": "Classification",
+          "Use Case": "Spam detection",
+          "Strength": "Handles binary outcomes"
+        },
+        {
+          "Algorithm": "Decision Tree",
+          "Task": "Classification/Regression",
+          "Use Case": "Customer churn prediction",
+          "Strength": "Handles non-linear data"
+        }
+      ],
+      "diagram": "Supervised Learning:\n  Labeled Data (Input: Features, Output: Labels)\n  ↓\n  Model Training (e.g., Logistic Regression)\n  ↓\n  Prediction (e.g., Spam or Not Spam)",
+      "mcq": {
+        "question": "What is the main task of logistic regression?",
+        "options": [
+          "Predicting continuous values",
+          "Predicting discrete categories",
+          "Clustering data",
+          "Optimizing rewards"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Logistic regression predicts discrete categories, like spam or not spam."
+      },
+      "references": [
+        {
+          "title": "Machine Learning Crash Course",
+          "description": "Google's free course on supervised learning.",
+          "url": "https://developers.google.com/machine-learning/crash-course"
+        }
+      ]
+    },
+    {
+      "title": "Day 7: Unsupervised Learning Techniques",
+      "introduction": "Unsupervised learning finds patterns in unlabeled data. This lesson covers clustering and more.",
+      "coreConcept": "Unsupervised learning identifies hidden patterns in unlabeled data, enabling tasks like clustering and dimensionality reduction without predefined labels. It’s used in applications like market segmentation, where customer data is grouped based on purchasing behavior. For example, K-Means clustering groups customers into similar segments for targeted marketing.",
+      "table": [
+        {
+          "Algorithm": "K-Means",
+          "Task": "Clustering",
+          "Use Case": "Customer segmentation",
+          "Strength": "Scalable, simple"
+        },
+        {
+          "Algorithm": "PCA",
+          "Task": "Dimensionality Reduction",
+          "Use Case": "Data visualization",
+          "Strength": "Preserves variance"
+        },
+        {
+          "Algorithm": "DBSCAN",
+          "Task": "Clustering",
+          "Use Case": "Anomaly detection",
+          "Strength": "Handles irregular clusters"
+        }
+      ],
+      "diagram": "K-Means Clustering:\n  Data Points\n  ↓\n  Initialize Centroids (Random)\n  ↓\n  Assign Points to Nearest Centroid\n  ↓\n  Update Centroids (Mean of Points)\n  ↓\n  Repeat Until Convergence -> Clusters",
+      "mcq": {
+        "question": "What is a common use of unsupervised learning?",
+        "options": [
+          "Predicting house prices",
+          "Customer segmentation",
+          "Spam detection",
+          "Game playing"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Unsupervised learning is used for customer segmentation by finding patterns."
+      },
+      "references": [
+        {
+          "title": "Introduction to Unsupervised Learning",
+          "description": "A tutorial by Stanford Online.",
+          "url": "https://online.stanford.edu/courses/xcs229ii-machine-learning-unsupervised-learning"
+        }
+      ]
+    },
+    {
+      "title": "Day 8: Reinforcement Learning Basics",
+      "introduction": "Reinforcement learning trains agents via rewards. This lesson covers its principles.",
+      "coreConcept": "Reinforcement learning involves agents learning optimal actions through trial and error, guided by rewards and penalties in an environment. It’s ideal for dynamic systems like robotics, where an agent learns to navigate by maximizing cumulative rewards. For example, AlphaGo used reinforcement learning to master the game of Go by optimizing moves based on wins.",
+      "table": [
+        {
+          "Component": "Agent",
+          "Role": "Learns and acts",
+          "Example": "Robot navigating a maze"
+        },
+        {
+          "Component": "Environment",
+          "Role": "Provides feedback",
+          "Example": "Maze with obstacles"
+        },
+        {
+          "Component": "Reward",
+          "Role": "Guides learning",
+          "Example": "Points for reaching goal"
+        }
+      ],
+      "diagram": "Reinforcement Learning Loop:\n  Agent -> Action -> Environment\n  ↑                      ↓\n  Reward <- State <- Feedback",
+      "mcq": {
+        "question": "What guides learning in reinforcement learning?",
+        "options": [
+          "Labeled data",
+          "Rewards",
+          "Unlabeled data",
+          "Manual rules"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Reinforcement learning uses rewards to guide an agent's decisions."
+      },
+      "references": [
+        {
+          "title": "Reinforcement Learning: An Introduction",
+          "description": "A book by Richard S. Sutton and Andrew G. Barto.",
+          "url": null
+        }
+      ]
+    },
+    {
+      "title": "Day 9: Data Preprocessing for ML",
+      "introduction": "Data preprocessing prepares raw data for ML models. This lesson covers cleaning and normalization.",
+      "coreConcept": "Data preprocessing transforms raw data into a format suitable for ML models by handling missing values, scaling features, and encoding categories. It improves model accuracy and training efficiency. For example, normalizing pixel values in images ensures consistent input for neural networks.",
+      "table": [
+        {
+          "Technique": "Normalization",
+          "Purpose": "Scale data to a range (e.g., 0–1)",
+          "Example": "Min-Max scaling for features",
+          "Benefit": "Improves convergence"
+        },
+        {
+          "Technique": "One-Hot Encoding",
+          "Purpose": "Convert categories to binary vectors",
+          "Example": "Encoding colors (Red, Blue)",
+          "Benefit": "Handles categorical data"
+        },
+        {
+          "Technique": "Imputation",
+          "Purpose": "Handle missing values",
+          "Example": "Replace with mean",
+          "Benefit": "Preserves dataset size"
+        }
+      ],
+      "diagram": "Preprocessing Pipeline:\n  Raw Data -> Clean (Remove Noise) -> Encode (One-Hot) -> Normalize -> Model Input",
+      "mcq": {
+        "question": "What is the purpose of data normalization?",
+        "options": [
+          "Remove missing data",
+          "Scale data to a standard range",
+          "Create new features",
+          "Cluster data"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Normalization scales data to a standard range to improve model performance."
+      },
+      "references": [
+        {
+          "title": "DataCamp: Data Preprocessing",
+          "description": "A course on data preprocessing techniques.",
+          "url": "https://www.datacamp.com/courses/data-preprocessing-with-python"
+        }
+      ]
+    },
+    {
+      "title": "Day 10: Evaluation Metrics for ML",
+      "introduction": "Evaluation metrics assess ML model performance. This lesson covers accuracy and precision.",
+      "coreConcept": "Evaluation metrics quantify ML model performance for tasks like classification and regression, ensuring models meet desired objectives. Metrics like precision and recall are critical for imbalanced datasets, such as fraud detection, where false positives matter. For example, precision measures the accuracy of positive predictions in spam filtering.",
+      "table": [
+        {
+          "Metric": "Accuracy",
+          "Definition": "Correct predictions / Total predictions",
+          "Use Case": "Balanced classification",
+          "Limitation": "Misleading for imbalanced data"
+        },
+        {
+          "Metric": "Precision",
+          "Definition": "True positives / Predicted positives",
+          "Use Case": "Fraud detection",
+          "Limitation": "Ignores false negatives"
+        },
+        {
+          "Metric": "Recall",
+          "Definition": "True positives / Actual positives",
+          "Use Case": "Medical diagnosis",
+          "Limitation": "Ignores false positives"
+        }
+      ],
+      "diagram": "Confusion Matrix:\n  Actual\n    | Positive | Negative\n  P |   TP     |   FP\n  r |----------|----------\n  e |   FN     |   TN\nd",
+      "mcq": {
+        "question": "What does precision measure in ML?",
+        "options": [
+          "Total correct predictions",
+          "True positives over predicted positives",
+          "True positives over actual positives",
+          "Model training time"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Precision measures true positives over predicted positives."
+      },
+      "references": [
+        {
+          "title": "Towards Data Science: ML Metrics",
+          "description": "An article on evaluation metrics.",
+          "url": "https://towardsdatascience.com/understanding-machine-learning-evaluation-metrics"
+        }
+      ]
+    },
+    {
+      "title": "Day 11: Decision Trees",
+      "introduction": "Decision trees are versatile ML models for classification and regression.",
+      "coreConcept": "Decision trees split data into branches based on feature values to make decisions, creating a tree-like structure of choices. They are interpretable and handle non-linear relationships, used in tasks like credit scoring. For example, a decision tree can predict loan approval based on income and credit history.",
+      "table": [
+        {
+          "Component": "Root Node",
+          "Role": "Initial feature split",
+          "Example": "Income > $50K"
+        },
+        {
+          "Component": "Internal Node",
+          "Role": "Subsequent feature splits",
+          "Example": "Credit Score > 700"
+        },
+        {
+          "Component": "Leaf Node",
+          "Role": "Final decision",
+          "Example": "Approve/Deny loan"
+        }
+      ],
+      "diagram": "Decision Tree:\n  [Income > $50K?]\n  /         \\\n Yes         No\n[Score > 700?]  [Deny]\n  /   \\\nApprove  Deny",
+      "mcq": {
+        "question": "What is the purpose of pruning in decision trees?",
+        "options": [
+          "Increase model complexity",
+          "Prevent overfitting",
+          "Reduce training time",
+          "Add more features"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Pruning reduces tree size to prevent overfitting."
+      },
+      "references": [
+        {
+          "title": "Scikit-learn: Decision Trees",
+          "description": "Documentation on decision trees in Scikit-learn.",
+          "url": "https://scikit-learn.org/stable/modules/tree.html"
+        }
+      ]
+    },
+    {
+      "title": "Day 12: Random Forests",
+      "introduction": "Random forests combine multiple decision trees for better performance.",
+      "coreConcept": "Random forests aggregate predictions from multiple decision trees to improve accuracy and reduce overfitting through ensemble learning. They use techniques like bagging and feature randomness, ideal for tasks like disease prediction. For example, random forests can predict heart disease risk by combining tree predictions.",
+      "table": [
+        {
+          "Technique": "Bagging",
+          "Purpose": "Bootstrap sampling of data",
+          "Benefit": "Reduces variance"
+        },
+        {
+          "Technique": "Feature Randomness",
+          "Purpose": "Random feature selection",
+          "Benefit": "Increases diversity"
+        },
+        {
+          "Technique": "Voting",
+          "Purpose": "Combine tree predictions",
+          "Benefit": "Improves accuracy"
+        }
+      ],
+      "diagram": "Random Forest:\n  Data -> [Tree 1, Tree 2, ..., Tree N]\n           ↓        ↓          ↓\n        Predict    Predict    Predict\n           ↓        ↓          ↓\n         [Combine Predictions -> Final Output]",
+      "mcq": {
+        "question": "What technique does random forest use to reduce variance?",
+        "options": [
+          "Boosting",
+          "Bagging",
+          "Pruning",
+          "Feature engineering"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Random forests use bagging to combine trees and reduce variance."
+      },
+      "references": [
+        {
+          "title": "Introduction to Random Forests",
+          "description": "A guide by Analytics Vidhya.",
+          "url": "https://www.analyticsvidhya.com/blog/2021/06/understanding-random-forest/"
+        }
+      ]
+    },
+    {
+      "title": "Day 13: Support Vector Machines",
+      "introduction": "Support Vector Machines (SVMs) are powerful for classification tasks.",
+      "coreConcept": "Support Vector Machines find the optimal hyperplane to separate data classes with the maximum margin, using kernels to handle non-linear data. They are effective for tasks like text classification due to their robustness. For example, SVMs can classify emails as spam or not by mapping features into a higher-dimensional space.",
+      "table": [
+        {
+          "Kernel": "Linear",
+          "Use Case": "Linearly separable data",
+          "Example": "Text classification",
+          "Strength": "Simple, fast"
+        },
+        {
+          "Kernel": "RBF",
+          "Use Case": "Non-linear data",
+          "Example": "Image classification",
+          "Strength": "Flexible"
+        },
+        {
+          "Kernel": "Polynomial",
+          "Use Case": "Complex patterns",
+          "Example": "Face recognition",
+          "Strength": "Captures interactions"
+        }
+      ],
+      "diagram": "SVM Hyperplane:\n  Class A | Optimal Hyperplane | Class B\n  [Support Vectors]   [Max Margin]   [Support Vectors]",
+      "mcq": {
+        "question": "What does an SVM kernel do?",
+        "options": [
+          "Reduces data dimensions",
+          "Handles non-linear data",
+          "Clusters data points",
+          "Predicts continuous values"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Kernels transform data to handle non-linear relationships."
+      },
+      "references": [
+        {
+          "title": "SVM Tutorial",
+          "description": "A tutorial by StatQuest.",
+          "url": "https://www.youtube.com/watch?v=efR1C6CvhmE"
+        }
+      ]
+    },
+    {
+      "title": "Day 14: Clustering Algorithms",
+      "introduction": "Clustering groups similar data points without labels.",
+      "coreConcept": "Clustering algorithms group data based on similarity, using methods like K-Means to identify patterns in unlabeled datasets. They are used in applications like market analysis to segment customers. For example, K-Means can cluster users based on browsing habits for personalized ads.",
+      "table": [
+        {
+          "Algorithm": "K-Means",
+          "Approach": "Centroid-based",
+          "Use Case": "Customer segmentation",
+          "Limitation": "Requires predefined k"
+        },
+        {
+          "Algorithm": "DBSCAN",
+          "Approach": "Density-based",
+          "Use Case": "Anomaly detection",
+          "Limitation": "Sensitive to parameters"
+        },
+        {
+          "Algorithm": "Hierarchical",
+          "Approach": "Tree-based",
+          "Use Case": "Taxonomy creation",
+          "Limitation": "Computationally expensive"
+        }
+      ],
+      "diagram": "K-Means Process:\n  1. Initialize k Centroids\n  2. Assign Points to Nearest Centroid\n  3. Update Centroids (Mean)\n  4. Repeat 2–3 Until Convergence\n  Output: k Clusters",
+      "mcq": {
+        "question": "What does K-Means clustering use to group data?",
+        "options": [
+          "Labeled data",
+          "Centroids",
+          "Rewards",
+          "Hyperplanes"
+        ],
+        "correctAnswer": "b",
+        "explanation": "K-Means uses centroids to assign data to clusters."
+      },
+      "references": [
+        {
+          "title": "Clustering with Scikit-learn",
+          "description": "Documentation on clustering algorithms.",
+          "url": "https://scikit-learn.org/stable/modules/clustering.html"
+        }
+      ]
+    },
+    {
+      "title": "Day 15: Dimensionality Reduction",
+      "introduction": "Dimensionality reduction simplifies data while preserving information.",
+      "coreConcept": "Dimensionality reduction reduces the number of features in a dataset while retaining essential information, improving model efficiency and visualization. Techniques like PCA transform high-dimensional data into lower dimensions. For example, PCA can reduce image features for faster processing in facial recognition.",
+      "table": [
+        {
+          "Technique": "PCA",
+          "Purpose": "Maximize variance",
+          "Use Case": "Data visualization",
+          "Strength": "Preserves structure"
+        },
+        {
+          "Technique": "t-SNE",
+          "Purpose": "Visualize high-dimensional data",
+          "Use Case": "Clustering visualization",
+          "Strength": "Non-linear mapping"
+        },
+        {
+          "Technique": "UMAP",
+          "Purpose": "Preserve local structure",
+          "Use Case": "Data exploration",
+          "Strength": "Fast, scalable"
+        }
+      ],
+      "diagram": "PCA Process:\n  High-Dim Data -> Compute Covariance Matrix\n  ↓\n  Eigenvalues/Vectors -> Select Top k\n  ↓\n  Project Data -> Low-Dim Representation",
+      "mcq": {
+        "question": "What is the main goal of PCA?",
+        "options": [
+          "Cluster data",
+          "Reduce feature dimensions",
+          "Predict labels",
+          "Optimize rewards"
+        ],
+        "correctAnswer": "b",
+        "explanation": "PCA reduces feature dimensions while preserving variance."
+      },
+      "references": [
+        {
+          "title": "PCA Explained",
+          "description": "A video by StatQuest.",
+          "url": "https://www.youtube.com/watch?v=FgakZw6K1QQ"
+        }
+      ]
+    },
+    {
+      "title": "Day 16: Introduction to Natural Language Processing",
+      "introduction": "NLP enables machines to understand text and speech.",
+      "coreConcept": "Natural Language Processing (NLP) processes human language using techniques like tokenization and embeddings to enable tasks like sentiment analysis. It bridges human communication and machine understanding. For example, NLP powers chatbots that interpret user queries and respond naturally.",
+      "table": [
+        {
+          "Task": "Tokenization",
+          "Purpose": "Split text into words or tokens",
+          "Example": "Sentence to word list",
+          "Tool": "NLTK, spaCy"
+        },
+        {
+          "Task": "Sentiment Analysis",
+          "Purpose": "Determine text sentiment",
+          "Example": "Positive/Negative reviews",
+          "Tool": "VADER, BERT"
+        },
+        {
+          "Task": "Named Entity Recognition",
+          "Purpose": "Identify entities in text",
+          "Example": "Extract names, places",
+          "Tool": "spaCy, Stanford NER"
+        }
+      ],
+      "diagram": "NLP Pipeline:\n  Raw Text -> Tokenization -> Embeddings\n  ↓\n  Processing (e.g., Sentiment Analysis) -> Output (e.g., Positive/Negative)",
+      "mcq": {
+        "question": "What does tokenization do in NLP?",
+        "options": [
+          "Translates text",
+          "Splits text into words",
+          "Predicts sentiment",
+          "Generates text"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Tokenization splits text into individual words or tokens."
+      },
+      "references": [
+        {
+          "title": "NLP with Python",
+          "description": "A course by Coursera.",
+          "url": "https://www.coursera.org/learn/natural-language-processing"
+        }
+      ]
+    },
+    {
+      "title": "Day 17: Word Embeddings",
+      "introduction": "Word embeddings represent words as vectors for NLP tasks.",
+      "coreConcept": "Word embeddings map words to dense vectors that capture semantic meanings, enabling machines to understand relationships like 'king' to 'queen'. Models like Word2Vec learn these vectors from large text corpora. For example, embeddings allow chatbots to interpret similar words like 'car' and 'automobile' as related.",
+      "table": [
+        {
+          "Model": "Word2Vec",
+          "Method": "CBOW or Skip-gram",
+          "Use Case": "Semantic similarity",
+          "Strength": "Captures context"
+        },
+        {
+          "Model": "GloVe",
+          "Method": "Co-occurrence matrix",
+          "Use Case": "Word analogy tasks",
+          "Strength": "Global word relationships"
+        },
+        {
+          "Model": "FastText",
+          "Method": "Subword embeddings",
+          "Use Case": "Out-of-vocabulary words",
+          "Strength": "Handles rare words"
+        }
+      ],
+      "diagram": "Word Embeddings:\n  Words (e.g., 'king', 'queen')\n  ↓\n  Vector Space (e.g., [0.5, -0.2, ...])\n  ↓\n  Semantic Operations (king - man + woman ≈ queen)",
+      "mcq": {
+        "question": "What does Word2Vec capture?",
+        "options": [
+          "Word frequency",
+          "Semantic relationships",
+          "Sentence structure",
+          "Grammar rules"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Word2Vec captures semantic relationships between words."
+      },
+      "references": [
+        {
+          "title": "Word2Vec Tutorial",
+          "description": "A guide by TensorFlow.",
+          "url": "https://www.tensorflow.org/tutorials/text/word2vec"
+        }
+      ]
+    },
+    {
+      "title": "Day 18: Recurrent Neural Networks",
+      "introduction": "RNNs handle sequential data like text or time-series.",
+      "coreConcept": "Recurrent Neural Networks (RNNs) process sequential data by maintaining a hidden state that captures previous inputs, ideal for tasks like speech recognition. They loop over sequences to model temporal dependencies. For example, RNNs predict the next word in a sentence by considering prior words.",
+      "table": [
+        {
+          "Component": "Hidden State",
+          "Role": "Stores sequence memory",
+          "Example": "Context for next word"
+        },
+        {
+          "Component": "Recurrent Layer",
+          "Role": "Processes sequential input",
+          "Example": "Text sequence processing"
+        },
+        {
+          "Component": "Output Layer",
+          "Role": "Generates predictions",
+          "Example": "Next word probability"
+        }
+      ],
+      "diagram": "RNN Flow:\n  Input(t) -> [Hidden State(t-1) -> Hidden State(t)]\n  ↓                           ↓\n  Output(t)                Loop",
+      "mcq": {
+        "question": "What is a challenge with basic RNNs?",
+        "options": [
+          "High computational cost",
+          "Vanishing gradients",
+          "Overfitting",
+          "Lack of data"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Basic RNNs suffer from vanishing gradients, making long-term dependencies hard to learn."
+      },
+      "references": [
+        {
+          "title": "Understanding RNNs",
+          "description": "A blog by Christopher Olah.",
+          "url": "http://colah.github.io/posts/2015-08-Understanding-LSTMs/"
+        }
+      ]
+    },
+    {
+      "title": "Day 19: LSTMs and GRUs",
+      "introduction": "LSTMs and GRUs improve RNNs for long-term dependencies.",
+      "coreConcept": "Long Short-Term Memory (LSTM) and Gated Recurrent Unit (GRU) models enhance RNNs by using gates to manage long-term dependencies, preventing issues like vanishing gradients. They are used in tasks like machine translation. For example, LSTMs translate sentences by retaining context across long sequences.",
+      "table": [
+        {
+          "Model": "LSTM",
+          "Gates": "Forget, Input, Output",
+          "Use Case": "Machine translation",
+          "Strength": "Handles long sequences"
+        },
+        {
+          "Model": "GRU",
+          "Gates": "Update, Reset",
+          "Use Case": "Text generation",
+          "Strength": "Simpler, faster"
+        },
+        {
+          "Model": "Bidirectional LSTM",
+          "Gates": "Same as LSTM",
+          "Use Case": "Speech recognition",
+          "Strength": "Captures context both ways"
+        }
+      ],
+      "diagram": "LSTM Cell:\n  Input(t) -> [Forget Gate -> Memory Cell -> Output Gate]\n  Hidden State(t-1) -> [Update Memory] -> Hidden State(t)",
+      "mcq": {
+        "question": "What does an LSTM’s forget gate do?",
+        "options": [
+          "Adds new information",
+          "Discards irrelevant information",
+          "Predicts outputs",
+          "Resets the network"
+        ],
+        "correctAnswer": "b",
+        "explanation": "The forget gate discards irrelevant information from the memory."
+      },
+      "references": [
+        {
+          "title": "LSTM Explained",
+          "description": "A video by StatQuest.",
+          "url": "https://www.youtube.com/watch?v=YCzL96nL7j0"
+        }
+      ]
+    },
+    {
+      "title": "Day 20: Transformers in NLP",
+      "introduction": "Transformers power modern NLP models like BERT.",
+      "coreConcept": "Transformers use self-attention mechanisms to process sequences efficiently, capturing long-range dependencies in text. They outperform RNNs in tasks like translation due to parallel processing. For example, BERT uses transformers to understand context in search queries.",
+      "table": [
+        {
+          "Component": "Self-Attention",
+          "Function": "Weights word importance",
+          "Example": "Context in sentences"
+        },
+        {
+          "Component": "Encoder",
+          "Function": "Processes input sequence",
+          "Example": "BERT input encoding"
+        },
+        {
+          "Component": "Decoder",
+          "Function": "Generates output sequence",
+          "Example": "Translation output"
+        }
+      ],
+      "diagram": "Transformer Model:\n  Input -> Encoder Stack (Self-Attention + Feedforward)\n  ↓\n  Decoder Stack (Self-Attention + Encoder-Decoder Attention)\n  ↓\n  Output (e.g., Translated Text)",
+      "mcq": {
+        "question": "What is a key feature of transformers?",
+        "options": [
+          "Sequential processing",
+          "Self-attention",
+          "Single-layer networks",
+          "Manual feature engineering"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Transformers use self-attention to capture word relationships."
+      },
+      "references": [
+        {
+          "title": "The Transformer Model",
+          "description": "A blog by Jay Alammar.",
+          "url": "https://jalammar.github.io/illustrated-transformer/"
+        }
+      ]
+    },
+    {
+      "title": "Day 21: Introduction to Computer Vision",
+      "introduction": "Computer vision enables machines to interpret images.",
+      "coreConcept": "Computer vision processes visual data for tasks like image classification, object detection, and segmentation using neural networks. It enables applications like autonomous driving by analyzing camera inputs. For example, image classification identifies objects in photos, such as cats or dogs.",
+      "table": [
+        {
+          "Task": "Image Classification",
+          "Description": "Assign labels to images",
+          "Example": "Cat vs. Dog",
+          "Model": "CNN"
+        },
+        {
+          "Task": "Object Detection",
+          "Description": "Locate and classify objects",
+          "Example": "Detect cars in video",
+          "Model": "YOLO"
+        },
+        {
+          "Task": "Segmentation",
+          "Description": "Label pixels by class",
+          "Example": "Medical imaging",
+          "Model": "U-Net"
+        }
+      ],
+      "diagram": "Computer Vision Pipeline:\n  Raw Image -> Preprocessing (Resize, Normalize)\n  ↓\n  Model (e.g., CNN) -> Output (Class/Object/Segment)",
+      "mcq": {
+        "question": "What is a common task in computer vision?",
+        "options": [
+          "Text translation",
+          "Image classification",
+          "Speech synthesis",
+          "Game playing"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Image classification is a core computer vision task."
+      },
+      "references": [
+        {
+          "title": "Computer Vision Basics",
+          "description": "A course by Coursera.",
+          "url": "https://www.coursera.org/learn/computer-vision-basics"
+        }
+      ]
+    },
+    {
+      "title": "Day 22: Convolutional Neural Networks",
+      "introduction": "CNNs are designed for image processing tasks.",
+      "coreConcept": "Convolutional Neural Networks (CNNs) use convolutional layers to extract features like edges and shapes from images, followed by pooling to reduce dimensions. They excel in tasks like object recognition due to spatial hierarchy learning. For example, CNNs power traffic sign recognition in self-driving cars.",
+      "table": [
+        {
+          "Layer": "Convolution",
+          "Function": "Extract features (e.g., edges)",
+          "Example": "Filter for edge detection"
+        },
+        {
+          "Layer": "Pooling",
+          "Function": "Reduce spatial dimensions",
+          "Example": "Max pooling 2x2"
+        },
+        {
+          "Layer": "Fully Connected",
+          "Function": "Classify based on features",
+          "Example": "Output class scores"
+        }
+      ],
+      "diagram": "CNN Architecture:\n  Input Image -> [Conv -> ReLU -> Pool] x N\n  ↓\n  Flatten -> Fully Connected -> Output (Class Probabilities)",
+      "mcq": {
+        "question": "What does pooling do in a CNN?",
+        "options": [
+          "Detects features",
+          "Reduces spatial dimensions",
+          "Classifies images",
+          "Adds layers"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Pooling reduces spatial dimensions to simplify computation."
+      },
+      "references": [
+        {
+          "title": "CNN Explained",
+          "description": "A video by StatQuest.",
+          "url": "https://www.youtube.com/watch?v=HGwBXDKFk9I"
+        }
+      ]
+    },
+    {
+      "title": "Day 23: Object Detection",
+      "introduction": "Object detection identifies and locates objects in images.",
+      "coreConcept": "Object detection locates and classifies objects in images or videos using bounding boxes, combining localization and classification. Models like YOLO process images in a single pass for real-time performance. For example, object detection is used in surveillance to identify people or vehicles.",
+      "table": [
+        {
+          "Model": "YOLO",
+          "Approach": "Single-pass detection",
+          "Use Case": "Real-time detection",
+          "Strength": "Speed"
+        },
+        {
+          "Model": "Faster R-CNN",
+          "Approach": "Region proposals",
+          "Use Case": "High accuracy detection",
+          "Strength": "Precision"
+        },
+        {
+          "Model": "SSD",
+          "Approach": "Single-shot detection",
+          "Use Case": "Balanced speed/accuracy",
+          "Strength": "Versatility"
+        }
+      ],
+      "diagram": "Object Detection:\n  Image -> Model (e.g., YOLO)\n  ↓\n  Bounding Boxes + Class Labels (e.g., Car: [x, y, w, h])",
+      "mcq": {
+        "question": "What does YOLO do in object detection?",
+        "options": [
+          "Processes images in multiple passes",
+          "Detects objects in a single pass",
+          "Reduces image size",
+          "Classifies text"
+        ],
+        "correctAnswer": "b",
+        "explanation": "YOLO detects objects in a single pass for efficiency."
+      },
+      "references": [
+        {
+          "title": "YOLO: Real-Time Object Detection",
+          "description": "A paper by Joseph Redmon.",
+          "url": "https://pjreddie.com/darknet/yolo/"
+        }
+      ]
+    },
+    {
+      "title": "Day 24: Image Segmentation",
+      "introduction": "Image segmentation divides images into meaningful regions.",
+      "coreConcept": "Image segmentation assigns labels to each pixel to partition images into regions, used in tasks like medical imaging for tumor detection. Models like U-Net use encoder-decoder architectures for precise segmentation. For example, semantic segmentation identifies organs in MRI scans.",
+      "table": [
+        {
+          "Type": "Semantic Segmentation",
+          "Description": "Labels pixels by class",
+          "Example": "Organ detection",
+          "Model": "U-Net"
+        },
+        {
+          "Type": "Instance Segmentation",
+          "Description": "Labels pixels by instance",
+          "Example": "Object counting",
+          "Model": "Mask R-CNN"
+        },
+        {
+          "Type": "Panoptic Segmentation",
+          "Description": "Combines semantic and instance",
+          "Example": "Scene understanding",
+          "Model": "Detectron2"
+        }
+      ],
+      "diagram": "U-Net Architecture:\n  Encoder (Downsample: Conv + Pool)\n  ↓\n  Bottleneck\n  ↑\n  Decoder (Upsample: Conv + Concatenate)\n  Output: Pixel-wise Labels",
+      "mcq": {
+        "question": "What does semantic segmentation do?",
+        "options": [
+          "Labels individual objects",
+          "Labels regions by class",
+          "Detects edges",
+          "Reduces image size"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Semantic segmentation labels each pixel by class."
+      },
+      "references": [
+        {
+          "title": "U-Net: Convolutional Networks for Biomedical Image Segmentation",
+          "description": "A paper on U-Net.",
+          "url": "https://arxiv.org/abs/1505.04597"
+        }
+      ]
+    },
+    {
+      "title": "Day 25: Transfer Learning",
+      "introduction": "Transfer learning reuses pre-trained models for new tasks.",
+      "coreConcept": "Transfer learning uses pre-trained models to improve performance on new tasks with limited data, leveraging learned features. It’s widely used in vision and NLP, such as fine-tuning ResNet for medical imaging. For example, BERT is fine-tuned for sentiment analysis with minimal labeled data.",
+      "table": [
+        {
+          "Model": "ResNet",
+          "Domain": "Computer Vision",
+          "Use Case": "Image classification",
+          "Pre-training": "ImageNet"
+        },
+        {
+          "Model": "BERT",
+          "Domain": "NLP",
+          "Use Case": "Text classification",
+          "Pre-training": "Wikipedia"
+        },
+        {
+          "Model": "VGG",
+          "Domain": "Computer Vision",
+          "Use Case": "Feature extraction",
+          "Pre-training": "ImageNet"
+        }
+      ],
+      "diagram": "Transfer Learning:\n  Pre-trained Model (e.g., ResNet)\n  ↓\n  Fine-tune (Adjust Weights for New Task)\n  ↓\n  New Model (e.g., Medical Image Classifier)",
+      "mcq": {
+        "question": "What is a benefit of transfer learning?",
+        "options": [
+          "Increases training time",
+          "Reduces data needs",
+          "Simplifies model architecture",
+          "Eliminates training"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Transfer learning reduces the need for large datasets."
+      },
+      "references": [
+        {
+          "title": "Transfer Learning Guide",
+          "description": "A tutorial by TensorFlow.",
+          "url": "https://www.tensorflow.org/tutorials/images/transfer_learning"
+        }
+      ]
+    },
+    {
+      "title": "Day 26: Generative Adversarial Networks",
+      "introduction": "GANs generate new data like images or text.",
+      "coreConcept": "Generative Adversarial Networks (GANs) consist of a generator and discriminator competing to create realistic data, such as synthetic images. The generator creates fake data, while the discriminator evaluates its authenticity. For example, GANs can generate photorealistic faces for digital art.",
+      "table": [
+        {
+          "Component": "Generator",
+          "Role": "Creates fake data",
+          "Example": "Synthetic images"
+        },
+        {
+          "Component": "Discriminator",
+          "Role": "Evaluates data authenticity",
+          "Example": "Real vs. fake classification"
+        },
+        {
+          "Component": "Loss Function",
+          "Role": "Guides training",
+          "Example": "Adversarial loss"
+        }
+      ],
+      "diagram": "GAN Training:\n  Generator -> Fake Data -> Discriminator\n  ↓                            ↓\n  Real Data -> Discriminator -> Loss -> Update Both",
+      "mcq": {
+        "question": "What does the generator do in a GAN?",
+        "options": [
+          "Evaluates data",
+          "Creates fake data",
+          "Classifies images",
+          "Reduces dimensions"
+        ],
+        "correctAnswer": "b",
+        "explanation": "The generator creates fake data to fool the discriminator."
+      },
+      "references": [
+        {
+          "title": "GANs Explained",
+          "description": "A video by Siraj Raval.",
+          "url": "https://www.youtube.com/watch?v=9JpdmJ3HMvo"
+        }
+      ]
+    },
+    {
+      "title": "Day 27: Autoencoders",
+      "introduction": "Autoencoders learn compact data representations.",
+      "coreConcept": "Autoencoders encode data into a compact latent space and decode it to reconstruct the input, useful for denoising or feature learning. They are unsupervised models that learn data structure. For example, autoencoders can denoise images by reconstructing clean versions from noisy inputs.",
+      "table": [
+        {
+          "Component": "Encoder",
+          "Role": "Compresses input",
+          "Example": "Image to latent vector"
+        },
+        {
+          "Component": "Latent Space",
+          "Role": "Stores compressed data",
+          "Example": "Reduced dimensions"
+        },
+        {
+          "Component": "Decoder",
+          "Role": "Reconstructs input",
+          "Example": "Latent to image"
+        }
+      ],
+      "diagram": "Autoencoder Flow:\n  Input (e.g., Image) -> Encoder -> Latent Space\n  ↓\n  Decoder -> Reconstructed Output (e.g., Denoised Image)",
+      "mcq": {
+        "question": "What does an autoencoder’s encoder do?",
+        "options": [
+          "Reconstructs data",
+          "Compresses data",
+          "Classifies data",
+          "Generates new data"
+        ],
+        "correctAnswer": "b",
+        "explanation": "The encoder compresses data into a latent space."
+      },
+      "references": [
+        {
+          "title": "Autoencoders Tutorial",
+          "description": "A guide by Keras.",
+          "url": "https://www.tensorflow.org/tutorials/generative/autoencoder"
+        }
+      ]
+    },
+    {
+      "title": "Day 28: AI Model Deployment",
+      "introduction": "Deploying AI models makes them accessible in production.",
+      "coreConcept": "AI model deployment integrates trained models into production environments, enabling real-world applications like recommendation systems. It involves cloud or edge deployment for scalability or low latency. For example, deploying a chatbot model on AWS serves user queries in real time.",
+      "table": [
+        {
+          "Deployment": "Cloud",
+          "Platform": "AWS SageMaker",
+          "Use Case": "Scalable APIs",
+          "Advantage": "High availability"
+        },
+        {
+          "Deployment": "Edge",
+          "Platform": "Mobile devices",
+          "Use Case": "Real-time processing",
+          "Advantage": "Low latency"
+        },
+        {
+          "Deployment": "Hybrid",
+          "Platform": "Cloud + Edge",
+          "Use Case": "IoT applications",
+          "Advantage": "Balanced performance"
+        }
+      ],
+      "diagram": "Deployment Flow:\n  Trained Model -> Package (e.g., Docker)\n  ↓\n  Deploy (Cloud/Edge) -> Serve (API/Inference)",
+      "mcq": {
+        "question": "What is cloud deployment?",
+        "options": [
+          "Running models on devices",
+          "Running models on servers",
+          "Training models",
+          "Evaluating models"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Cloud deployment runs models on remote servers."
+      },
+      "references": [
+        {
+          "title": "AWS: Machine Learning Deployment",
+          "description": "A guide by AWS.",
+          "url": "https://aws.amazon.com/machine-learning/ml-deployment/"
+        }
+      ]
+    },
+    {
+      "title": "Day 29: Model Optimization",
+      "introduction": "Optimizing AI models improves efficiency for deployment.",
+      "coreConcept": "Model optimization reduces size and improves inference speed for efficient deployment, using techniques like quantization and pruning. It ensures models run on resource-constrained devices like mobiles. For example, optimizing a CNN allows real-time inference on a smartphone.",
+      "table": [
+        {
+          "Technique": "Quantization",
+          "Purpose": "Reduce numerical precision",
+          "Example": "Float32 to Int8",
+          "Benefit": "Smaller model size"
+        },
+        {
+          "Technique": "Pruning",
+          "Purpose": "Remove unnecessary weights",
+          "Example": "Sparse weights",
+          "Benefit": "Faster inference"
+        },
+        {
+          "Technique": "Distillation",
+          "Purpose": "Transfer knowledge to smaller model",
+          "Example": "Large to small CNN",
+          "Benefit": "Maintains accuracy"
+        }
+      ],
+      "diagram": "Optimization Process:\n  Large Model -> Quantize (Reduce Precision)\n  ↓\n  Prune (Remove Weights) -> Smaller, Faster Model",
+      "mcq": {
+        "question": "What does quantization do in model optimization?",
+        "options": [
+          "Increases model size",
+          "Reduces numerical precision",
+          "Adds weights",
+          "Trains the model"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Quantization reduces numerical precision to save resources."
+      },
+      "references": [
+        {
+          "title": "TensorFlow: Model Optimization",
+          "description": "A guide on optimization techniques.",
+          "url": "https://www.tensorflow.org/model_optimization"
+        }
+      ]
+    },
+    {
+      "title": "Day 30: Explainable AI",
+      "introduction": "Explainable AI makes model decisions transparent.",
+      "coreConcept": "Explainable AI provides interpretable explanations for model decisions, enhancing trust and regulatory compliance. Techniques like SHAP reveal feature importance in predictions. For example, explainable AI helps doctors understand why a model predicts a disease risk.",
+      "table": [
+        {
+          "Technique": "SHAP",
+          "Purpose": "Feature importance",
+          "Example": "Explain prediction weights",
+          "Strength": "Global interpretability"
+        },
+        {
+          "Technique": "LIME",
+          "Purpose": "Local explanations",
+          "Example": "Explain single prediction",
+          "Strength": "Instance-specific"
+        },
+        {
+          "Technique": "Feature Visualization",
+          "Purpose": "Visualize model focus",
+          "Example": "CNN attention maps",
+          "Strength": "Intuitive insights"
+        }
+      ],
+      "diagram": "Explainable AI:\n  Model Prediction -> Explain (SHAP/LIME)\n  ↓\n  Interpretable Output (Feature Importance/Visualization)",
+      "mcq": {
+        "question": "Why is explainable AI important?",
+        "options": [
+          "Increases model size",
+          "Improves trust",
+          "Reduces training time",
+          "Simplifies data"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Explainable AI improves trust by making decisions interpretable."
+      },
+      "references": [
+        {
+          "title": "Explainable AI",
+          "description": "A guide by Google.",
+          "url": "https://cloud.google.com/explainable-ai"
+        }
+      ]
+    },
+    {
+      "title": "Day 31: Generative AI Models",
+      "introduction": "Generative AI creates new content like text or images.",
+      "coreConcept": "Generative AI models create new data, such as text or images, using architectures like GPT or VAEs. They learn data distributions to produce realistic outputs. For example, GPT generates coherent text for chatbots or creative writing.",
+      "table": [
+        {
+          "Model": "GPT",
+          "Output": "Text",
+          "Use Case": "Chatbots",
+          "Strength": "Coherent generation"
+        },
+        {
+          "Model": "VAE",
+          "Output": "Images",
+          "Use Case": "Image synthesis",
+          "Strength": "Stable training"
+        },
+        {
+          "Model": "DALL-E",
+          "Output": "Images from text",
+          "Use Case": "Art generation",
+          "Strength": "Creative outputs"
+        }
+      ],
+      "diagram": "Generative AI:\n  Input (e.g., Prompt) -> Model (e.g., GPT)\n  ↓\n  Generate -> Output (e.g., Text/Image)",
+      "mcq": {
+        "question": "What does GPT generate?",
+        "options": [
+          "Images",
+          "Text",
+          "Audio",
+          "Video"
+        ],
+        "correctAnswer": "b",
+        "explanation": "GPT generates coherent text based on input prompts."
+      },
+      "references": [
+        {
+          "title": "Introduction to Generative AI",
+          "description": "A course by Google Cloud.",
+          "url": "https://www.cloudskillsboost.google/quests/234"
+        }
+      ]
+    },
+    {
+      "title": "Day 32: AI in Healthcare",
+      "introduction": "AI transforms healthcare with diagnostics and treatment.",
+      "coreConcept": "AI in healthcare leverages ML to improve diagnostics, treatment planning, and patient monitoring, enhancing accuracy and efficiency. Applications include tumor detection in medical imaging and predicting disease risks. For example, CNNs analyze X-rays to detect pneumonia with high accuracy.",
+      "table": [
+        {
+          "Application": "Medical Imaging",
+          "Example": "Cancer detection",
+          "Model": "CNN",
+          "Impact": "Early diagnosis"
+        },
+        {
+          "Application": "Predictive Analytics",
+          "Example": "Disease risk prediction",
+          "Model": "Random Forest",
+          "Impact": "Preventive care"
+        },
+        {
+          "Application": "Drug Discovery",
+          "Example": "Molecular design",
+          "Model": "GAN",
+          "Impact": "Faster development"
+        }
+      ],
+      "diagram": "AI in Healthcare:\n  Data (e.g., X-rays) -> Model (e.g., CNN)\n  ↓\n  Output (e.g., Tumor Detected)",
+      "mcq": {
+        "question": "What is an AI application in healthcare?",
+        "options": [
+          "Game development",
+          "Cancer detection",
+          "Text translation",
+          "Stock prediction"
+        ],
+        "correctAnswer": "b",
+        "explanation": "AI is used in healthcare for tasks like cancer detection."
+      },
+      "references": [
+        {
+          "title": "AI in Healthcare",
+          "description": "A report by Stanford Medicine.",
+          "url": "https://med.stanford.edu/aimi.html"
+        }
+      ]
+    },
+    {
+      "title": "Day 33: AI in Finance",
+      "introduction": "AI enhances financial services with fraud detection and trading.",
+      "coreConcept": "AI in finance uses algorithms to detect fraud, assess risks, and automate trading, improving efficiency and security. Techniques like anomaly detection identify suspicious transactions. For example, ML models flag fraudulent credit card transactions in real time.",
+      "table": [
+        {
+          "Application": "Fraud Detection",
+          "Example": "Anomaly detection",
+          "Model": "Autoencoders",
+          "Benefit": "Real-time alerts"
+        },
+        {
+          "Application": "Algorithmic Trading",
+          "Example": "Stock predictions",
+          "Model": "LSTM",
+          "Benefit": "High-speed trading"
+        },
+        {
+          "Application": "Credit Scoring",
+          "Example": "Loan approval",
+          "Model": "Decision Trees",
+          "Benefit": "Fair assessments"
+        }
+      ],
+      "diagram": "Fraud Detection:\n  Transaction Data -> Model (e.g., Autoencoder)\n  ↓\n  Output: Normal or Anomaly",
+      "mcq": {
+        "question": "What is an AI application in finance?",
+        "options": [
+          "Image segmentation",
+          "Fraud detection",
+          "Speech synthesis",
+          "Medical diagnosis"
+        ],
+        "correctAnswer": "b",
+        "explanation": "AI detects fraudulent transactions in finance."
+      },
+      "references": [
+        {
+          "title": "AI in Financial Services",
+          "description": "A report by PwC.",
+          "url": "https://www.pwc.com/ai-finance"
+        }
+      ]
+    },
+    {
+      "title": "Day 34: AI in Autonomous Vehicles",
+      "introduction": "AI powers self-driving cars with perception and planning.",
+      "coreConcept": "AI in autonomous vehicles enables perception and control using sensor data from cameras and LIDAR to navigate environments safely. It processes real-time data for obstacle detection and path planning. For example, Tesla’s Autopilot uses CNNs to detect lanes and vehicles.",
+      "table": [
+        {
+          "Component": "Perception",
+          "Function": "Process sensor data",
+          "Example": "Lane detection",
+          "Model": "CNN"
+        },
+        {
+          "Component": "Planning",
+          "Function": "Determine paths",
+          "Example": "Route optimization",
+          "Model": "Reinforcement Learning"
+        },
+        {
+          "Component": "Control",
+          "Function": "Execute actions",
+          "Example": "Steering, braking",
+          "Model": "PID Controller"
+        }
+      ],
+      "diagram": "Autonomous Driving:\n  Sensors (Camera, LIDAR) -> Perception (CNN)\n  ↓\n  Planning (Path Optimization) -> Control (Steering)",
+      "mcq": {
+        "question": "What does AI perception do in autonomous vehicles?",
+        "options": [
+          "Executes driving actions",
+          "Processes sensor data",
+          "Plans routes",
+          "Trains models"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Perception processes sensor data to understand the environment."
+      },
+      "references": [
+        {
+          "title": "Waymo: AI for Autonomous Driving",
+          "description": "An overview by Waymo.",
+          "url": "https://waymo.com/tech/"
+        }
+      ]
+    },
+    {
+      "title": "Day 35: AI for Time-Series Analysis",
+      "introduction": "AI analyzes time-series data for forecasting.",
+      "coreConcept": "Time-series analysis predicts future values based on historical sequential data, using models like LSTMs for complex patterns. It’s critical for applications like stock price prediction. For example, LSTMs forecast weather by modeling temperature trends over time.",
+      "table": [
+        {
+          "Model": "ARIMA",
+          "Type": "Statistical",
+          "Use Case": "Stock forecasting",
+          "Strength": "Handles linear trends"
+        },
+        {
+          "Model": "LSTM",
+          "Type": "Neural Network",
+          "Use Case": "Weather prediction",
+          "Strength": "Captures non-linear patterns"
+        },
+        {
+          "Model": "Prophet",
+          "Type": "Additive Model",
+          "Use Case": "Sales forecasting",
+          "Strength": "Handles seasonality"
+        }
+      ],
+      "diagram": "Time-Series Forecasting:\n  Historical Data (t1, t2, ...) -> Model (e.g., LSTM)\n  ↓\n  Prediction (t_n+1)",
+      "mcq": {
+        "question": "What is a common AI model for time-series forecasting?",
+        "options": [
+          "CNN",
+          "LSTM",
+          "Decision Tree",
+          "SVM"
+        ],
+        "correctAnswer": "b",
+        "explanation": "LSTMs are effective for complex time-series patterns."
+      },
+      "references": [
+        {
+          "title": "Time-Series Forecasting",
+          "description": "A tutorial by TensorFlow.",
+          "url": "https://www.tensorflow.org/tutorials/structured_data/time_series"
+        }
+      ]
+    },
+    {
+      "title": "Day 36: AI and Robotics",
+      "introduction": "AI enables robots to perform tasks autonomously.",
+      "coreConcept": "AI in robotics combines perception, planning, and control to enable autonomous tasks like navigation and manipulation. Techniques like SLAM allow robots to map environments. For example, warehouse robots use AI to navigate and pick items efficiently.",
+      "table": [
+        {
+          "Technique": "SLAM",
+          "Purpose": "Map and navigate environments",
+          "Example": "Robot vacuum mapping",
+          "Strength": "Real-time localization"
+        },
+        {
+          "Technique": "Motion Planning",
+          "Purpose": "Plan robot movements",
+          "Example": "Path to avoid obstacles",
+          "Strength": "Safe navigation"
+        },
+        {
+          "Technique": "Object Manipulation",
+          "Purpose": "Handle physical objects",
+          "Example": "Robotic arm picking",
+          "Strength": "Precision tasks"
+        }
+      ],
+      "diagram": "Robotics Pipeline:\n  Sensors -> Perception (SLAM)\n  ↓\n  Planning (Path) -> Control (Move Robot)",
+      "mcq": {
+        "question": "What does SLAM do in robotics?",
+        "options": [
+          "Optimizes rewards",
+          "Maps and navigates environments",
+          "Classifies images",
+          "Generates text"
+        ],
+        "correctAnswer": "b",
+        "explanation": "SLAM enables robots to map and navigate environments."
+      },
+      "references": [
+        {
+          "title": "Robotics and AI",
+          "description": "A course by MIT OpenCourseWare.",
+          "url": "https://ocw.mit.edu/courses/robotics"
+        }
+      ]
+    },
+    {
+      "title": "Day 37: AI for Speech Recognition",
+      "introduction": "Speech recognition converts audio to text.",
+      "coreConcept": "Speech recognition transcribes spoken language into text using AI techniques like feature extraction and sequence modeling. It powers voice assistants like Alexa. For example, deep learning models process audio waveforms to transcribe meetings accurately.",
+      "table": [
+        {
+          "Technique": "MFCC",
+          "Purpose": "Extract audio features",
+          "Example": "Mel-frequency cepstral coefficients",
+          "Strength": "Captures speech patterns"
+        },
+        {
+          "Technique": "RNN",
+          "Purpose": "Process sequential data",
+          "Example": "Transcribe audio",
+          "Strength": "Handles temporal data"
+        },
+        {
+          "Technique": "CTC Loss",
+          "Purpose": "Align audio to text",
+          "Example": "End-to-end training",
+          "Strength": "Simplifies alignment"
+        }
+      ],
+      "diagram": "Speech Recognition:\n  Audio Input -> Feature Extraction (MFCC)\n  ↓\n  Model (RNN/CTC) -> Text Output",
+      "mcq": {
+        "question": "What do MFCCs do in speech recognition?",
+        "options": [
+          "Generate audio",
+          "Extract audio features",
+          "Classify text",
+          "Reduce dimensions"
+        ],
+        "correctAnswer": "b",
+        "explanation": "MFCCs extract audio features for speech recognition."
+      },
+      "references": [
+        {
+          "title": "Speech Recognition with Deep Learning",
+          "description": "A tutorial by DeepLearning.AI.",
+          "url": "https://www.deeplearning.ai/courses/speech-recognition/"
+        }
+      ]
+    },
+    {
+      "title": "Day 38: AI for Recommender Systems",
+      "introduction": "Recommender systems personalize content for users.",
+      "coreConcept": "Recommender systems suggest items based on user preferences, using collaborative or content-based filtering. They power platforms like Netflix for personalized recommendations. For example, collaborative filtering recommends movies based on user ratings.",
+      "table": [
+        {
+          "Approach": "Collaborative Filtering",
+          "Method": "User-item interactions",
+          "Example": "Movie recommendations",
+          "Strength": "Leverages user behavior"
+        },
+        {
+          "Approach": "Content-Based",
+          "Method": "Item features",
+          "Example": "Song recommendations",
+          "Strength": "Handles new items"
+        },
+        {
+          "Approach": "Hybrid",
+          "Method": "Combine both",
+          "Example": "E-commerce suggestions",
+          "Strength": "Improved accuracy"
+        }
+      ],
+      "diagram": "Recommender System:\n  User Data (Ratings/Features) -> Model\n  ↓\n  Output: Personalized Recommendations",
+      "mcq": {
+        "question": "What does collaborative filtering use?",
+        "options": [
+          "Item features",
+          "User-item interactions",
+          "Labeled data",
+          "Rewards"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Collaborative filtering uses user-item interactions for recommendations."
+      },
+      "references": [
+        {
+          "title": "Recommender Systems",
+          "description": "A course by Coursera.",
+          "url": "https://www.coursera.org/learn/recommender-systems"
+        }
+      ]
+    },
+    {
+      "title": "Day 39: Quantum AI",
+      "introduction": "Quantum AI leverages quantum computing for AI tasks.",
+      "coreConcept": "Quantum AI uses quantum computers to enhance AI algorithms, potentially offering exponential speedups for tasks like optimization. It leverages quantum properties like superposition. For example, quantum AI could optimize complex neural network training in the future.",
+      "table": [
+        {
+          "Concept": "Qubits",
+          "Role": "Quantum data unit",
+          "Example": "Superposition states",
+          "Benefit": "Parallel computation"
+        },
+        {
+          "Concept": "Quantum Gates",
+          "Role": "Manipulate qubits",
+          "Example": "Hadamard gate",
+          "Benefit": "Complex operations"
+        },
+        {
+          "Concept": "Quantum Circuits",
+          "Role": "Perform computations",
+          "Example": "Quantum neural networks",
+          "Benefit": "Potential speedup"
+        }
+      ],
+      "diagram": "Quantum AI:\n  Classical Data -> Quantum Circuit (Qubits + Gates)\n  ↓\n  Output: Optimized Solution (e.g., ML Model)",
+      "mcq": {
+        "question": "What is a potential benefit of quantum AI?",
+        "options": [
+          "Slower computation",
+          "Quantum speedup",
+          "Simpler models",
+          "Less data"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Quantum AI offers potential speedup for complex computations."
+      },
+      "references": [
+        {
+          "title": "Quantum Machine Learning",
+          "description": "A paper by Google Quantum AI.",
+          "url": "https://quantumai.google/research"
+        }
+      ]
+    },
+    {
+      "title": "Day 40: Future of AI",
+      "introduction": "The future of AI includes advancements and challenges.",
+      "coreConcept": "The future of AI involves advancements in capability, integration with IoT, and ethical considerations to ensure responsible development. Emerging trends include AI-driven automation and fairness in algorithms. For example, AI in smart cities optimizes traffic using IoT data.",
+      "table": [
+        {
+          "Trend": "AI and IoT",
+          "Impact": "Smart cities",
+          "Example": "Traffic optimization",
+          "Challenge": "Data privacy"
+        },
+        {
+          "Trend": "Ethical AI",
+          "Impact": "Fair algorithms",
+          "Example": "Bias-free hiring",
+          "Challenge": "Standardization"
+        },
+        {
+          "Trend": "AI Automation",
+          "Impact": "Increased efficiency",
+          "Example": "Factory automation",
+          "Challenge": "Job displacement"
+        }
+      ],
+      "diagram": "Future AI:\n  Trends -> [IoT Integration, Ethical AI, Automation]\n  ↓\n  Applications (Smart Cities, Fair Systems, Robotics)",
+      "mcq": {
+        "question": "What is a future trend in AI?",
+        "options": [
+          "Manual programming",
+          "AI and IoT integration",
+          "Smaller models",
+          "Less data usage"
+        ],
+        "correctAnswer": "b",
+        "explanation": "AI integration with IoT is a key future trend."
+      },
+      "references": [
+        {
+          "title": "The Future of AI",
+          "description": "A report by MIT.",
+          "url": "https://www.mit.edu/ai-future"
+        }
+      ]
+    }
+  ]
+}

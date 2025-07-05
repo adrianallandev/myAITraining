@@ -1,0 +1,108 @@
+[
+    {
+        "title": "Day 1: What is AI?",
+        "introduction": "Understand AI and its relevance in IT services.",
+        "coreConcept": "AI enables machines to mimic human intelligence for tasks like decision-making, pattern recognition, and automation. Unlike traditional programming, which relies on explicit rules (e.g., if-then logic for network alerts), AI learns patterns from data to make dynamic predictions, such as detecting anomalies in server logs. Key areas include Machine Learning (ML) for predictive models, Natural Language Processing (NLP) for analyzing IT tickets, and Computer Vision for monitoring hardware via images. In IT, AI automates repetitive tasks (e.g., ticketing), enhances security (e.g., intrusion detection), and optimizes resources (e.g., server load balancing).",
+        "table": [
+            {"Aspect": "Input", "AI": "Data + Model", "Traditional Programming": "Rules + Data"},
+            {"Aspect": "Output", "AI": "Predictions/Decisions", "Traditional Programming": "Fixed Output"},
+            {"Aspect": "Example", "AI": "Predicting network congestion", "Traditional Programming": "Static alert thresholds"}
+        ],
+        "diagram": "[Network Logs] -> [AI Model] -> [Congestion Prediction]",
+        "mcq": {
+            "question": "Which IT task is best suited for AI over traditional programming?",
+            "options": [
+                "Calculating payroll based on fixed hours",
+                "Predicting server downtime from usage patterns",
+                "Generating static reports",
+                "Formatting database entries"
+            ],
+            "correctAnswer": "b",
+            "explanation": "AI excels at learning complex patterns from data, unlike static rules."
+        }
+    },
+    {
+        "title": "Day 2: History and Types of AI",
+        "introduction": "Learn AI’s evolution and categories.",
+        "coreConcept": "AI’s history shapes its IT applications. In the 1950s, Alan Turing’s Turing Test defined machine intelligence, relevant for testing AI chatbots in IT support. The 1980s brought expert systems for diagnostics (e.g., early IT troubleshooting tools), while the 2010s introduced deep learning, enabling advanced network anomaly detection. AI types include: Narrow AI (task-specific, e.g., chatbots for IT ticketing or anomaly detectors for network security), General AI (theoretical, human-like intelligence for multi-task IT automation), Super AI (hypothetical, surpassing human capabilities, potentially revolutionizing IT infrastructure). In IT, narrow AI dominates, automating tasks like log analysis and user support.",
+        "table": [
+            {"Type": "Narrow", "Capability": "Single task", "IT Example": "Chatbot for tickets"},
+            {"Type": "General", "Capability": "Multi-task", "IT Example": "None yet"},
+            {"Type": "Super", "Capability": "Beyond human", "IT Example": "Hypothetical"}
+        ],
+        "mcq": {
+            "question": "Which AI type is currently used in IT for ticket automation?",
+            "options": [
+                "General AI",
+                "Narrow AI",
+                "Super AI",
+                "None of the above"
+            ],
+            "correctAnswer": "b",
+            "explanation": "Current IT tools like chatbots are task-specific."
+        }
+    },
+    {
+        "title": "Day 3: Comparison of Leading AI Models",
+        "introduction": "Understand leading AI models for IT applications.",
+        "coreConcept": "Modern AI models (2025) offer unique strengths for IT tasks. GPT-4o excels in NLP for IT chatbots, analyzing ticket text with high accuracy. Claude 3.7 prioritizes ethical processing, ideal for compliance-sensitive IT tasks. Gemini 2.5’s speed suits real-time network monitoring, while Grok 3’s reasoning optimizes system performance (e.g., server allocation). DeepSeek-R1 is cost-effective for log analysis but less mature. IT professionals must choose models based on task requirements, cost, and integration needs (e.g., API compatibility with existing systems).",
+        "table": [
+            {"Model": "GPT-4o", "Developer": "OpenAI", "Strengths": "NLP, reasoning", "IT Use Case": "Chatbots", "Limitations": "High cost"},
+            {"Model": "Claude 3.7", "Developer": "Anthropic", "Strengths": "Ethics, safety", "IT Use Case": "Compliance analysis", "Limitations": "Limited context"},
+            {"Model": "Gemini 2.5", "Developer": "Google", "Strengths": "Multimodal, speed", "IT Use Case": "Network monitoring", "Limitations": "Privacy concerns"},
+            {"Model": "Grok 3", "Developer": "xAI", "Strengths": "Reasoning, IT focus", "IT Use Case": "System optimization", "Limitations": "Limited voice mode"},
+            {"Model": "DeepSeek-R1", "Developer": "DeepSeek", "Strengths": "Cost-effective", "IT Use Case": "Log analysis", "Limitations": "Less mature"}
+        ],
+        "mcq": {
+            "question": "Which model is best for real-time network monitoring?",
+            "options": [
+                "GPT-4o",
+                "Claude 3.7",
+                "Gemini 2.5",
+                "DeepSeek-R1"
+            ],
+            "correctAnswer": "c",
+            "explanation": "Its speed and multimodal capabilities suit real-time IT tasks."
+        }
+    },
+    {
+        "title": "Day 4: AI Applications in IT",
+        "introduction": "Explore AI’s role in technology services.",
+        "coreConcept": "AI transforms IT by automating repetitive tasks, enhancing security, and predicting issues. Examples include: Network Security (AI models like Gemini 2.5 analyze traffic patterns to detect anomalies, reducing false positives compared to rule-based systems), Predictive Maintenance (ML predicts hardware failures from sensor data, minimizing downtime in data centers), Chatbots (NLP models like GPT-4o automate IT ticketing, improving response times). In IT services, AI integrates with existing tools (e.g., ServiceNow) via APIs, streamlining workflows.",
+        "diagram": "[Server Logs] -> [AI Model] -> [Anomaly Alert]",
+        "mcq": {
+            "question": "Which AI application best suits IT support automation?",
+            "options": [
+                "Predictive maintenance",
+                "Network anomaly detection",
+                "Chatbot for ticketing",
+                "Hardware image analysis"
+            ],
+            "correctAnswer": "c",
+            "explanation": "Directly automates support tasks."
+        }
+    },
+    {
+        "title": "Day 5: AI Workflow in IT",
+        "introduction": "Understand AI project workflows.",
+        "coreConcept": "AI projects follow a structured process to ensure success in IT environments: Data Collection (gather relevant data, e.g., server logs via APIs), Preprocessing (clean data, e.g., normalize metrics), Training (build models using tools like TensorFlow), Evaluation (test performance, e.g., precision for security models), Deployment (integrate via APIs or cloud for real-time IT use). In IT, workflows must align with system constraints (e.g., real-time processing for monitoring).",
+        "table": [
+            {"Step": "Data Collection", "Description": "Gather data", "IT Example": "Collect server logs"},
+            {"Step": "Preprocessing", "Description": "Clean data", "IT Example": "Normalize CPU usage"},
+            {"Step": "Training", "Description": "Build model", "IT Example": "Train anomaly detector"},
+            {"Step": "Evaluation", "Description": "Test accuracy", "IT Example": "Check precision"},
+            {"Step": "Deployment", "Description": "Integrate model", "IT Example": "Deploy alerts"}
+        ],
+        "mcq": {
+            "question": "Which step is critical for ensuring accurate IT anomaly detection?",
+            "options": [
+                "Data collection",
+                "Preprocessing",
+                "Training",
+                "Evaluation"
+            ],
+            "correctAnswer": "b",
+            "explanation": "Clean data prevents model errors."
+        }
+    }
+]
