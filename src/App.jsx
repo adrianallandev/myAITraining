@@ -1,7 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import lessons from './data/lessons.json';
-import anotherTraining from './data/anotherTraining.json';
-import aiProgramming from './data/aiProgramming.json';
+import './styles.css';
 
 function App() {
   const [currentLesson, setCurrentLesson] = useState(() => {
@@ -22,20 +20,11 @@ function App() {
   const [trainingFile, setTrainingFile] = useState('lessons.json');
   const [lessonsData, setLessonsData] = useState(null);
   const [error, setError] = useState(null);
-
-  const trainingFiles = ['lessons.json', 'anotherTraining.json', 'aiProgramming.json'];
-  const displayNames = {
-    'lessons.json': 'AI Basics',
-    'anotherTraining.json': 'Advanced AI Techniques',
-    'aiProgramming.json': 'AI Programming with Python & JS'
-  };
-  const dataMap = {
-    'lessons.json': lessons,
-    'anotherTraining.json': anotherTraining,
-    'aiProgramming.json': aiProgramming
-  };
+  const [trainingFiles, setTrainingFiles] = useState([]);
+  const [dataMap, setDataMap] = useState({});
 
   const fallbackData = {
+    displayName: 'Fallback Training',
     lessons: [
       {
         title: 'Fallback Lesson',
@@ -54,12 +43,59 @@ function App() {
     ]
   };
 
+  // Dynamically load all JSON files from src/data/
+  useEffect(() => {
+    const loadTrainingFiles = async () => {
+      try {
+        const files = import.meta.glob('./data/*.json', { eager: true });
+        const loadedFiles = [];
+        const loadedData = {};
+
+        for (const [path, module] of Object.entries(files)) {
+          const fileName = path.split('/').pop();
+          const data = module.default || module;
+          if (data.displayName && data.lessons && Array.isArray(data.lessons) && data.lessons.length > 0) {
+            loadedFiles.push(fileName);
+            loadedData[fileName] = data;
+          } else {
+            console.warn(`Invalid JSON structure in ${fileName}: Missing displayName or valid lessons array`);
+          }
+        }
+
+        if (loadedFiles.length === 0) {
+          console.error('No valid JSON files found in src/data/');
+          setError('No valid training data found. Using fallback data.');
+          setLessonsData(fallbackData);
+          setTrainingFiles(['fallback']);
+          setDataMap({ 'fallback': fallbackData });
+          setTrainingFile('fallback');
+          return;
+        }
+
+        setTrainingFiles(loadedFiles);
+        setDataMap(loadedData);
+        if (!loadedFiles.includes(trainingFile)) {
+          setTrainingFile('lessons.json'); // Default to lessons.json
+        }
+      } catch (err) {
+        console.error('Failed to load JSON files:', err);
+        setError('Failed to load training data. Using fallback data.');
+        setLessonsData(fallbackData);
+        setTrainingFiles(['fallback']);
+        setDataMap({ 'fallback': fallbackData });
+        setTrainingFile('fallback');
+      }
+    };
+
+    loadTrainingFiles();
+  }, []);
+
   // Validate data and set lessonsData
   useEffect(() => {
     const validateData = (data, file) => {
-      if (!data?.lessons || !Array.isArray(data.lessons) || data.lessons.length === 0) {
+      if (!data?.lessons || !Array.isArray(data.lessons) || data.lessons.length === 0 || !data.displayName) {
         console.error('Invalid data structure for', file, ':', data);
-        return { valid: false, error: `Invalid structure in ${file}: Must have non-empty lessons array` };
+        return { valid: false, error: `Invalid structure in ${file}: Must have displayName and non-empty lessons array` };
       }
       console.log('Validated data for', file, ':', data);
       return { valid: true, data };
@@ -75,30 +111,31 @@ function App() {
         result = validateData(selectedData, trainingFile);
       }
 
-      if (!result.valid && trainingFile !== defaultFile) {
+      if (!result.valid && trainingFile !== defaultFile && dataMap[defaultFile]) {
         console.warn(`Falling back to default file: ${defaultFile}`);
-        const defaultData = dataMap[defaultFile];
-        if (defaultData) {
-          result = validateData(defaultData, defaultFile);
-          if (result.valid) {
-            setTrainingFile(defaultFile);
-            setError(`Invalid data in ${displayNames[trainingFile] || trainingFile}. Loaded ${displayNames[defaultFile]} instead.`);
-          }
+        result = validateData(dataMap[defaultFile], defaultFile);
+        if (result.valid) {
+          setTrainingFile(defaultFile);
+          setError(`Invalid data in ${dataMap[trainingFile]?.displayName || trainingFile}. Loaded ${dataMap[defaultFile].displayName} instead.`);
         }
       }
 
       if (!result.valid) {
         console.warn('All data invalid, using fallback data');
         setLessonsData(fallbackData);
-        setError(`Failed to load valid data for ${displayNames[trainingFile] || trainingFile}${trainingFile !== defaultFile ? ` and ${displayNames[defaultFile]}` : ''}. Using fallback data.`);
+        setError(`Failed to load valid data for ${dataMap[trainingFile]?.displayName || trainingFile}${trainingFile !== defaultFile ? ` and ${dataMap[defaultFile]?.displayName || defaultFile}` : ''}. Using fallback data.`);
+        setTrainingFile('fallback');
+        setDataMap((prev) => ({ ...prev, 'fallback': fallbackData }));
       } else {
         setLessonsData(result.data);
         setCurrentLesson(0); // Reset to first lesson
       }
     };
 
-    loadTraining();
-  }, [trainingFile]);
+    if (Object.keys(dataMap).length > 0) {
+      loadTraining();
+    }
+  }, [trainingFile, dataMap]);
 
   // Save currentLesson to localStorage
   useEffect(() => {
@@ -205,7 +242,7 @@ function App() {
         >
           {trainingFiles.map((file) => (
             <option key={file} value={file}>
-              {displayNames[file] || file.replace('.json', '')}
+              {dataMap[file]?.displayName || file.replace('.json', '')}
             </option>
           ))}
         </select>

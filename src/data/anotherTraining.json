@@ -1,18 +1,515 @@
 {
+  "displayName": "Creating React App",
   "lessons": [
     {
-      "title": "Lesson 1",
-      "introduction": "Intro text",
-      "coreConcept": "Core concept",
-      "table": [{"Column1": "Value1", "Column2": "Value2"}],
-      "diagram": "Diagram text",
+      "title": "Introduction to JavaScript",
+      "introduction": "JavaScript is a versatile language for web development. Learn its basics to start coding.",
+      "coreConcept": "JavaScript runs in browsers and Node.js, using variables and data types to store data.",
+      "table": [
+        {
+          "Concept": "Variables",
+          "Code": "let name = 'Adrian';\nconst age = 30;\nvar score = 85;"
+        },
+        {
+          "Concept": "Data Types",
+          "Code": "let str = 'Hello';\nlet num = 42;\nlet bool = true;\nlet arr = [1, 2];\nlet obj = { key: 'value' };"
+        }
+      ],
+      "diagram": "// Save as intro.js\n// Run: node /Users/adrian/Desktop/projects/intro.js\nlet name = 'Adrian';\nconst age = 30;\nlet scores = [80, 90];\nlet person = { name: 'Adrian', age: 30 };\nconsole.log('Name:', name, 'Type:', typeof name);\nconsole.log('Age:', age, 'Type:', typeof age);\nconsole.log('Scores:', scores, 'Type:', typeof scores);\nconsole.log('Person:', person, 'Type:', typeof person);",
       "mcq": {
-        "question": "Question?",
-        "options": ["Option A", "Option B"],
-        "correctAnswer": "a",
-        "explanation": "Explanation"
+        "question": "What is the difference between `let` and `const`?",
+        "options": ["`let` is constant, `const` is variable", "`let` allows reassignment, `const` does not", "`let` is for functions, `const` is for arrays", "`let` is old, `const` is new"],
+        "correctAnswer": "b",
+        "explanation": "`let` allows variable reassignment, while `const` prevents it."
       },
-      "references": [{"title": "Ref", "description": "Desc", "url": "http://example.com"}]
+      "references": [
+        {
+          "title": "MDN JavaScript Basics",
+          "description": "Introduction to JavaScript.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction"
+        },
+        {
+          "title": "JS Basics Video",
+          "description": "Video tutorial on JavaScript basics.",
+          "url": "https://www.youtube.com/watch?v=W6NZfCO5SIk"
+        }
+      ]
+    },
+    {
+      "title": "JavaScript Functions",
+      "introduction": "Functions are reusable blocks of code that perform tasks or calculations.",
+      "coreConcept": "Functions can take parameters, return values, and be written as declarations or arrow functions.",
+      "table": [
+        {
+          "Concept": "Function Declaration",
+          "Code": "function add(a, b) {\n  return a + b;\n}"
+        },
+        {
+          "Concept": "Arrow Function",
+          "Code": "const multiply = (a, b) => a * b;"
+        }
+      ],
+      "diagram": "// Save as functions.js\n// Run: node /Users/adrian/Desktop/projects/functions.js\nfunction add(a, b) {\n  return a + b;\n}\nconst multiply = (a, b) => a * b;\nconsole.log('Add 5 + 3:', add(5, 3)); // 8\nconsole.log('Multiply 5 * 3:', multiply(5, 3)); // 15",
+      "mcq": {
+        "question": "What is an arrow function’s benefit?",
+        "options": ["Loops arrays", "Concise syntax", "Declares constants", "Fetches data"],
+        "correctAnswer": "b",
+        "explanation": "Arrow functions offer a shorter syntax and lexical `this` binding."
+      },
+      "references": [
+        {
+          "title": "MDN Functions",
+          "description": "Guide to JavaScript functions.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions"
+        },
+        {
+          "title": "Functions Video",
+          "description": "Video on JavaScript functions.",
+          "url": "https://www.youtube.com/watch?v=N8ap4k_1QEQ"
+        }
+      ]
+    },
+    {
+      "title": "Working with Arrays and Objects",
+      "introduction": "Arrays and objects store collections of data for complex applications.",
+      "coreConcept": "Arrays hold ordered lists, while objects store key-value pairs.",
+      "table": [
+        {
+          "Concept": "Array Methods",
+          "Code": "let arr = [1, 2, 3];\narr.push(4);\narr.map(x => x * 2);"
+        },
+        {
+          "Concept": "Object Access",
+          "Code": "let obj = { name: 'Adrian', age: 30 };\nconsole.log(obj.name);"
+        }
+      ],
+      "diagram": "// Save as arrays_objects.js\n// Run: node /Users/adrian/Desktop/projects/arrays_objects.js\nlet scores = [80, 90, 95];\nlet person = { name: 'Adrian', age: 30, scores };\nscores.push(100);\nlet doubled = scores.map(score => score * 2);\nconsole.log('Scores:', scores); // [80, 90, 95, 100]\nconsole.log('Doubled:', doubled); // [160, 180, 190, 200]\nconsole.log('Person Name:', person.name); // Adrian\nconsole.log('Person Scores:', person.scores);",
+      "mcq": {
+        "question": "What does Array.map do?",
+        "options": ["Removes items", "Transforms items", "Sorts array", "Joins arrays"],
+        "correctAnswer": "b",
+        "explanation": "Array.map creates a new array by applying a function to each element."
+      },
+      "references": [
+        {
+          "title": "MDN Arrays",
+          "description": "Guide to JavaScript arrays.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+        },
+        {
+          "title": "MDN Objects",
+          "description": "Guide to JavaScript objects.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects"
+        }
+      ]
+    },
+    {
+      "title": "Asynchronous JavaScript",
+      "introduction": "Handle asynchronous operations like API calls using Promises and async/await.",
+      "coreConcept": "Async/await simplifies working with Promises for fetching data.",
+      "table": [
+        {
+          "Concept": "Promise",
+          "Code": "fetch('https://jsonplaceholder.typicode.com/posts')\n  .then(res => res.json())\n  .then(data => console.log(data));"
+        },
+        {
+          "Concept": "Async/Await",
+          "Code": "async function getData() {\n  const res = await fetch('https://jsonplaceholder.typicode.com/posts');\n  const data = await res.json();\n  return data;\n}"
+        }
+      ],
+      "diagram": "// Save as async.js\n// Run: node /Users/adrian/Desktop/projects/async.js\n// Requires: npm install node-fetch\nconst fetch = require('node-fetch');\nasync function getPosts() {\n  try {\n    const res = await fetch('https://jsonplaceholder.typicode.com/posts');\n    const data = await res.json();\n    console.log('Posts:', data.slice(0, 2)); // First 2 posts\n  } catch (err) {\n    console.error('Error:', err.message);\n  }\n}\ngetPosts();",
+      "mcq": {
+        "question": "What does `await` require?",
+        "options": ["A loop", "An async function", "A variable", "A component"],
+        "correctAnswer": "b",
+        "explanation": "`await` can only be used inside an async function."
+      },
+      "references": [
+        {
+          "title": "MDN Async/Await",
+          "description": "Guide to asynchronous JavaScript.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"
+        },
+        {
+          "title": "Async Video",
+          "description": "Video on async JavaScript.",
+          "url": "https://www.youtube.com/watch?v=PoRJizFvM7s"
+        }
+      ]
+    },
+    {
+      "title": "Introduction to React",
+      "introduction": "React is a JavaScript library for building user interfaces with components.",
+      "coreConcept": "Components are reusable functions that return JSX to describe UI.",
+      "table": [
+        {
+          "Concept": "Component",
+          "Code": "function Welcome() {\n  return <h1>Hello, World!</h1>;\n}"
+        },
+        {
+          "Concept": "JSX",
+          "Code": "<div className='container'>Content</div>"
+        }
+      ],
+      "diagram": "// Save as Welcome.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/Welcome.jsx\n// Run in browser via Vite\nimport React from 'react';\nfunction Welcome() {\n  return (\n    <div className='container'>\n      <h1>Hello, World!</h1>\n      <p>Welcome to React!</p>\n    </div>\n  );\n}\nexport default Welcome;\n// In App.jsx: import Welcome from './Welcome'; <Welcome />",
+      "mcq": {
+        "question": "What does JSX stand for?",
+        "options": ["JavaScript XML", "JavaScript Extension", "JSON XML", "Java Syntax"],
+        "correctAnswer": "a",
+        "explanation": "JSX stands for JavaScript XML, a syntax for writing HTML-like code in JavaScript."
+      },
+      "references": [
+        {
+          "title": "React Introduction",
+          "description": "Official React introduction.",
+          "url": "https://react.dev/learn"
+        },
+        {
+          "title": "React Basics Video",
+          "description": "Video on React basics.",
+          "url": "https://www.youtube.com/watch?v=Ke90Tje7VS0"
+        }
+      ]
+    },
+    {
+      "title": "React State with useState",
+      "introduction": "Manage dynamic data in React components using the useState hook.",
+      "coreConcept": "useState creates state variables and setters for interactive UIs.",
+      "table": [
+        {
+          "Concept": "Declare State",
+          "Code": "const [count, setCount] = useState(0);"
+        },
+        {
+          "Concept": "Update State",
+          "Code": "<button onClick={() => setCount(count + 1)}>Click</button>"
+        }
+      ],
+      "diagram": "// Save as Counter.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/Counter.jsx\n// Run in browser via Vite\nimport React, { useState } from 'react';\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  return (\n    <div className='container'>\n      <p>Count: {count}</p>\n      <button className='nav-button' onClick={() => setCount(count + 1)}>Increment</button>\n      <button className='nav-button' onClick={() => setCount(count - 1)}>Decrement</button>\n    </div>\n  );\n}\nexport default Counter;\n// In App.jsx: import Counter from './Counter'; <Counter />",
+      "mcq": {
+        "question": "What does setCount do?",
+        "options": ["Defines a component", "Updates state", "Fetches data", "Styles elements"],
+        "correctAnswer": "b",
+        "explanation": "setCount updates the state variable, triggering a re-render."
+      },
+      "references": [
+        {
+          "title": "React useState",
+          "description": "Guide to useState hook.",
+          "url": "https://react.dev/reference/react/useState"
+        },
+        {
+          "title": "Hooks Video",
+          "description": "Video on React hooks.",
+          "url": "https://www.youtube.com/watch?v=TNhaISOUy6Q"
+        }
+      ]
+    },
+    {
+      "title": "React Event Handling",
+      "introduction": "Handle user interactions like clicks and inputs using event handlers.",
+      "coreConcept": "Event handlers are functions that respond to events like onClick or onChange.",
+      "table": [
+        {
+          "Concept": "Click Event",
+          "Code": "<button onClick={() => alert('Clicked')}>Click</button>"
+        },
+        {
+          "Concept": "Input Event",
+          "Code": "<input onChange={(e) => setText(e.target.value)} />"
+        }
+      ],
+      "diagram": "// Save as Event.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/Event.jsx\n// Run in browser via Vite\nimport React, { useState } from 'react';\nfunction Event() {\n  const [text, setText] = useState('');\n  const handleClick = () => alert(`You typed: ${text}`);\n  return (\n    <div className='container'>\n      <input\n        type='text'\n        value={text}\n        onChange={(e) => setText(e.target.value)}\n        className='border p-2 w-full'\n        placeholder='Type something'\n      />\n      <button className='nav-button mt-2 w-full' onClick={handleClick}>Submit</button>\n      <p>Input: {text}</p>\n    </div>\n  );\n}\nexport default Event;\n// In App.jsx: import Event from './Event'; <Event />",
+      "mcq": {
+        "question": "What triggers an onChange event?",
+        "options": ["Button click", "Input value change", "Page load", "API call"],
+        "correctAnswer": "b",
+        "explanation": "onChange triggers when an input’s value changes."
+      },
+      "references": [
+        {
+          "title": "React Events",
+          "description": "Guide to event handling.",
+          "url": "https://react.dev/learn/responding-to-events"
+        },
+        {
+          "title": "Events Video",
+          "description": "Video on React event handling.",
+          "url": "https://www.youtube.com/watch?v=8pKjULHzs0s"
+        }
+      ]
+    },
+    {
+      "title": "React Props",
+      "introduction": "Pass data between components using props to make them reusable.",
+      "coreConcept": "Props are read-only data passed from parent to child components.",
+      "table": [
+        {
+          "Concept": "Pass Props",
+          "Code": "<Child name='Adrian' age={30} />"
+        },
+        {
+          "Concept": "Receive Props",
+          "Code": "function Child({ name, age }) {\n  return <p>{name} is {age}</p>;\n}"
+        }
+      ],
+      "diagram": "// Save as Parent.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/Parent.jsx\n// Run in browser via Vite\nimport React from 'react';\nfunction Child({ name, age }) {\n  return <p className='p-2'>{name} is {age} years old</p>;\n}\nfunction Parent() {\n  return (\n    <div className='container'>\n      <Child name='Adrian' age={30} />\n      <Child name='Alex' age={25} />\n    </div>\n  );\n}\nexport default Parent;\n// In App.jsx: import Parent from './Parent'; <Parent />",
+      "mcq": {
+        "question": "Can props be modified in a child component?",
+        "options": ["Yes", "No", "Only strings", "Only numbers"],
+        "correctAnswer": "b",
+        "explanation": "Props are read-only in child components."
+      },
+      "references": [
+        {
+          "title": "React Props",
+          "description": "Guide to React props.",
+          "url": "https://react.dev/learn/passing-props-to-a-component"
+        },
+        {
+          "title": "Props Video",
+          "description": "Video on React props.",
+          "url": "https://www.youtube.com/watch?v=PHaECbrKgs0"
+        }
+      ]
+    },
+    {
+      "title": "Setting Up Vite and React",
+      "introduction": "Set up a React project with Vite to build the course application.",
+      "coreConcept": "Vite is a fast build tool that simplifies React app development.",
+      "table": [
+        {
+          "Concept": "Create Vite App",
+          "Code": "npm create vite@latest my-app -- --template react"
+        },
+        {
+          "Concept": "Run Dev Server",
+          "Code": "cd my-app\nnpm install\nnpm run dev"
+        }
+      ],
+      "diagram": "// Terminal commands\n// Run in /Users/adrian/Desktop/projects/\nnpm create vite@latest my-app -- --template react\ncd my-app\nnpm install\nnpm install react react-dom\n// Create directory structure\nmkdir src/data src/components\n// Create src/styles.css and src/data/lessons.json\necho '.container { max-width: 100%; padding: 0.5rem; }' > src/styles.css\necho '{\"displayName\": \"Sample\", \"lessons\": []}' > src/data/lessons.json\n// Start server\nnpm run dev\n// Open http://localhost:5173",
+      "mcq": {
+        "question": "What is Vite used for?",
+        "options": ["Styling", "Building web apps", "Fetching APIs", "Managing state"],
+        "correctAnswer": "b",
+        "explanation": "Vite is a build tool for modern web applications."
+      },
+      "references": [
+        {
+          "title": "Vite Guide",
+          "description": "Official Vite documentation.",
+          "url": "https://vitejs.dev/guide/"
+        },
+        {
+          "title": "Vite Setup Video",
+          "description": "Video on Vite with React.",
+          "url": "https://www.youtube.com/watch?v=UH5wVoR8zUc"
+        }
+      ]
+    },
+    {
+      "title": "Structuring the Course App",
+      "introduction": "Organize the app with components, data, and styles for scalability.",
+      "coreConcept": "A well-structured app separates concerns: components, data, and CSS.",
+      "table": [
+        {
+          "Concept": "Directory Structure",
+          "Code": "src/\n  ├── App.jsx\n  ├── styles.css\n  ├── data/\n  │   ├── lessons.json\n  ├── components/"
+        },
+        {
+          "Concept": "Main Component",
+          "Code": "import './styles.css';\nfunction App() {\n  return <div className='container'>Hello</div>;\n}"
+        }
+      ],
+      "diagram": "// Save as App.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/App.jsx\n// Run in browser via Vite\nimport React from 'react';\nimport './styles.css';\nfunction App() {\n  return (\n    <div className='container'>\n      <h1 className='text-3xl font-bold'>Course App</h1>\n      <p className='text-lg'>Welcome to the AI Course!</p>\n    </div>\n  );\n}\nexport default App;\n// Create src/styles.css\n// echo '.container { max-width: 100%; padding: 0.5rem; background: linear-gradient(135deg, #4682b4, #5f9ea0); }' > src/styles.css",
+      "mcq": {
+        "question": "Why separate data into JSON files?",
+        "options": ["To style the app", "To fetch APIs", "To manage content easily", "To run scripts"],
+        "correctAnswer": "c",
+        "explanation": "JSON files separate content from code, making it easier to manage."
+      },
+      "references": [
+        {
+          "title": "React Project Structure",
+          "description": "Guide to organizing React projects.",
+          "url": "https://react.dev/learn/start-a-new-react-project"
+        },
+        {
+          "title": "Project Structure Video",
+          "description": "Video on React project structure.",
+          "url": "https://www.youtube.com/watch?v=C3pTD6Sw3aQ"
+        }
+      ]
+    },
+    {
+      "title": "Dynamic JSON Loading",
+      "introduction": "Load training data dynamically from JSON files without modifying code.",
+      "coreConcept": "Vite’s import.meta.glob enables dynamic import of JSON files.",
+      "table": [
+        {
+          "Concept": "Glob Import",
+          "Code": "const files = import.meta.glob('./data/*.json', { eager: true });"
+        },
+        {
+          "Concept": "Process Files",
+          "Code": "const dataMap = {};\nfor (const [path, module] of Object.entries(files)) {\n  dataMap[path.split('/').pop()] = module.default;\n}"
+        }
+      ],
+      "diagram": "// Save as DynamicApp.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/DynamicApp.jsx\n// Run in browser via Vite\n// Create /Users/adrian/Desktop/projects/sample.json: {\"displayName\": \"Test\", \"lessons\": []}\nimport React, { useState, useEffect } from 'react';\nfunction DynamicApp() {\n  const [files, setFiles] = useState([]);\n  const [dataMap, setDataMap] = useState({});\n  useEffect(() => {\n    const loadFiles = async () => {\n      const importedFiles = import.meta.glob('./data/*.json', { eager: true });\n      const loadedFiles = [];\n      const loadedData = {};\n      for (const [path, module] of Object.entries(importedFiles)) {\n        const fileName = path.split('/').pop();\n        const data = module.default;\n        if (data.displayName && data.lessons) {\n          loadedFiles.push(fileName);\n          loadedData[fileName] = data;\n        }\n      }\n      setFiles(loadedFiles);\n      setDataMap(loadedData);\n    };\n    loadFiles();\n  }, []);\n  return (\n    <div className='container'>\n      <select className='training-selector'>\n        {files.map(file => (\n          <option key={file} value={file}>{dataMap[file]?.displayName || file}</option>\n        ))}\n      </select>\n    </div>\n  );\n}\nexport default DynamicApp;\n// In App.jsx: import DynamicApp from './DynamicApp'; <DynamicApp />",
+      "mcq": {
+        "question": "What does import.meta.glob return?",
+        "options": ["A component", "A Promise", "A file map", "A state object"],
+        "correctAnswer": "c",
+        "explanation": "import.meta.glob returns an object mapping file paths to modules."
+      },
+      "references": [
+        {
+          "title": "Vite Glob Import",
+          "description": "Guide to Vite glob imports.",
+          "url": "https://vitejs.dev/guide/features.html#glob-import"
+        },
+        {
+          "title": "Dynamic Import Video",
+          "description": "Video on dynamic imports.",
+          "url": "https://www.youtube.com/watch?v=9jO8zSzS4gQ"
+        }
+      ]
+    },
+    {
+      "title": "Creating Controlled Inputs",
+      "introduction": "Build a form with controlled inputs to collect and manage user data.",
+      "coreConcept": "Controlled inputs synchronize input values with React state.",
+      "table": [
+        {
+          "Concept": "Controlled Input",
+          "Code": "<input value={name} onChange={(e) => setName(e.target.value)} />"
+        },
+        {
+          "Concept": "Handle Submission",
+          "Code": "const handleSubmit = () => console.log('Submitted:', name);"
+        }
+      ],
+      "diagram": "// Save as InputForm.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/InputForm.jsx\n// Run in browser via Vite\nimport React, { useState } from 'react';\nfunction InputForm() {\n  const [name, setName] = useState('');\n  const handleSubmit = () => {\n    console.log('Submitted:', name);\n    alert(`Hello, ${name}!`);\n  };\n  return (\n    <div className='container'>\n      <input\n        type='text'\n        value={name}\n        onChange={(e) => setName(e.target.value)}\n        className='border p-2 w-full rounded'\n        placeholder='Enter your name'\n      />\n      <button className='nav-button mt-2 w-full' onClick={handleSubmit}>Submit</button>\n      <p className='text-lg mt-2'>You typed: {name}</p>\n    </div>\n  );\n}\nexport default InputForm;\n// In App.jsx: import InputForm from './InputForm'; <InputForm />",
+      "mcq": {
+        "question": "Why use controlled inputs?",
+        "options": ["For styling", "To sync with state", "To fetch APIs", "To disable inputs"],
+        "correctAnswer": "b",
+        "explanation": "Controlled inputs sync their value with React state for dynamic updates."
+      },
+      "references": [
+        {
+          "title": "React Forms",
+          "description": "Guide to controlled inputs.",
+          "url": "https://react.dev/reference/react-dom/components/input"
+        },
+        {
+          "title": "Forms Video",
+          "description": "Video on React forms.",
+          "url": "https://www.youtube.com/watch?v=7Vo_VhSwq0U"
+        }
+      ]
+    },
+    {
+      "title": "Form Validation",
+      "introduction": "Validate user inputs to ensure data quality before submission.",
+      "coreConcept": "Validation checks input data and provides feedback to users.",
+      "table": [
+        {
+          "Concept": "Validate Input",
+          "Code": "const isValid = name.length > 2;"
+        },
+        {
+          "Concept": "Show Error",
+          "Code": "{!isValid && <p className='text-red-600'>Name too short</p>}"
+        }
+      ],
+      "diagram": "// Save as ValidatedForm.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/ValidatedForm.jsx\n// Run in browser via Vite\nimport React, { useState } from 'react';\nfunction ValidatedForm() {\n  const [name, setName] = useState('');\n  const [error, setError] = useState('');\n  const handleSubmit = () => {\n    if (name.length < 3) {\n      setError('Name must be at least 3 characters');\n    } else {\n      setError('');\n      alert(`Valid name: ${name}`);\n    }\n  };\n  return (\n    <div className='container'>\n      <input\n        type='text'\n        value={name}\n        onChange={(e) => setName(e.target.value)}\n        className='border p-2 w-full rounded'\n        placeholder='Enter your name'\n      />\n      {error && <p className='text-red-600 mt-2'>{error}</p>}\n      <button className='nav-button mt-2 w-full' onClick={handleSubmit}>Submit</button>\n    </div>\n  );\n}\nexport default ValidatedForm;\n// In App.jsx: import ValidatedForm from './ValidatedForm'; <ValidatedForm />",
+      "mcq": {
+        "question": "What does form validation do?",
+        "options": ["Styles inputs", "Checks data quality", "Fetches APIs", "Renders components"],
+        "correctAnswer": "b",
+        "explanation": "Form validation ensures user inputs meet requirements."
+      },
+      "references": [
+        {
+          "title": "React Form Validation",
+          "description": "Guide to validating forms.",
+          "url": "https://react.dev/learn/keeping-components-pure#step-3-add-some-input-handling"
+        },
+        {
+          "title": "Validation Video",
+          "description": "Video on form validation.",
+          "url": "https://www.youtube.com/watch?v=b0IZo2Aho9Y"
+        }
+      ]
+    },
+    {
+      "title": "Fetching Remote Data",
+      "introduction": "Fetch and display data from a remote API like JSONPlaceholder.",
+      "coreConcept": "The fetch API retrieves JSON data for rendering in React.",
+      "table": [
+        {
+          "Concept": "Fetch Data",
+          "Code": "fetch('https://jsonplaceholder.typicode.com/users')\n  .then(res => res.json())\n  .then(data => setUsers(data));"
+        },
+        {
+          "Concept": "Render Data",
+          "Code": "{users.map(user => <p key={user.id}>{user.name}</p>)}"
+        }
+      ],
+      "diagram": "// Save as ApiFetch.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/ApiFetch.jsx\n// Run in browser via Vite\nimport React, { useState, useEffect } from 'react';\nfunction ApiFetch() {\n  const [users, setUsers] = useState([]);\n  const [error, setError] = useState(null);\n  useEffect(() => {\n    fetch('https://jsonplaceholder.typicode.com/users')\n      .then(res => {\n        if (!res.ok) throw new Error('Network response was not ok');\n        return res.json();\n      })\n      .then(data => setUsers(data))\n      .catch(err => setError('Failed to fetch users: ' + err.message));\n  }, []);\n  return (\n    <div className='container'>\n      {error && <p className='error-message'>{error}</p>}\n      {users.length === 0 && !error && <p className='text-lg'>Loading...</p>}\n      {users.map(user => (\n        <p key={user.id} className='p-2 text-lg'>{user.name}</p>\n      ))}\n    </div>\n  );\n}\nexport default ApiFetch;\n// In App.jsx: import ApiFetch from './ApiFetch'; <ApiFetch />",
+      "mcq": {
+        "question": "What does fetch return?",
+        "options": ["A JSON object", "A Promise", "A component", "An array"],
+        "correctAnswer": "b",
+        "explanation": "fetch returns a Promise that resolves to a Response object."
+      },
+      "references": [
+        {
+          "title": "Fetch API",
+          "description": "Guide to using fetch.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"
+        },
+        {
+          "title": "API Fetch Video",
+          "description": "Video on fetching data in React.",
+          "url": "https://www.youtube.com/watch?v=T3Px88x_PsA"
+        }
+      ]
+    },
+    {
+      "title": "Error Handling and Deployment",
+      "introduction": "Handle errors in API calls and deploy the app for production.",
+      "coreConcept": "Error boundaries and try-catch ensure robust apps; Vite builds for deployment.",
+      "table": [
+        {
+          "Concept": "Handle Fetch Errors",
+          "Code": "fetch(url).then(res => {\n  if (!res.ok) throw new Error('Failed');\n  return res.json();\n}).catch(err => setError(err.message));"
+        },
+        {
+          "Concept": "Build and Deploy",
+          "Code": "npm run build\n// Deploy to GitHub Pages: npm run deploy"
+        }
+      ],
+      "diagram": "// Save as ErrorApp.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/ErrorApp.jsx\n// Run in browser via Vite\nimport React, { useState, useEffect } from 'react';\nfunction ErrorApp() {\n  const [data, setData] = useState([]);\n  const [error, setError] = useState(null);\n  useEffect(() => {\n    fetch('https://jsonplaceholder.typicode.com/users')\n      .then(res => {\n        if (!res.ok) throw new Error('Failed to fetch');\n        return res.json();\n      })\n      .then(data => setData(data))\n      .catch(err => setError(err.message));\n  }, []);\n  return (\n    <div className='container'>\n      {error && <p className='error-message'>{error}</p>}\n      {data.map(item => <p key={item.id} className='p-2'>{item.name}</p>)}\n    </div>\n  );\n}\n// Terminal: Build and deploy\n// npm run build\n// echo '{\"base\": \"/AI_Expert_Course_App/\"}' > vite.config.js\n// npm run deploy\n// In App.jsx: import ErrorApp from './ErrorApp'; <ErrorApp />",
+      "mcq": {
+        "question": "What does npm run build do?",
+        "options": ["Starts dev server", "Creates production files", "Installs dependencies", "Fetches data"],
+        "correctAnswer": "b",
+        "explanation": "npm run build creates optimized files for production."
+      },
+      "references": [
+        {
+          "title": "React Error Handling",
+          "description": "Guide to error handling in React.",
+          "url": "https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary"
+        },
+        {
+          "title": "Vite Deployment",
+          "description": "Guide to deploying Vite apps.",
+          "url": "https://vitejs.dev/guide/static-deploy.html"
+        }
+      ]
     }
   ]
 }

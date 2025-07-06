@@ -1,0 +1,345 @@
+{
+   "displayName": "Python AI Applications",
+  "lessons": [
+    {
+      "title": "Setting Up a Python AI Environment",
+      "introduction": "Learn to set up a Python environment for AI development with virtual environments and key libraries.",
+      "coreConcept": "Virtual environments isolate dependencies, enabling clean AI development with libraries like pandas and tensorflow.",
+      "table": [
+        {
+          "Concept": "Create Virtual Environment",
+          "Code": "python3 -m venv ai_env\nsource ai_env/bin/activate  # macOS/Linux\n# ai_env\\Scripts\\activate  # Windows"
+        },
+        {
+          "Concept": "Install AI Libraries",
+          "Code": "pip install pandas scikit-learn tensorflow requests Pillow Flask"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Set up Python AI environment\n# Save as setup_ai_env.py\n# Run: python3 setup_ai_env.py\n\n# Create virtual environment\n# Run in terminal: python3 -m venv ai_env\n# Activate: source ai_env/bin/activate (macOS/Linux) or ai_env\\Scripts\\activate (Windows)\n# Install dependencies\n# Run: pip install pandas scikit-learn tensorflow requests Pillow Flask\n\nimport sys\nprint('Python version:', sys.version)\ntry:\n    import pandas, sklearn, tensorflow, requests, PIL, flask\n    print('All AI libraries installed successfully')\nexcept ImportError as e:\n    print('Missing library:', e)",
+      "mcq": {
+        "question": "Why use a virtual environment for AI projects?",
+        "options": ["To speed up code", "To isolate dependencies", "To compile Python", "To fetch APIs"],
+        "correctAnswer": "b",
+        "explanation": "Virtual environments isolate project dependencies to prevent conflicts."
+      },
+      "references": [
+        {
+          "title": "Python Virtual Environments",
+          "description": "Official guide to setting up virtual environments.",
+          "url": "https://docs.python.org/3/library/venv.html"
+        },
+        {
+          "title": "Environment Setup Video",
+          "description": "Video tutorial on Python setup.",
+          "url": "https://www.youtube.com/watch?v=YPItfQ87qjM"
+        }
+      ]
+    },
+    {
+      "title": "Reading CSV Files for AI Data",
+      "introduction": "AI models require data. This lesson uses pandas to read customer reviews from a CSV file.",
+      "coreConcept": "pandas DataFrames simplify data loading and manipulation for AI tasks like sentiment analysis.",
+      "table": [
+        {
+          "Concept": "Load CSV",
+          "Code": "import pandas as pd\ndf = pd.read_csv('reviews.csv')\nprint(df.head())"
+        },
+        {
+          "Concept": "Extract Columns",
+          "Code": "reviews = df['review']\nlabels = df['sentiment']\nprint(reviews)"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Read CSV for AI data\n# Save as read_csv.py\n# Create reviews.csv in /Users/adrian/Desktop/projects/ with:\n# review,sentiment\n# \"Great product\",positive\n# \"Terrible service\",negative\n# Run: python3 read_csv.py\n\nimport pandas as pd\n# Load CSV file\ndf = pd.read_csv('/Users/adrian/Desktop/projects/reviews.csv')\n# Extract columns\nreviews = df['review']\nlabels = df['sentiment']\n# Display data\nprint('Reviews:\\n', reviews)\nprint('Sentiments:\\n', labels)",
+      "mcq": {
+        "question": "What does pd.read_csv() return?",
+        "options": ["A list", "A dictionary", "A DataFrame", "A string"],
+        "correctAnswer": "c",
+        "explanation": "pd.read_csv() returns a pandas DataFrame for data manipulation."
+      },
+      "references": [
+        {
+          "title": "Pandas CSV Guide",
+          "description": "Official pandas CSV documentation.",
+          "url": "https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html"
+        },
+        {
+          "title": "Pandas Video",
+          "description": "Video on reading CSVs with pandas.",
+          "url": "https://www.youtube.com/watch?v=vmEHCJofslg"
+        }
+      ]
+    },
+    {
+      "title": "Preprocessing Text for Sentiment Analysis",
+      "introduction": "Text data must be preprocessed for AI models. This lesson uses scikit-learn to prepare reviews.",
+      "coreConcept": "TF-IDF vectorization converts text into numerical features for sentiment analysis.",
+      "table": [
+        {
+          "Concept": "Vectorize Text",
+          "Code": "from sklearn.feature_extraction.text import TfidfVectorizer\nvectorizer = TfidfVectorizer()\nX = vectorizer.fit_transform(['Great product', 'Terrible service'])"
+        },
+        {
+          "Concept": "Handle Missing Data",
+          "Code": "df['review'] = df['review'].fillna('')\nX = vectorizer.fit_transform(df['review'])"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Preprocess text for sentiment analysis\n# Save as preprocess_text.py\n# Use reviews.csv from Lesson 2\n# Run: python3 preprocess_text.py\n\nimport pandas as pd\nfrom sklearn.feature_extraction.text import TfidfVectorizer\n# Load CSV\ndf = pd.read_csv('/Users/adrian/Desktop/projects/reviews.csv')\n# Handle missing data\ndf['review'] = df['review'].fillna('')\n# Vectorize text\nvectorizer = TfidfVectorizer(max_features=100)\nX = vectorizer.fit_transform(df['review'])\n# Display shape\nprint(f'Feature matrix shape: {X.shape}')",
+      "mcq": {
+        "question": "What does TfidfVectorizer do?",
+        "options": ["Classifies text", "Removes stopwords", "Converts text to numbers", "Trains models"],
+        "correctAnswer": "c",
+        "explanation": "TfidfVectorizer converts text to numerical features based on term frequency."
+      },
+      "references": [
+        {
+          "title": "Scikit-learn Text Processing",
+          "description": "Guide to text feature extraction.",
+          "url": "https://scikit-learn.org/stable/modules/feature_extraction.html"
+        },
+        {
+          "title": "Text Preprocessing Video",
+          "description": "Video on text preprocessing with scikit-learn.",
+          "url": "https://www.youtube.com/watch?v=6d273uO6W0U"
+        }
+      ]
+    },
+    {
+      "title": "Building a Sentiment Classifier",
+      "introduction": "Build a classifier to predict sentiment (positive/negative) from reviews using SVM.",
+      "coreConcept": "Support Vector Machines (SVM) classify text features into sentiment categories.",
+      "table": [
+        {
+          "Concept": "Train SVM",
+          "Code": "from sklearn.svm import SVC\nclassifier = SVC(kernel='linear')\nclassifier.fit(X, y)"
+        },
+        {
+          "Concept": "Predict Sentiment",
+          "Code": "X_new = vectorizer.transform(['Amazing product'])\nprediction = classifier.predict(X_new)"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Build sentiment classifier\n# Save as sentiment_classifier.py\n# Use reviews.csv from Lesson 2\n# Run: python3 sentiment_classifier.py\n\nimport pandas as pd\nfrom sklearn.feature_extraction.text import TfidfVectorizer\nfrom sklearn.svm import SVC\n# Load data\ndf = pd.read_csv('/Users/adrian/Desktop/projects/reviews.csv')\ndf['review'] = df['review'].fillna('')\n# Vectorize\nvectorizer = TfidfVectorizer(max_features=100)\nX = vectorizer.fit_transform(df['review'])\ny = df['sentiment']\n# Train classifier\nclassifier = SVC(kernel='linear')\nclassifier.fit(X, y)\n# Predict\nX_new = vectorizer.transform(['Amazing product'])\nprediction = classifier.predict(X_new)\nprint(f'Sentiment: {prediction[0]}')",
+      "mcq": {
+        "question": "What does the linear kernel in SVC do?",
+        "options": ["Clusters data", "Fits a linear boundary", "Reduces features", "Encodes text"],
+        "correctAnswer": "b",
+        "explanation": "The linear kernel fits a linear decision boundary for classification."
+      },
+      "references": [
+        {
+          "title": "Scikit-learn SVM",
+          "description": "Guide to SVM classifiers.",
+          "url": "https://scikit-learn.org/stable/modules/svm.html"
+        },
+        {
+          "title": "SVM Video",
+          "description": "Video on SVM with scikit-learn.",
+          "url": "https://www.youtube.com/watch?v=efR1C6CvhmE"
+        }
+      ]
+    },
+    {
+      "title": "Evaluating the Sentiment Classifier",
+      "introduction": "Evaluate the sentiment classifier’s performance using accuracy and confusion matrix.",
+      "coreConcept": "Metrics like accuracy and confusion matrix measure classifier performance.",
+      "table": [
+        {
+          "Concept": "Calculate Accuracy",
+          "Code": "from sklearn.metrics import accuracy_score\naccuracy = accuracy_score(y_test, y_pred)"
+        },
+        {
+          "Concept": "Confusion Matrix",
+          "Code": "from sklearn.metrics import confusion_matrix\nmatrix = confusion_matrix(y_test, y_pred)"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Evaluate sentiment classifier\n# Save as evaluate_classifier.py\n# Use reviews.csv from Lesson 2\n# Run: python3 evaluate_classifier.py\n\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.feature_extraction.text import TfidfVectorizer\nfrom sklearn.svm import SVC\nfrom sklearn.metrics import accuracy_score, confusion_matrix\nimport pandas as pd\n# Load data\ndf = pd.read_csv('/Users/adrian/Desktop/projects/reviews.csv')\ndf['review'] = df['review'].fillna('')\n# Prepare data\nX = TfidfVectorizer(max_features=100).fit_transform(df['review'])\ny = df['sentiment']\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)\n# Train classifier\nclassifier = SVC(kernel='linear')\nclassifier.fit(X_train, y_train)\n# Evaluate\ny_pred = classifier.predict(X_test)\naccuracy = accuracy_score(y_test, y_pred)\nmatrix = confusion_matrix(y_test, y_pred, labels=['positive', 'negative'])\nprint(f'Accuracy: {accuracy:.2f}\\nConfusion Matrix:\\n{matrix}')",
+      "mcq": {
+        "question": "What does a confusion matrix show?",
+        "options": ["Feature weights", "Prediction errors", "Training time", "Data types"],
+        "correctAnswer": "b",
+        "explanation": "A confusion matrix shows true vs. predicted labels, highlighting errors."
+      },
+      "references": [
+        {
+          "title": "Scikit-learn Metrics",
+          "description": "Guide to model evaluation metrics.",
+          "url": "https://scikit-learn.org/stable/modules/model_evaluation.html"
+        },
+        {
+          "title": "Evaluation Video",
+          "description": "Video on classifier evaluation.",
+          "url": "https://www.youtube.com/watch?v=85dtiMz9tSo"
+        }
+      ]
+    },
+    {
+      "title": "Fetching Data from an API",
+      "introduction": "Fetch external text data for AI using APIs, simulating customer reviews.",
+      "coreConcept": "The requests library fetches JSON data from APIs for AI processing.",
+      "table": [
+        {
+          "Concept": "Fetch JSON",
+          "Code": "import requests\nresponse = requests.get('https://jsonplaceholder.typicode.com/posts')\ndata = response.json()"
+        },
+        {
+          "Concept": "Process API Data",
+          "Code": "texts = [post['title'] for post in data]\nX = vectorizer.fit_transform(texts)"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Fetch API data for AI\n# Save as fetch_api.py\n# Run: python3 fetch_api.py\n\nimport requests\nfrom sklearn.feature_extraction.text import TfidfVectorizer\n# Fetch data\nresponse = requests.get('https://jsonplaceholder.typicode.com/posts')\ndata = response.json()\n# Extract text\ntexts = [post['title'] for post in data[:10]]\n# Vectorize\nvectorizer = TfidfVectorizer(max_features=100)\nX = vectorizer.fit_transform(texts)\nprint(f'Fetched {len(texts)} texts, feature matrix shape: {X.shape}')",
+      "mcq": {
+        "question": "What does requests.get() return?",
+        "options": ["A list", "A Response object", "A DataFrame", "A tensor"],
+        "correctAnswer": "b",
+        "explanation": "requests.get() returns a Response object with API data."
+      },
+      "references": [
+        {
+          "title": "Requests Library",
+          "description": "Guide to using requests for APIs.",
+          "url": "https://requests.readthedocs.io/en/latest/"
+        },
+        {
+          "title": "API Video",
+          "description": "Video on fetching API data.",
+          "url": "https://www.youtube.com/watch?v=0sOvCWFH8nQ"
+        }
+      ]
+    },
+    {
+      "title": "Reading Images for Classification",
+      "introduction": "Load images for AI classification using Pillow, preparing for digit recognition.",
+      "coreConcept": "Pillow loads and preprocesses images into arrays for AI models.",
+      "table": [
+        {
+          "Concept": "Load Image",
+          "Code": "from PIL import Image\nimg = Image.open('digit.png').convert('L')"
+        },
+        {
+          "Concept": "Convert to Array",
+          "Code": "import numpy as np\nimg_array = np.array(img) / 255.0"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Read image for classification\n# Save as read_image.py\n# Create digit.png (28x28 grayscale) in /Users/adrian/Desktop/projects/\n# Run: python3 read_image.py\n\nfrom PIL import Image\nimport numpy as np\n# Load image\nimg = Image.open('/Users/adrian/Desktop/projects/digit.png').convert('L')\n# Resize and normalize\nimg = img.resize((28, 28))\nimg_array = np.array(img) / 255.0\nprint(f'Image array shape: {img_array.shape}')",
+      "mcq": {
+        "question": "What does Image.convert('L') do?",
+        "options": ["Resizes image", "Converts to grayscale", "Normalizes pixels", "Crops image"],
+        "correctAnswer": "b",
+        "explanation": "Image.convert('L') converts an image to grayscale."
+      },
+      "references": [
+        {
+          "title": "Pillow Documentation",
+          "description": "Guide to image processing with Pillow.",
+          "url": "https://pillow.readthedocs.io/en/stable/"
+        },
+        {
+          "title": "Image Processing Video",
+          "description": "Video on image handling.",
+          "url": "https://www.youtube.com/watch?v=6Qs3wObeWwc"
+        }
+      ]
+    },
+    {
+      "title": "Preprocessing Images for AI",
+      "introduction": "Prepare images for neural networks by resizing and normalizing.",
+      "coreConcept": "Image preprocessing ensures images are in the correct format for AI models.",
+      "table": [
+        {
+          "Concept": "Resize Image",
+          "Code": "img = img.resize((28, 28))"
+        },
+        {
+          "Concept": "Reshape for CNN",
+          "Code": "img_array = img_array.reshape(1, 28, 28, 1)"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Preprocess image for AI\n# Save as preprocess_image.py\n# Use digit.png from Lesson 7\n# Run: python3 preprocess_image.py\n\nfrom PIL import Image\nimport numpy as np\n# Load image\nimg = Image.open('/Users/adrian/Desktop/projects/digit.png').convert('L')\n# Resize and normalize\nimg = img.resize((28, 28))\nimg_array = np.array(img) / 255.0\n# Reshape for CNN\nimg_array = img_array.reshape(1, 28, 28, 1)\nprint(f'Processed image shape: {img_array.shape}')",
+      "mcq": {
+        "question": "Why normalize image pixels to [0,1]?",
+        "options": ["To resize images", "To improve training", "To convert to grayscale", "To crop images"],
+        "correctAnswer": "b",
+        "explanation": "Normalization improves neural network training stability."
+      },
+      "references": [
+        {
+          "title": "TensorFlow Image Guide",
+          "description": "Guide to image preprocessing.",
+          "url": "https://www.tensorflow.org/tutorials/images"
+        },
+        {
+          "title": "Image Preprocessing Video",
+          "description": "Video on image preprocessing.",
+          "url": "https://www.youtube.com/watch?v=mL7-g9F2mEY"
+        }
+      ]
+    },
+    {
+      "title": "Building an Image Classifier",
+      "introduction": "Create a digit classifier using a convolutional neural network (CNN) with tensorflow.",
+      "coreConcept": "CNNs learn spatial patterns in images for classification tasks.",
+      "table": [
+        {
+          "Concept": "Build CNN",
+          "Code": "import tensorflow as tf\nmodel = tf.keras.Sequential([tf.keras.layers.Conv2D(32, 3, activation='relu', input_shape=(28, 28, 1))])"
+        },
+        {
+          "Concept": "Predict with Model",
+          "Code": "prediction = model.predict(img_array)\nlabel = prediction.argmax()"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Build image classifier\n# Save as image_classifier.py\n# Use digit.png from Lesson 7\n# Run: python3 image_classifier.py\n\nfrom PIL import Image\nimport numpy as np\nimport tensorflow as tf\n# Load and preprocess image\nimg = Image.open('/Users/adrian/Desktop/projects/digit.png').convert('L')\nimg = img.resize((28, 28))\nimg_array = np.array(img) / 255.0\nimg_array = img_array.reshape(1, 28, 28, 1)\n# Build model\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Conv2D(32, 3, activation='relu', input_shape=(28, 28, 1)),\n    tf.keras.layers.Flatten(),\n    tf.keras.layers.Dense(10, activation='softmax')\n])\nmodel.compile(optimizer='adam', loss='sparse_categorical_crossentropy')\n# Note: In practice, train model on MNIST dataset\n# For testing, assume pre-trained weights\n# prediction = model.predict(img_array)\n# print(f'Predicted digit: {prediction.argmax()}')",
+      "mcq": {
+        "question": "What does Conv2D do in a CNN?",
+        "options": ["Flattens data", "Applies filters", "Classifies text", "Normalizes pixels"],
+        "correctAnswer": "b",
+        "explanation": "Conv2D applies convolutional filters to detect patterns."
+      },
+      "references": [
+        {
+          "title": "TensorFlow CNN Guide",
+          "description": "Guide to building CNNs.",
+          "url": "https://www.tensorflow.org/tutorials/images/cnn"
+        },
+        {
+          "title": "CNN Video",
+          "description": "Video on CNNs with tensorflow.",
+          "url": "https://www.youtube.com/watch?v=x_V8zTLPhHs"
+        }
+      ]
+    },
+    {
+      "title": "Deploying an AI App with Flask",
+      "introduction": "Deploy the sentiment classifier as a web app using Flask.",
+      "coreConcept": "Flask serves AI models via web endpoints, enabling user interaction.",
+      "table": [
+        {
+          "Concept": "Create Flask App",
+          "Code": "from flask import Flask\napp = Flask(__name__)\n@app.route('/')\ndef home():\n    return 'AI App'"
+        },
+        {
+          "Concept": "Prediction Endpoint",
+          "Code": "from flask import request\n@app.route('/predict', methods=['POST'])\ndef predict():\n    data = request.json['text']\n    return {'prediction': 'positive'}"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Deploy AI app with Flask\n# Save as app.py\n# Use reviews.csv from Lesson 2\n# Run: python3 app.py\n# Test: curl -X POST -H \"Content-Type: application/json\" -d '{\"text\":\"Great app\"}' http://localhost:5000/predict\n\nfrom flask import Flask, request, jsonify\nimport pandas as pd\nfrom sklearn.feature_extraction.text import TfidfVectorizer\nfrom sklearn.svm import SVC\n# Load and train model\napp = Flask(__name__)\ndf = pd.read_csv('/Users/adrian/Desktop/projects/reviews.csv')\ndf['review'] = df['review'].fillna('')\nvectorizer = TfidfVectorizer(max_features=100)\nX = vectorizer.fit_transform(df['review'])\nclassifier = SVC(kernel='linear')\nclassifier.fit(X, df['sentiment'])\n# Prediction endpoint\n@app.route('/predict', methods=['POST'])\ndef predict():\n    data = request.json['text']\n    X_new = vectorizer.transform([data])\n    prediction = classifier.predict(X_new)[0]\n    return jsonify({'prediction': prediction})\n# Run server\nif __name__ == '__main__':\n    app.run(debug=True)",
+      "mcq": {
+        "question": "What does @app.route define?",
+        "options": ["A model", "A web endpoint", "A dataset", "A library"],
+        "correctAnswer": "b",
+        "explanation": "@app.route defines a web endpoint for handling requests."
+      },
+      "references": [
+        {
+          "title": "Flask Documentation",
+          "description": "Guide to building Flask apps.",
+          "url": "https://flask.palletsprojects.com/"
+        },
+        {
+          "title": "Flask Video",
+          "description": "Video on Flask web apps.",
+          "url": "https://www.youtube.com/watch?v=Z1RJmh-OqeA"
+        }
+      ]
+    }
+  ]
+}
