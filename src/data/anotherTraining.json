@@ -1,44 +1,44 @@
 {
-  "displayName": "Creating React App",
+  "displayName": "Building a React Course App",
   "lessons": [
     {
-      "title": "Introduction to JavaScript",
-      "introduction": "JavaScript is a versatile language for web development. Learn its basics to start coding.",
-      "coreConcept": "JavaScript runs in browsers and Node.js, using variables and data types to store data.",
+      "title": "JavaScript Variables",
+      "introduction": "JavaScript variables store data like numbers or strings. Learn to use `let`, `const`, and `var` to manage data in your course app.",
+      "coreConcept": "Variables hold data; `let` allows reassignment, `const` is fixed, `var` is older.",
       "table": [
         {
-          "Concept": "Variables",
-          "Code": "let name = 'Adrian';\nconst age = 30;\nvar score = 85;"
+          "Concept": "Declare Variables",
+          "Code": "let name = 'Adrian';\nconst age = 30;"
         },
         {
-          "Concept": "Data Types",
-          "Code": "let str = 'Hello';\nlet num = 42;\nlet bool = true;\nlet arr = [1, 2];\nlet obj = { key: 'value' };"
+          "Concept": "Reassign Variables",
+          "Code": "let score = 85;\nscore = 90;"
         }
       ],
-      "diagram": "// Save as intro.js\n// Run: node /Users/adrian/Desktop/projects/intro.js\nlet name = 'Adrian';\nconst age = 30;\nlet scores = [80, 90];\nlet person = { name: 'Adrian', age: 30 };\nconsole.log('Name:', name, 'Type:', typeof name);\nconsole.log('Age:', age, 'Type:', typeof age);\nconsole.log('Scores:', scores, 'Type:', typeof scores);\nconsole.log('Person:', person, 'Type:', typeof person);",
+      "diagram": "// Save as variables.js\n// Run: node /Users/adrian/Desktop/AI_Expert_Course_App/src/variables.js\nlet name = 'Adrian';\nconst age = 30;\nlet score = 85;\nscore = 90;\nconsole.log('Name:', name); // Adrian\nconsole.log('Age:', age); // 30\nconsole.log('Score:', score); // 90",
       "mcq": {
-        "question": "What is the difference between `let` and `const`?",
-        "options": ["`let` is constant, `const` is variable", "`let` allows reassignment, `const` does not", "`let` is for functions, `const` is for arrays", "`let` is old, `const` is new"],
-        "correctAnswer": "b",
-        "explanation": "`let` allows variable reassignment, while `const` prevents it."
+        "question": "What keyword prevents variable reassignment?",
+        "options": ["let", "var", "const", "function"],
+        "correctAnswer": "c",
+        "explanation": "`const` prevents reassignment, ensuring the variable's value stays fixed."
       },
       "references": [
         {
-          "title": "MDN JavaScript Basics",
-          "description": "Introduction to JavaScript.",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction"
+          "title": "MDN Variables",
+          "description": "Guide to JavaScript variables.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#variables"
         },
         {
-          "title": "JS Basics Video",
-          "description": "Video tutorial on JavaScript basics.",
-          "url": "https://www.youtube.com/watch?v=W6NZfCO5SIk"
+          "title": "Variables Video",
+          "description": "Video on JavaScript variables.",
+          "url": "https://www.youtube.com/watch?v=9WIJQDvt4Us"
         }
       ]
     },
     {
       "title": "JavaScript Functions",
-      "introduction": "Functions are reusable blocks of code that perform tasks or calculations.",
-      "coreConcept": "Functions can take parameters, return values, and be written as declarations or arrow functions.",
+      "introduction": "Functions are reusable code blocks. Use them in the course app to handle user interactions like submitting answers.",
+      "coreConcept": "Functions execute tasks, taking inputs and returning outputs, using declarations or arrow syntax.",
       "table": [
         {
           "Concept": "Function Declaration",
@@ -49,12 +49,12 @@
           "Code": "const multiply = (a, b) => a * b;"
         }
       ],
-      "diagram": "// Save as functions.js\n// Run: node /Users/adrian/Desktop/projects/functions.js\nfunction add(a, b) {\n  return a + b;\n}\nconst multiply = (a, b) => a * b;\nconsole.log('Add 5 + 3:', add(5, 3)); // 8\nconsole.log('Multiply 5 * 3:', multiply(5, 3)); // 15",
+      "diagram": "// Save as functions.js\n// Run: node /Users/adrian/Desktop/AI_Expert_Course_App/src/functions.js\nfunction checkAnswer(selected, correct) {\n  return selected === correct;\n}\nconst logResult = (result) => console.log('Result:', result);\nlogResult(checkAnswer('a', 'a')); // Result: true\nlogResult(checkAnswer('a', 'b')); // Result: false",
       "mcq": {
-        "question": "What is an arrow function’s benefit?",
-        "options": ["Loops arrays", "Concise syntax", "Declares constants", "Fetches data"],
+        "question": "What is an arrow function’s key feature?",
+        "options": ["Loops data", "Concise syntax", "Stores state", "Fetches APIs"],
         "correctAnswer": "b",
-        "explanation": "Arrow functions offer a shorter syntax and lexical `this` binding."
+        "explanation": "Arrow functions provide a concise syntax and lexical `this` binding."
       },
       "references": [
         {
@@ -70,25 +70,25 @@
       ]
     },
     {
-      "title": "Working with Arrays and Objects",
-      "introduction": "Arrays and objects store collections of data for complex applications.",
-      "coreConcept": "Arrays hold ordered lists, while objects store key-value pairs.",
+      "title": "JavaScript Arrays and Objects",
+      "introduction": "Arrays and objects store multiple values. Use them to manage lesson data in the course app.",
+      "coreConcept": "Arrays hold ordered lists; objects store key-value pairs for structured data.",
       "table": [
         {
           "Concept": "Array Methods",
-          "Code": "let arr = [1, 2, 3];\narr.push(4);\narr.map(x => x * 2);"
+          "Code": "let lessons = ['JS', 'React'];\nlessons.push('Vite');"
         },
         {
           "Concept": "Object Access",
-          "Code": "let obj = { name: 'Adrian', age: 30 };\nconsole.log(obj.name);"
+          "Code": "let lesson = { title: 'JS', id: 1 };\nconsole.log(lesson.title);"
         }
       ],
-      "diagram": "// Save as arrays_objects.js\n// Run: node /Users/adrian/Desktop/projects/arrays_objects.js\nlet scores = [80, 90, 95];\nlet person = { name: 'Adrian', age: 30, scores };\nscores.push(100);\nlet doubled = scores.map(score => score * 2);\nconsole.log('Scores:', scores); // [80, 90, 95, 100]\nconsole.log('Doubled:', doubled); // [160, 180, 190, 200]\nconsole.log('Person Name:', person.name); // Adrian\nconsole.log('Person Scores:', person.scores);",
+      "diagram": "// Save as data.js\n// Run: node /Users/adrian/Desktop/AI_Expert_Course_App/src/data.js\nlet lessons = [{ title: 'JS', id: 1 }, { title: 'React', id: 2 }];\nlessons.push({ title: 'Vite', id: 3 });\nlet selected = lessons.find(lesson => lesson.id === 1);\nconsole.log('Lessons:', lessons); // [{title: 'JS', id: 1}, ...]\nconsole.log('Selected:', selected.title); // JS",
       "mcq": {
-        "question": "What does Array.map do?",
-        "options": ["Removes items", "Transforms items", "Sorts array", "Joins arrays"],
+        "question": "How do you add an item to an array?",
+        "options": ["array.add()", "array.push()", "array.insert()", "array.append()"],
         "correctAnswer": "b",
-        "explanation": "Array.map creates a new array by applying a function to each element."
+        "explanation": "`array.push()` adds an item to the end of an array."
       },
       "references": [
         {
@@ -104,25 +104,59 @@
       ]
     },
     {
+      "title": "JavaScript Conditionals and Loops",
+      "introduction": "Conditionals and loops control logic flow. Use them in the course app to validate answers or iterate lessons.",
+      "coreConcept": "Use `if` for decisions and `for`/`map` for iteration over data.",
+      "table": [
+        {
+          "Concept": "Conditional",
+          "Code": "if (score > 80) {\n  return 'Pass';\n} else {\n  return 'Fail';\n}"
+        },
+        {
+          "Concept": "Loop",
+          "Code": "let scores = [85, 90];\nscores.forEach(s => console.log(s));"
+        }
+      ],
+      "diagram": "// Save as logic.js\n// Run: node /Users/adrian/Desktop/AI_Expert_Course_App/src/logic.js\nlet answers = ['a', 'b', 'a'];\nlet correct = 'a';\nlet results = answers.map(ans => ans === correct ? 'Correct' : 'Incorrect');\nif (results.every(res => res === 'Correct')) {\n  console.log('All correct!');\n} else {\n  console.log('Results:', results); // ['Correct', 'Incorrect', 'Correct']\n}",
+      "mcq": {
+        "question": "What does `array.map()` return?",
+        "options": ["A number", "A new array", "A string", "Nothing"],
+        "correctAnswer": "b",
+        "explanation": "`array.map()` returns a new array with transformed elements."
+      },
+      "references": [
+        {
+          "title": "MDN Control Flow",
+          "description": "Guide to conditionals and loops.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling"
+        },
+        {
+          "title": "Loops Video",
+          "description": "Video on JavaScript loops.",
+          "url": "https://www.youtube.com/watch?v=Kn06785pkJg"
+        }
+      ]
+    },
+    {
       "title": "Asynchronous JavaScript",
-      "introduction": "Handle asynchronous operations like API calls using Promises and async/await.",
-      "coreConcept": "Async/await simplifies working with Promises for fetching data.",
+      "introduction": "Handle asynchronous tasks like API calls in the course app using Promises and async/await.",
+      "coreConcept": "Async/await simplifies Promise-based operations for fetching data.",
       "table": [
         {
           "Concept": "Promise",
-          "Code": "fetch('https://jsonplaceholder.typicode.com/posts')\n  .then(res => res.json())\n  .then(data => console.log(data));"
+          "Code": "fetch('https://jsonplaceholder.typicode.com/posts')\n  .then(res => res.json());"
         },
         {
           "Concept": "Async/Await",
-          "Code": "async function getData() {\n  const res = await fetch('https://jsonplaceholder.typicode.com/posts');\n  const data = await res.json();\n  return data;\n}"
+          "Code": "async function getData() {\n  const res = await fetch('url');\n  return res.json();\n}"
         }
       ],
-      "diagram": "// Save as async.js\n// Run: node /Users/adrian/Desktop/projects/async.js\n// Requires: npm install node-fetch\nconst fetch = require('node-fetch');\nasync function getPosts() {\n  try {\n    const res = await fetch('https://jsonplaceholder.typicode.com/posts');\n    const data = await res.json();\n    console.log('Posts:', data.slice(0, 2)); // First 2 posts\n  } catch (err) {\n    console.error('Error:', err.message);\n  }\n}\ngetPosts();",
+      "diagram": "// Save as async.js\n// Run: node /Users/adrian/Desktop/AI_Expert_Course_App/src/async.js\n// Requires: npm install node-fetch\nconst fetch = require('node-fetch');\nasync function fetchLessons() {\n  try {\n    const res = await fetch('https://jsonplaceholder.typicode.com/posts');\n    const data = await res.json();\n    console.log('Posts:', data.slice(0, 1)); // First post\n  } catch (err) {\n    console.error('Error:', err.message);\n  }\n}\nfetchLessons();",
       "mcq": {
-        "question": "What does `await` require?",
-        "options": ["A loop", "An async function", "A variable", "A component"],
+        "question": "Where can `await` be used?",
+        "options": ["In loops", "In async functions", "In objects", "In arrays"],
         "correctAnswer": "b",
-        "explanation": "`await` can only be used inside an async function."
+        "explanation": "`await` is used inside async functions to wait for Promises."
       },
       "references": [
         {
@@ -138,59 +172,127 @@
       ]
     },
     {
-      "title": "Introduction to React",
-      "introduction": "React is a JavaScript library for building user interfaces with components.",
-      "coreConcept": "Components are reusable functions that return JSX to describe UI.",
+      "title": "Setting Up Vite and React",
+      "introduction": "Start building the course app by setting up a React project with Vite.",
+      "coreConcept": "Vite is a fast build tool for creating and running React apps.",
       "table": [
         {
-          "Concept": "Component",
-          "Code": "function Welcome() {\n  return <h1>Hello, World!</h1>;\n}"
+          "Concept": "Create Vite App",
+          "Code": "npm create vite@latest my-app -- --template react"
         },
         {
-          "Concept": "JSX",
-          "Code": "<div className='container'>Content</div>"
+          "Concept": "Run Dev Server",
+          "Code": "cd my-app\nnpm install\nnpm run dev"
         }
       ],
-      "diagram": "// Save as Welcome.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/Welcome.jsx\n// Run in browser via Vite\nimport React from 'react';\nfunction Welcome() {\n  return (\n    <div className='container'>\n      <h1>Hello, World!</h1>\n      <p>Welcome to React!</p>\n    </div>\n  );\n}\nexport default Welcome;\n// In App.jsx: import Welcome from './Welcome'; <Welcome />",
+      "diagram": "// Run in /Users/adrian/Desktop/AI_Expert_Course_App/\nnpm create vite@latest AI_Expert_Course_App -- --template react\ncd AI_Expert_Course_App\nnpm install\nnpm install react react-dom\nmkdir src/data src/components\necho '{\"displayName\": \"Course\", \"lessons\": []}' > src/data/lessons.json\necho '.container { max-width: 100%; padding: 0.5rem; }' > src/styles.css\nnpm run dev\n// Open http://localhost:5173",
       "mcq": {
-        "question": "What does JSX stand for?",
-        "options": ["JavaScript XML", "JavaScript Extension", "JSON XML", "Java Syntax"],
-        "correctAnswer": "a",
-        "explanation": "JSX stands for JavaScript XML, a syntax for writing HTML-like code in JavaScript."
+        "question": "What does Vite provide?",
+        "options": ["State management", "Fast build and dev server", "API fetching", "Styling"],
+        "correctAnswer": "b",
+        "explanation": "Vite offers a fast build tool and development server for React apps."
       },
       "references": [
         {
-          "title": "React Introduction",
-          "description": "Official React introduction.",
-          "url": "https://react.dev/learn"
+          "title": "Vite Guide",
+          "description": "Official Vite documentation.",
+          "url": "https://vitejs.dev/guide/"
         },
         {
-          "title": "React Basics Video",
-          "description": "Video on React basics.",
+          "title": "Vite Setup Video",
+          "description": "Video on Vite with React.",
+          "url": "https://www.youtube.com/watch?v=UH5wVoR8zUc"
+        }
+      ]
+    },
+    {
+      "title": "React Components",
+      "introduction": "Build the course app’s UI using React components, reusable pieces of code.",
+      "coreConcept": "Components are functions that return JSX to define UI elements.",
+      "table": [
+        {
+          "Concept": "Create Component",
+          "Code": "function Header() {\n  return <h1>Course App</h1>;\n}"
+        },
+        {
+          "Concept": "Use Component",
+          "Code": "import Header from './Header';\n<Header />"
+        }
+      ],
+      "diagram": "// Save as Header.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/Header.jsx\nimport React from 'react';\nfunction Header() {\n  return (\n    <div className='bg-gray-50 p-2 mb-2'>\n      <h1 className='text-3xl font-bold'>Course App</h1>\n    </div>\n  );\n}\nexport default Header;\n// In App.jsx: import Header from './components/Header'; <Header />",
+      "mcq": {
+        "question": "What does a React component return?",
+        "options": ["A Promise", "JSX", "A string", "An array"],
+        "correctAnswer": "b",
+        "explanation": "Components return JSX to describe the UI."
+      },
+      "references": [
+        {
+          "title": "React Components",
+          "description": "Guide to React components.",
+          "url": "https://react.dev/learn/your-first-component"
+        },
+        {
+          "title": "Components Video",
+          "description": "Video on React components.",
           "url": "https://www.youtube.com/watch?v=Ke90Tje7VS0"
         }
       ]
     },
     {
+      "title": "JSX in React",
+      "introduction": "Use JSX to write HTML-like code in the course app for clean UI design.",
+      "coreConcept": "JSX is a syntax extension for JavaScript, blending HTML with React.",
+      "table": [
+        {
+          "Concept": "JSX Element",
+          "Code": "<div className='container'>Hello</div>"
+        },
+        {
+          "Concept": "Dynamic JSX",
+          "Code": "<p>{title}</p>"
+        }
+      ],
+      "diagram": "// Save as LessonTitle.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/LessonTitle.jsx\nimport React from 'react';\nfunction LessonTitle({ title }) {\n  return (\n    <div className='bg-off-white p-2 mb-2'>\n      <h1 className='text-3xl font-bold'>{title || 'No Title'}</h1>\n    </div>\n  );\n}\nexport default LessonTitle;\n// In App.jsx: import LessonTitle from './components/LessonTitle'; <LessonTitle title='JS Basics' />",
+      "mcq": {
+        "question": "What is JSX used for?",
+        "options": ["Fetching data", "Writing UI code", "Managing state", "Styling"],
+        "correctAnswer": "b",
+        "explanation": "JSX describes UI elements in a HTML-like syntax."
+      },
+      "references": [
+        {
+          "title": "React JSX",
+          "description": "Guide to JSX in React.",
+          "url": "https://react.dev/learn/writing-markup-with-jsx"
+        },
+        {
+          "title": "JSX Video",
+          "description": "Video on JSX.",
+          "url": "https://www.youtube.com/watch?v=7Vo_VhSwq0U"
+        }
+      ]
+    },
+    {
       "title": "React State with useState",
-      "introduction": "Manage dynamic data in React components using the useState hook.",
-      "coreConcept": "useState creates state variables and setters for interactive UIs.",
+      "introduction": "Add interactivity to the course app with useState, like toggling the diagram.",
+      "coreConcept": "useState creates state variables and setters to update the UI.",
       "table": [
         {
           "Concept": "Declare State",
-          "Code": "const [count, setCount] = useState(0);"
+          "Code": "const [isOpen, setIsOpen] = useState(false);"
         },
         {
           "Concept": "Update State",
-          "Code": "<button onClick={() => setCount(count + 1)}>Click</button>"
+          "Code": "<button onClick={() => setIsOpen(!isOpen)}>Toggle</button>"
         }
       ],
-      "diagram": "// Save as Counter.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/Counter.jsx\n// Run in browser via Vite\nimport React, { useState } from 'react';\nfunction Counter() {\n  const [count, setCount] = useState(0);\n  return (\n    <div className='container'>\n      <p>Count: {count}</p>\n      <button className='nav-button' onClick={() => setCount(count + 1)}>Increment</button>\n      <button className='nav-button' onClick={() => setCount(count - 1)}>Decrement</button>\n    </div>\n  );\n}\nexport default Counter;\n// In App.jsx: import Counter from './Counter'; <Counter />",
+      "diagram": "// Save as DiagramToggle.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/DiagramToggle.jsx\nimport React, { useState } from 'react';\nfunction DiagramToggle() {\n  const [isOpen, setIsOpen] = useState(true);\n  return (\n    <div className='mb-2'>\n      <label className='toggle-switch-label mb-2'>\n        <input\n          type='checkbox'\n          checked={isOpen}\n          onChange={() => setIsOpen(!isOpen)}\n          className='toggle-switch'\n        />\n        <span className='toggle-slider'></span>\n        Show Diagram\n      </label>\n      {isOpen && <div className='bg-gray-800 p-2'>Diagram Content</div>}\n    </div>\n  );\n}\nexport default DiagramToggle;\n// In App.jsx: import DiagramToggle from './components/DiagramToggle'; <DiagramToggle />",
       "mcq": {
-        "question": "What does setCount do?",
-        "options": ["Defines a component", "Updates state", "Fetches data", "Styles elements"],
+        "question": "What triggers a re-render in React?",
+        "options": ["New component", "State update", "New prop", "New function"],
         "correctAnswer": "b",
-        "explanation": "setCount updates the state variable, triggering a re-render."
+        "explanation": "Updating state with setState triggers a re-render."
       },
       "references": [
         {
@@ -206,57 +308,23 @@
       ]
     },
     {
-      "title": "React Event Handling",
-      "introduction": "Handle user interactions like clicks and inputs using event handlers.",
-      "coreConcept": "Event handlers are functions that respond to events like onClick or onChange.",
-      "table": [
-        {
-          "Concept": "Click Event",
-          "Code": "<button onClick={() => alert('Clicked')}>Click</button>"
-        },
-        {
-          "Concept": "Input Event",
-          "Code": "<input onChange={(e) => setText(e.target.value)} />"
-        }
-      ],
-      "diagram": "// Save as Event.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/Event.jsx\n// Run in browser via Vite\nimport React, { useState } from 'react';\nfunction Event() {\n  const [text, setText] = useState('');\n  const handleClick = () => alert(`You typed: ${text}`);\n  return (\n    <div className='container'>\n      <input\n        type='text'\n        value={text}\n        onChange={(e) => setText(e.target.value)}\n        className='border p-2 w-full'\n        placeholder='Type something'\n      />\n      <button className='nav-button mt-2 w-full' onClick={handleClick}>Submit</button>\n      <p>Input: {text}</p>\n    </div>\n  );\n}\nexport default Event;\n// In App.jsx: import Event from './Event'; <Event />",
-      "mcq": {
-        "question": "What triggers an onChange event?",
-        "options": ["Button click", "Input value change", "Page load", "API call"],
-        "correctAnswer": "b",
-        "explanation": "onChange triggers when an input’s value changes."
-      },
-      "references": [
-        {
-          "title": "React Events",
-          "description": "Guide to event handling.",
-          "url": "https://react.dev/learn/responding-to-events"
-        },
-        {
-          "title": "Events Video",
-          "description": "Video on React event handling.",
-          "url": "https://www.youtube.com/watch?v=8pKjULHzs0s"
-        }
-      ]
-    },
-    {
       "title": "React Props",
-      "introduction": "Pass data between components using props to make them reusable.",
+      "introduction": "Pass data to components in the course app, like lesson titles, using props.",
       "coreConcept": "Props are read-only data passed from parent to child components.",
       "table": [
         {
           "Concept": "Pass Props",
-          "Code": "<Child name='Adrian' age={30} />"
+          "Code": "<Lesson title='JS Basics' />"
         },
         {
           "Concept": "Receive Props",
-          "Code": "function Child({ name, age }) {\n  return <p>{name} is {age}</p>;\n}"
+          "Code": "function Lesson({ title }) {\n  return <h1>{title}</h1>;\n}"
         }
       ],
-      "diagram": "// Save as Parent.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/Parent.jsx\n// Run in browser via Vite\nimport React from 'react';\nfunction Child({ name, age }) {\n  return <p className='p-2'>{name} is {age} years old</p>;\n}\nfunction Parent() {\n  return (\n    <div className='container'>\n      <Child name='Adrian' age={30} />\n      <Child name='Alex' age={25} />\n    </div>\n  );\n}\nexport default Parent;\n// In App.jsx: import Parent from './Parent'; <Parent />",
+      "diagram": "// Save as Lesson.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/Lesson.jsx\nimport React from 'react';\nfunction Lesson({ title, content }) {\n  return (\n    <div className='bg-gray-50 p-2 mb-2'>\n      <h2 className='text-xl font-semibold'>{title}</h2>\n      <p>{content}</p>\n    </div>\n  );\n}\nexport default Lesson;\n// In App.jsx: import Lesson from './components/Lesson'; <Lesson title='JS Basics' content='Learn variables' />",
       "mcq": {
-        "question": "Can props be modified in a child component?",
-        "options": ["Yes", "No", "Only strings", "Only numbers"],
+        "question": "Are props mutable in a child component?",
+        "options": ["Yes", "No", "Only strings", "Only objects"],
         "correctAnswer": "b",
         "explanation": "Props are read-only in child components."
       },
@@ -274,77 +342,43 @@
       ]
     },
     {
-      "title": "Setting Up Vite and React",
-      "introduction": "Set up a React project with Vite to build the course application.",
-      "coreConcept": "Vite is a fast build tool that simplifies React app development.",
+      "title": "React Event Handling",
+      "introduction": "Handle user interactions in the course app, like selecting MCQ answers.",
+      "coreConcept": "Event handlers like onClick and onChange respond to user actions.",
       "table": [
         {
-          "Concept": "Create Vite App",
-          "Code": "npm create vite@latest my-app -- --template react"
+          "Concept": "Click Event",
+          "Code": "<button onClick={() => console.log('Clicked')}>Click</button>"
         },
         {
-          "Concept": "Run Dev Server",
-          "Code": "cd my-app\nnpm install\nnpm run dev"
+          "Concept": "Change Event",
+          "Code": "<input onChange={(e) => setValue(e.target.value)} />"
         }
       ],
-      "diagram": "// Terminal commands\n// Run in /Users/adrian/Desktop/projects/\nnpm create vite@latest my-app -- --template react\ncd my-app\nnpm install\nnpm install react react-dom\n// Create directory structure\nmkdir src/data src/components\n// Create src/styles.css and src/data/lessons.json\necho '.container { max-width: 100%; padding: 0.5rem; }' > src/styles.css\necho '{\"displayName\": \"Sample\", \"lessons\": []}' > src/data/lessons.json\n// Start server\nnpm run dev\n// Open http://localhost:5173",
+      "diagram": "// Save as AnswerSelector.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/AnswerSelector.jsx\nimport React, { useState } from 'react';\nfunction AnswerSelector() {\n  const [selected, setSelected] = useState(null);\n  const options = ['Option A', 'Option B'];\n  return (\n    <div className='container'>\n      {options.map((opt, index) => (\n        <button\n          key={index}\n          className={`p-2 mb-2 w-full ${selected === index ? 'bg-blue-100' : 'bg-white'}`}\n          onClick={() => setSelected(index)}\n        >\n          {opt}\n        </button>\n      ))}\n      <p>Selected: {selected !== null ? options[selected] : 'None'}</p>\n    </div>\n  );\n}\nexport default AnswerSelector;\n// In App.jsx: import AnswerSelector from './components/AnswerSelector'; <AnswerSelector />",
       "mcq": {
-        "question": "What is Vite used for?",
-        "options": ["Styling", "Building web apps", "Fetching APIs", "Managing state"],
+        "question": "What triggers an onClick event?",
+        "options": ["Input change", "Button click", "Page load", "State update"],
         "correctAnswer": "b",
-        "explanation": "Vite is a build tool for modern web applications."
+        "explanation": "onClick triggers when a user clicks an element."
       },
       "references": [
         {
-          "title": "Vite Guide",
-          "description": "Official Vite documentation.",
-          "url": "https://vitejs.dev/guide/"
+          "title": "React Events",
+          "description": "Guide to event handling.",
+          "url": "https://react.dev/learn/responding-to-events"
         },
         {
-          "title": "Vite Setup Video",
-          "description": "Video on Vite with React.",
-          "url": "https://www.youtube.com/watch?v=UH5wVoR8zUc"
-        }
-      ]
-    },
-    {
-      "title": "Structuring the Course App",
-      "introduction": "Organize the app with components, data, and styles for scalability.",
-      "coreConcept": "A well-structured app separates concerns: components, data, and CSS.",
-      "table": [
-        {
-          "Concept": "Directory Structure",
-          "Code": "src/\n  ├── App.jsx\n  ├── styles.css\n  ├── data/\n  │   ├── lessons.json\n  ├── components/"
-        },
-        {
-          "Concept": "Main Component",
-          "Code": "import './styles.css';\nfunction App() {\n  return <div className='container'>Hello</div>;\n}"
-        }
-      ],
-      "diagram": "// Save as App.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/App.jsx\n// Run in browser via Vite\nimport React from 'react';\nimport './styles.css';\nfunction App() {\n  return (\n    <div className='container'>\n      <h1 className='text-3xl font-bold'>Course App</h1>\n      <p className='text-lg'>Welcome to the AI Course!</p>\n    </div>\n  );\n}\nexport default App;\n// Create src/styles.css\n// echo '.container { max-width: 100%; padding: 0.5rem; background: linear-gradient(135deg, #4682b4, #5f9ea0); }' > src/styles.css",
-      "mcq": {
-        "question": "Why separate data into JSON files?",
-        "options": ["To style the app", "To fetch APIs", "To manage content easily", "To run scripts"],
-        "correctAnswer": "c",
-        "explanation": "JSON files separate content from code, making it easier to manage."
-      },
-      "references": [
-        {
-          "title": "React Project Structure",
-          "description": "Guide to organizing React projects.",
-          "url": "https://react.dev/learn/start-a-new-react-project"
-        },
-        {
-          "title": "Project Structure Video",
-          "description": "Video on React project structure.",
-          "url": "https://www.youtube.com/watch?v=C3pTD6Sw3aQ"
+          "title": "Events Video",
+          "description": "Video on React events.",
+          "url": "https://www.youtube.com/watch?v=8pKjULHzs0s"
         }
       ]
     },
     {
       "title": "Dynamic JSON Loading",
-      "introduction": "Load training data dynamically from JSON files without modifying code.",
-      "coreConcept": "Vite’s import.meta.glob enables dynamic import of JSON files.",
+      "introduction": "Load lesson data dynamically in the course app using Vite’s glob import.",
+      "coreConcept": "import.meta.glob loads JSON files into a map for dynamic rendering.",
       "table": [
         {
           "Concept": "Glob Import",
@@ -355,12 +389,12 @@
           "Code": "const dataMap = {};\nfor (const [path, module] of Object.entries(files)) {\n  dataMap[path.split('/').pop()] = module.default;\n}"
         }
       ],
-      "diagram": "// Save as DynamicApp.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/DynamicApp.jsx\n// Run in browser via Vite\n// Create /Users/adrian/Desktop/projects/sample.json: {\"displayName\": \"Test\", \"lessons\": []}\nimport React, { useState, useEffect } from 'react';\nfunction DynamicApp() {\n  const [files, setFiles] = useState([]);\n  const [dataMap, setDataMap] = useState({});\n  useEffect(() => {\n    const loadFiles = async () => {\n      const importedFiles = import.meta.glob('./data/*.json', { eager: true });\n      const loadedFiles = [];\n      const loadedData = {};\n      for (const [path, module] of Object.entries(importedFiles)) {\n        const fileName = path.split('/').pop();\n        const data = module.default;\n        if (data.displayName && data.lessons) {\n          loadedFiles.push(fileName);\n          loadedData[fileName] = data;\n        }\n      }\n      setFiles(loadedFiles);\n      setDataMap(loadedData);\n    };\n    loadFiles();\n  }, []);\n  return (\n    <div className='container'>\n      <select className='training-selector'>\n        {files.map(file => (\n          <option key={file} value={file}>{dataMap[file]?.displayName || file}</option>\n        ))}\n      </select>\n    </div>\n  );\n}\nexport default DynamicApp;\n// In App.jsx: import DynamicApp from './DynamicApp'; <DynamicApp />",
+      "diagram": "// Save as LessonLoader.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/LessonLoader.jsx\n// Create src/data/lessons.json: {\"displayName\": \"Course\", \"lessons\": [{\"title\": \"Test\"}]}\nimport React, { useState, useEffect } from 'react';\nfunction LessonLoader() {\n  const [dataMap, setDataMap] = useState({});\n  useEffect(() => {\n    const files = import.meta.glob('./data/*.json', { eager: true });\n    const loadedData = {};\n    for (const [path, module] of Object.entries(files)) {\n      loadedData[path.split('/').pop()] = module.default;\n    }\n    setDataMap(loadedData);\n  }, []);\n  return (\n    <div className='container'>\n      {Object.values(dataMap).map((data, index) => (\n        <p key={index} className='p-2'>{data.displayName}</p>\n      ))}\n    </div>\n  );\n}\nexport default LessonLoader;\n// In App.jsx: import LessonLoader from './components/LessonLoader'; <LessonLoader />",
       "mcq": {
-        "question": "What does import.meta.glob return?",
-        "options": ["A component", "A Promise", "A file map", "A state object"],
-        "correctAnswer": "c",
-        "explanation": "import.meta.glob returns an object mapping file paths to modules."
+        "question": "What does import.meta.glob do?",
+        "options": ["Fetches APIs", "Maps files to modules", "Creates components", "Manages state"],
+        "correctAnswer": "b",
+        "explanation": "import.meta.glob maps file paths to their module contents."
       },
       "references": [
         {
@@ -376,25 +410,127 @@
       ]
     },
     {
-      "title": "Creating Controlled Inputs",
-      "introduction": "Build a form with controlled inputs to collect and manage user data.",
-      "coreConcept": "Controlled inputs synchronize input values with React state.",
+      "title": "Building the Lesson Selector",
+      "introduction": "Create a dropdown to select lessons in the course app, using state and events.",
+      "coreConcept": "A dropdown with onChange updates the current lesson dynamically.",
+      "table": [
+        {
+          "Concept": "State for Selection",
+          "Code": "const [lessonIndex, setLessonIndex] = useState(0);"
+        },
+        {
+          "Concept": "Handle Change",
+          "Code": "<select onChange={(e) => setLessonIndex(e.target.value)}>"
+        }
+      ],
+      "diagram": "// Save as LessonSelector.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/LessonSelector.jsx\nimport React, { useState } from 'react';\nfunction LessonSelector({ lessons }) {\n  const [lessonIndex, setLessonIndex] = useState(0);\n  return (\n    <div className='bg-gray-50 p-2 mb-2'>\n      <select\n        className='lesson-selector'\n        value={lessonIndex}\n        onChange={(e) => setLessonIndex(Number(e.target.value))}\n      >\n        {lessons.map((lesson, index) => (\n          <option key={index} value={index}>{lesson.title}</option>\n        ))}\n      </select>\n      <p className='text-lg mt-2'>Selected: {lessons[lessonIndex]?.title}</p>\n    </div>\n  );\n}\nexport default LessonSelector;\n// In App.jsx: import LessonSelector from './components/LessonSelector'; <LessonSelector lessons={[{title: 'JS'}, {title: 'React'}]} />",
+      "mcq": {
+        "question": "What updates the dropdown’s value?",
+        "options": ["onClick", "onChange", "onSubmit", "onSelect"],
+        "correctAnswer": "b",
+        "explanation": "onChange updates the dropdown’s selected value."
+      },
+      "references": [
+        {
+          "title": "React Forms",
+          "description": "Guide to form elements in React.",
+          "url": "https://react.dev/reference/react-dom/components/select"
+        },
+        {
+          "title": "Select Video",
+          "description": "Video on select elements.",
+          "url": "https://www.youtube.com/watch?v=7Vo_VhSwq0U"
+        }
+      ]
+    },
+    {
+      "title": "Creating the Diagram Toggle",
+      "introduction": "Add a toggle switch to show/hide diagrams in the course app, using state and styling.",
+      "coreConcept": "A checkbox with state controls visibility; CSS styles enhance usability.",
+      "table": [
+        {
+          "Concept": "Toggle State",
+          "Code": "const [isOpen, setIsOpen] = useState(true);"
+        },
+        {
+          "Concept": "Conditional Rendering",
+          "Code": "{isOpen && <pre>Diagram</pre>}"
+        }
+      ],
+      "diagram": "// Save as DiagramToggle.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/DiagramToggle.jsx\n// Add to src/styles.css: .toggle-switch-label { display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; color: #111827; }\n// .toggle-switch { width: 48px; height: 24px; background: linear-gradient(135deg, #6b7280, #4b5563); border-radius: 9999px; }\n// .toggle-switch:checked { background: linear-gradient(135deg, #3b82f6, #2563eb); }\n// .toggle-slider { width: 24px; height: 24px; background: #ffffff; border: 1px solid #111827; border-radius: 50%; }\n// .toggle-switch:checked + .toggle-slider { transform: translateX(24px); }\nimport React, { useState } from 'react';\nfunction DiagramToggle({ diagram }) {\n  const [isOpen, setIsOpen] = useState(true);\n  return (\n    <div className='mb-2'>\n      <label className='toggle-switch-label mb-2'>\n        <input\n          type='checkbox'\n          checked={isOpen}\n          onChange={() => setIsOpen(!isOpen)}\n          className='toggle-switch'\n        />\n        <span className='toggle-slider'></span>\n        Show Diagram\n      </label>\n      {isOpen && <pre className='bg-gray-800 p-2 text-white'>{diagram}</pre>}\n    </div>\n  );\n}\nexport default DiagramToggle;\n// In App.jsx: import DiagramToggle from './components/DiagramToggle'; <DiagramToggle diagram='Sample diagram' />",
+      "mcq": {
+        "question": "How is the diagram’s visibility controlled?",
+        "options": ["Props", "State", "Functions", "Loops"],
+        "correctAnswer": "b",
+        "explanation": "State (e.g., isOpen) controls conditional rendering of the diagram."
+      },
+      "references": [
+        {
+          "title": "React Conditional Rendering",
+          "description": "Guide to conditional rendering.",
+          "url": "https://react.dev/learn/conditional-rendering"
+        },
+        {
+          "title": "Toggle Video",
+          "description": "Video on toggle switches.",
+          "url": "https://www.youtube.com/watch?v=8pKjULHzs0s"
+        }
+      ]
+    },
+    {
+      "title": "Building the MCQ Component",
+      "introduction": "Create an MCQ component for the course app to test user knowledge.",
+      "coreConcept": "State tracks selections and submission; conditional rendering shows feedback.",
+      "table": [
+        {
+          "Concept": "Track Selection",
+          "Code": "const [selected, setSelected] = useState(null);"
+        },
+        {
+          "Concept": "Flexbox Layout",
+          "Code": "<div className='mcq-options flex flex-wrap gap-2'>...</div>"
+        }
+      ],
+      "diagram": "// Save as MCQ.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/MCQ.jsx\n// Add to src/styles.css: .mcq-options { display: flex; flex-wrap: wrap; gap: 0.5rem; }\n// .mcq-option { flex: 1 1 48%; min-width: 120px; padding: 0.5rem; color: #111827; border: 1px solid #d1d5db; border-radius: 0.875rem; }\n// .mcq-option:hover { background: #f3f4f6; }\n// .mcq-option:disabled { opacity: 0.5; cursor: not-allowed; }\n// @media (min-width: 640px) { .mcq-option { flex: 1 1 48%; } }\n// @media (min-width: 1024px) { .mcq-option { flex: 1 1 23%; } }\nimport React, { useState } from 'react';\nfunction MCQ({ question, options, correctAnswer }) {\n  const [selected, setSelected] = useState(null);\n  const [isSubmitted, setIsSubmitted] = useState(false);\n  const handleSubmit = () => {\n    setIsSubmitted(true);\n  };\n  return (\n    <div className='bg-light-gray p-2 mb-2'>\n      <h2 className='text-xl font-semibold'>{question}</h2>\n      <div className='mcq-options flex flex-wrap gap-2 mt-2'>\n        {options.map((opt, index) => (\n          <button\n            key={index}\n            className={`mcq-option ${selected === index ? 'bg-blue-100' : 'bg-white'}`}\n            onClick={() => setSelected(index)}\n            disabled={isSubmitted}\n          >\n            {String.fromCharCode(97 + index)}. {opt}\n          </button>\n        ))}\n      </div>\n      {!isSubmitted && (\n        <button className='nav-button mt-2 w-full' onClick={handleSubmit}>\n          Submit\n        </button>\n      )}\n      {isSubmitted && (\n        <p className={selected === correctAnswer ? 'text-green-600' : 'text-red-600'}>\n          {selected === correctAnswer ? 'Correct!' : 'Incorrect'}\n        </p>\n      )}\n    </div>\n  );\n}\nexport default MCQ;\n// In App.jsx: import MCQ from './components/MCQ'; <MCQ question='Test?' options={['A', 'B', 'C', 'D']} correctAnswer={0} />",
+      "mcq": {
+        "question": "What manages MCQ answer selection?",
+        "options": ["Props", "State", "Functions", "JSX"],
+        "correctAnswer": "b",
+        "explanation": "State tracks the selected answer and submission status."
+      },
+      "references": [
+        {
+          "title": "React State",
+          "description": "Guide to managing state.",
+          "url": "https://react.dev/learn/managing-state"
+        },
+        {
+          "title": "Interactive Components Video",
+          "description": "Video on interactive components.",
+          "url": "https://www.youtube.com/watch?v=8pKjULHzs0s"
+        }
+      ]
+    },
+    {
+      "title": "Controlled Inputs",
+      "introduction": "Build a form in the course app to collect user inputs, like a search field.",
+      "coreConcept": "Controlled inputs sync input values with React state for dynamic updates.",
       "table": [
         {
           "Concept": "Controlled Input",
-          "Code": "<input value={name} onChange={(e) => setName(e.target.value)} />"
+          "Code": "<input value={text} onChange={(e) => setText(e.target.value)} />"
         },
         {
           "Concept": "Handle Submission",
-          "Code": "const handleSubmit = () => console.log('Submitted:', name);"
+          "Code": "const handleSubmit = () => console.log(text);"
         }
       ],
-      "diagram": "// Save as InputForm.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/InputForm.jsx\n// Run in browser via Vite\nimport React, { useState } from 'react';\nfunction InputForm() {\n  const [name, setName] = useState('');\n  const handleSubmit = () => {\n    console.log('Submitted:', name);\n    alert(`Hello, ${name}!`);\n  };\n  return (\n    <div className='container'>\n      <input\n        type='text'\n        value={name}\n        onChange={(e) => setName(e.target.value)}\n        className='border p-2 w-full rounded'\n        placeholder='Enter your name'\n      />\n      <button className='nav-button mt-2 w-full' onClick={handleSubmit}>Submit</button>\n      <p className='text-lg mt-2'>You typed: {name}</p>\n    </div>\n  );\n}\nexport default InputForm;\n// In App.jsx: import InputForm from './InputForm'; <InputForm />",
+      "diagram": "// Save as SearchForm.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/SearchForm.jsx\nimport React, { useState } from 'react';\nfunction SearchForm() {\n  const [text, setText] = useState('');\n  return (\n    <div className='container'>\n      <input\n        type='text'\n        value={text}\n        onChange={(e) => setText(e.target.value)}\n        className='border p-2 w-full rounded'\n        placeholder='Search lessons'\n      />\n      <button className='nav-button mt-2 w-full' onClick={() => console.log('Search:', text)}>\n        Search\n      </button>\n      <p className='text-lg mt-2'>You typed: {text}</p>\n    </div>\n  );\n}\nexport default SearchForm;\n// In App.jsx: import SearchForm from './components/SearchForm'; <SearchForm />",
       "mcq": {
-        "question": "Why use controlled inputs?",
-        "options": ["For styling", "To sync with state", "To fetch APIs", "To disable inputs"],
+        "question": "What makes an input controlled?",
+        "options": ["CSS styling", "State binding", "Props", "Functions"],
         "correctAnswer": "b",
-        "explanation": "Controlled inputs sync their value with React state for dynamic updates."
+        "explanation": "Controlled inputs bind their value to a state variable."
       },
       "references": [
         {
@@ -411,24 +547,24 @@
     },
     {
       "title": "Form Validation",
-      "introduction": "Validate user inputs to ensure data quality before submission.",
-      "coreConcept": "Validation checks input data and provides feedback to users.",
+      "introduction": "Validate inputs in the course app to ensure valid user data, like lesson answers.",
+      "coreConcept": "Validation checks input data and displays error messages.",
       "table": [
         {
           "Concept": "Validate Input",
-          "Code": "const isValid = name.length > 2;"
+          "Code": "const isValid = answer.length > 0;"
         },
         {
           "Concept": "Show Error",
-          "Code": "{!isValid && <p className='text-red-600'>Name too short</p>}"
+          "Code": "{!isValid && <p className='text-red-600'>Answer required</p>}"
         }
       ],
-      "diagram": "// Save as ValidatedForm.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/ValidatedForm.jsx\n// Run in browser via Vite\nimport React, { useState } from 'react';\nfunction ValidatedForm() {\n  const [name, setName] = useState('');\n  const [error, setError] = useState('');\n  const handleSubmit = () => {\n    if (name.length < 3) {\n      setError('Name must be at least 3 characters');\n    } else {\n      setError('');\n      alert(`Valid name: ${name}`);\n    }\n  };\n  return (\n    <div className='container'>\n      <input\n        type='text'\n        value={name}\n        onChange={(e) => setName(e.target.value)}\n        className='border p-2 w-full rounded'\n        placeholder='Enter your name'\n      />\n      {error && <p className='text-red-600 mt-2'>{error}</p>}\n      <button className='nav-button mt-2 w-full' onClick={handleSubmit}>Submit</button>\n    </div>\n  );\n}\nexport default ValidatedForm;\n// In App.jsx: import ValidatedForm from './ValidatedForm'; <ValidatedForm />",
+      "diagram": "// Save as AnswerForm.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/AnswerForm.jsx\nimport React, { useState } from 'react';\nfunction AnswerForm() {\n  const [answer, setAnswer] = useState('');\n  const [error, setError] = useState('');\n  const handleSubmit = () => {\n    if (answer.length === 0) {\n      setError('Answer is required');\n    } else {\n      setError('');\n      console.log('Submitted:', answer);\n    }\n  };\n  return (\n    <div className='container'>\n      <input\n        type='text'\n        value={answer}\n        onChange={(e) => setAnswer(e.target.value)}\n        className='border p-2 w-full rounded'\n        placeholder='Enter answer'\n      />\n      {error && <p className='text-red-600 mt-2'>{error}</p>}\n      <button className='nav-button mt-2 w-full' onClick={handleSubmit}>Submit</button>\n    </div>\n  );\n}\nexport default AnswerForm;\n// In App.jsx: import AnswerForm from './components/AnswerForm'; <AnswerForm />",
       "mcq": {
-        "question": "What does form validation do?",
-        "options": ["Styles inputs", "Checks data quality", "Fetches APIs", "Renders components"],
+        "question": "What is the purpose of form validation?",
+        "options": ["Style inputs", "Ensure data quality", "Fetch data", "Render UI"],
         "correctAnswer": "b",
-        "explanation": "Form validation ensures user inputs meet requirements."
+        "explanation": "Validation ensures user inputs meet requirements."
       },
       "references": [
         {
@@ -445,24 +581,24 @@
     },
     {
       "title": "Fetching Remote Data",
-      "introduction": "Fetch and display data from a remote API like JSONPlaceholder.",
-      "coreConcept": "The fetch API retrieves JSON data for rendering in React.",
+      "introduction": "Fetch lesson data from an API to display in the course app dynamically.",
+      "coreConcept": "The fetch API retrieves JSON data for rendering in React components.",
       "table": [
         {
           "Concept": "Fetch Data",
-          "Code": "fetch('https://jsonplaceholder.typicode.com/users')\n  .then(res => res.json())\n  .then(data => setUsers(data));"
+          "Code": "fetch('url').then(res => res.json()).then(setData);"
         },
         {
           "Concept": "Render Data",
-          "Code": "{users.map(user => <p key={user.id}>{user.name}</p>)}"
+          "Code": "{data.map(item => <p key={item.id}>{item.name}</p>)}"
         }
       ],
-      "diagram": "// Save as ApiFetch.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/ApiFetch.jsx\n// Run in browser via Vite\nimport React, { useState, useEffect } from 'react';\nfunction ApiFetch() {\n  const [users, setUsers] = useState([]);\n  const [error, setError] = useState(null);\n  useEffect(() => {\n    fetch('https://jsonplaceholder.typicode.com/users')\n      .then(res => {\n        if (!res.ok) throw new Error('Network response was not ok');\n        return res.json();\n      })\n      .then(data => setUsers(data))\n      .catch(err => setError('Failed to fetch users: ' + err.message));\n  }, []);\n  return (\n    <div className='container'>\n      {error && <p className='error-message'>{error}</p>}\n      {users.length === 0 && !error && <p className='text-lg'>Loading...</p>}\n      {users.map(user => (\n        <p key={user.id} className='p-2 text-lg'>{user.name}</p>\n      ))}\n    </div>\n  );\n}\nexport default ApiFetch;\n// In App.jsx: import ApiFetch from './ApiFetch'; <ApiFetch />",
+      "diagram": "// Save as DataFetcher.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/DataFetcher.jsx\nimport React, { useState, useEffect } from 'react';\nfunction DataFetcher() {\n  const [data, setData] = useState([]);\n  useEffect(() => {\n    fetch('https://jsonplaceholder.typicode.com/users')\n      .then(res => res.json())\n      .then(setData);\n  }, []);\n  return (\n    <div className='container'>\n      {data.map(user => (\n        <p key={user.id} className='p-2 text-lg'>{user.name}</p>\n      ))}\n    </div>\n  );\n}\nexport default DataFetcher;\n// In App.jsx: import DataFetcher from './components/DataFetcher'; <DataFetcher />",
       "mcq": {
         "question": "What does fetch return?",
         "options": ["A JSON object", "A Promise", "A component", "An array"],
         "correctAnswer": "b",
-        "explanation": "fetch returns a Promise that resolves to a Response object."
+        "explanation": "fetch returns a Promise resolving to a Response object."
       },
       "references": [
         {
@@ -472,42 +608,144 @@
         },
         {
           "title": "API Fetch Video",
-          "description": "Video on fetching data in React.",
+          "description": "Video on fetching data.",
           "url": "https://www.youtube.com/watch?v=T3Px88x_PsA"
         }
       ]
     },
     {
-      "title": "Error Handling and Deployment",
-      "introduction": "Handle errors in API calls and deploy the app for production.",
-      "coreConcept": "Error boundaries and try-catch ensure robust apps; Vite builds for deployment.",
+      "title": "Error Handling",
+      "introduction": "Handle errors in the course app, like failed API calls, to improve reliability.",
+      "coreConcept": "Try-catch and state manage errors for user feedback.",
       "table": [
         {
-          "Concept": "Handle Fetch Errors",
-          "Code": "fetch(url).then(res => {\n  if (!res.ok) throw new Error('Failed');\n  return res.json();\n}).catch(err => setError(err.message));"
+          "Concept": "Catch Errors",
+          "Code": "fetch(url).catch(err => setError(err.message));"
         },
         {
-          "Concept": "Build and Deploy",
-          "Code": "npm run build\n// Deploy to GitHub Pages: npm run deploy"
+          "Concept": "Display Error",
+          "Code": "{error && <p className='error-message'>{error}</p>}"
         }
       ],
-      "diagram": "// Save as ErrorApp.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/ErrorApp.jsx\n// Run in browser via Vite\nimport React, { useState, useEffect } from 'react';\nfunction ErrorApp() {\n  const [data, setData] = useState([]);\n  const [error, setError] = useState(null);\n  useEffect(() => {\n    fetch('https://jsonplaceholder.typicode.com/users')\n      .then(res => {\n        if (!res.ok) throw new Error('Failed to fetch');\n        return res.json();\n      })\n      .then(data => setData(data))\n      .catch(err => setError(err.message));\n  }, []);\n  return (\n    <div className='container'>\n      {error && <p className='error-message'>{error}</p>}\n      {data.map(item => <p key={item.id} className='p-2'>{item.name}</p>)}\n    </div>\n  );\n}\n// Terminal: Build and deploy\n// npm run build\n// echo '{\"base\": \"/AI_Expert_Course_App/\"}' > vite.config.js\n// npm run deploy\n// In App.jsx: import ErrorApp from './ErrorApp'; <ErrorApp />",
+      "diagram": "// Save as ErrorHandler.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/ErrorHandler.jsx\nimport React, { useState, useEffect } from 'react';\nfunction ErrorHandler() {\n  const [data, setData] = useState([]);\n  const [error, setError] = useState(null);\n  useEffect(() => {\n    fetch('https://jsonplaceholder.typicode.com/users')\n      .then(res => {\n        if (!res.ok) throw new Error('Failed to fetch');\n        return res.json();\n      })\n      .then(setData)\n      .catch(err => setError(err.message));\n  }, []);\n  return (\n    <div className='container'>\n      {error && <p className='error-message'>{error}</p>}\n      {data.map(item => <p key={item.id} className='p-2'>{item.name}</p>)}\n    </div>\n  );\n}\nexport default ErrorHandler;\n// In App.jsx: import ErrorHandler from './components/ErrorHandler'; <ErrorHandler />",
       "mcq": {
-        "question": "What does npm run build do?",
-        "options": ["Starts dev server", "Creates production files", "Installs dependencies", "Fetches data"],
+        "question": "How do you handle fetch errors?",
+        "options": ["Use loops", "Use try-catch", "Use props", "Use JSX"],
+        "correctAnswer": "b",
+        "explanation": "Try-catch captures errors in async operations like fetch."
+      },
+      "references": [
+        {
+          "title": "React Error Handling",
+          "description": "Guide to error handling.",
+          "url": "https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary"
+        },
+        {
+          "title": "Error Handling Video",
+          "description": "Video on error handling.",
+          "url": "https://www.youtube.com/watch?v=8pKjULHzs0s"
+        }
+      ]
+    },
+    {
+      "title": "Styling with CSS",
+      "introduction": "Style the course app with CSS to match its blue-gray aesthetic, like the toggle switch.",
+      "coreConcept": "CSS with Tailwind-like classes styles components for consistency.",
+      "table": [
+        {
+          "Concept": "Style Component",
+          "Code": ".container { max-width: 100%; padding: 0.5rem; }"
+        },
+        {
+          "Concept": "Gradient Background",
+          "Code": ".bg-gray-800 { background: linear-gradient(135deg, #1f2937, #374151); }"
+        }
+      ],
+      "diagram": "// Save as styles.css\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/styles.css\n.container {\n  max-width: 100%;\n  padding: 0.5rem;\n  color: #111827;\n}\n.bg-gray-50 {\n  background: linear-gradient(135deg, #f9fafb, #e5e7eb);\n}\n.toggle-switch-label {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  font-size: 1rem;\n  color: #111827;\n}\n.toggle-switch {\n  width: 48px;\n  height: 24px;\n  background: linear-gradient(135deg, #6b7280, #4b5563);\n  border-radius: 9999px;\n}\n.toggle-switch:checked {\n  background: linear-gradient(135deg, #3b82f6, #2563eb);\n}\n.toggle-slider {\n  width: 24px;\n  height: 24px;\n  background: #ffffff;\n  border: 1px solid #111827;\n  border-radius: 50%;\n}\n.toggle-switch:checked + .toggle-slider {\n  transform: translateX(24px);\n}\n// In App.jsx: import './styles.css'; <div className='container'><DiagramToggle /></div>",
+      "mcq": {
+        "question": "What does border-radius: 9999px do?",
+        "options": ["Sets color", "Rounds corners", "Adds padding", "Changes font"],
+        "correctAnswer": "b",
+        "explanation": "border-radius: 9999px creates fully rounded corners."
+      },
+      "references": [
+        {
+          "title": "MDN CSS",
+          "description": "Guide to CSS styling.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+        },
+        {
+          "title": "CSS Styling Video",
+          "description": "Video on CSS for React.",
+          "url": "https://www.youtube.com/watch?v=1Rs2ND1ryYc"
+        }
+      ]
+    },
+    {
+      "title": "Component Composition",
+      "introduction": "Combine components in the course app for a modular, reusable structure.",
+      "coreConcept": "Compose components by nesting them to build complex UIs.",
+      "table": [
+        {
+          "Concept": "Nest Components",
+          "Code": "<Parent><Child /></Parent>"
+        },
+        {
+          "Concept": "Pass Props",
+          "Code": "<Child title='Lesson' />"
+        }
+      ],
+      "diagram": "// Save as CourseApp.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/CourseApp.jsx\nimport React from 'react';\nimport LessonTitle from './LessonTitle';\nimport DiagramToggle from './DiagramToggle';\nfunction CourseApp({ lesson }) {\n  return (\n    <div className='container'>\n      <LessonTitle title={lesson.title} />\n      <DiagramToggle diagram={lesson.diagram} />\n    </div>\n  );\n}\nexport default CourseApp;\n// In App.jsx: import CourseApp from './components/CourseApp'; <CourseApp lesson={{title: 'JS', diagram: 'Sample'}} />",
+      "mcq": {
+        "question": "What is component composition?",
+        "options": ["Styling", "Nesting components", "Fetching data", "Managing state"],
+        "correctAnswer": "b",
+        "explanation": "Composition involves nesting components to build UIs."
+      },
+      "references": [
+        {
+          "title": "React Composition",
+          "description": "Guide to component composition.",
+          "url": "https://react.dev/learn/sharing-state-between-components"
+        },
+        {
+          "title": "Composition Video",
+          "description": "Video on React composition.",
+          "url": "https://www.youtube.com/watch?v=3xaO-7w2X_k"
+        }
+      ]
+    },
+    {
+      "title": "Deploying the App",
+      "introduction": "Deploy the course app to share it online using Vite’s build tools.",
+      "coreConcept": "Vite’s build command creates optimized files for production deployment.",
+      "table": [
+        {
+          "Concept": "Build App",
+          "Code": "npm run build"
+        },
+        {
+          "Concept": "Deploy to GitHub Pages",
+          "Code": "npm run deploy"
+        }
+      ],
+      "diagram": "// Run in /Users/adrian/Desktop/AI_Expert_Course_App/\n// Create vite.config.js: echo 'export default { base: \"/AI_Expert_Course_App/\" }' > vite.config.js\n// Install gh-pages: npm install --save-dev gh-pages\n// Add to package.json: \"scripts\": { \"deploy\": \"gh-pages -d dist\" }\nnpm run build\nnpm run deploy\n// Access at: https://<your-username>.github.io/AI_Expert_Course_App/\n// In App.jsx: Ensure all components (e.g., LessonSelector, DiagramToggle) are imported",
+      "mcq": {
+        "question": "What does npm run build produce?",
+        "options": ["Dev server", "Optimized files", "JSON data", "Components"],
         "correctAnswer": "b",
         "explanation": "npm run build creates optimized files for production."
       },
       "references": [
         {
-          "title": "React Error Handling",
-          "description": "Guide to error handling in React.",
-          "url": "https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary"
-        },
-        {
           "title": "Vite Deployment",
           "description": "Guide to deploying Vite apps.",
           "url": "https://vitejs.dev/guide/static-deploy.html"
+        },
+        {
+          "title": "Deployment Video",
+          "description": "Video on deploying React apps.",
+          "url": "https://www.youtube.com/watch?v=7Vo_VhSwq0U"
         }
       ]
     }

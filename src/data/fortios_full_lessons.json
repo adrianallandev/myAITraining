@@ -1,0 +1,841 @@
+{
+  "displayName": "FortiOS Security Operating System Training",
+  "lessons": [
+    {
+      "title": "Day 1: Introduction to FortiOS",
+      "introduction": "FortiOS is Fortinet's proprietary security operating system that powers FortiGate firewalls and security appliances. This lesson covers the fundamentals, architecture, and core capabilities of FortiOS.",
+      "coreConcept": "FortiOS is a purpose-built security operating system that provides integrated network security, application control, and threat protection. It combines firewall, VPN, intrusion prevention, web filtering, and antivirus capabilities in a single platform. For example, a single FortiGate appliance running FortiOS can simultaneously filter web traffic, block malware, and establish secure VPN connections for remote users.",
+      "table": [
+        {
+          "Feature": "Intelligent path selection",
+          "Function": "Dynamic routing decisions",
+          "Benefit": "Optimal performance",
+          "Example": "Route VoIP via MPLS"
+        },
+        {
+          "Feature": "Application steering",
+          "Function": "App-specific routing",
+          "Benefit": "Service optimization",
+          "Example": "Cloud apps via internet"
+        },
+        {
+          "Feature": "Link load balancing",
+          "Function": "Traffic distribution",
+          "Benefit": "Bandwidth utilization",
+          "Example": "Distribute web traffic"
+        }
+      ],
+      "diagram": "SD-WAN Architecture:\n  Applications → SD-WAN Policy Engine\n  ↓\n  Path Selection [MPLS, Internet, LTE]\n  ↓\n  Traffic Steering → Optimal Link",
+      "mcq": {
+        "question": "What does SD-WAN use to make routing decisions?",
+        "options": [
+          "Only link cost",
+          "Application requirements and link quality",
+          "Only bandwidth availability",
+          "Random selection"
+        ],
+        "correctAnswer": "b",
+        "explanation": "SD-WAN makes intelligent routing decisions based on application requirements, link quality, and business policies."
+      },
+      "references": [
+        {
+          "title": "FortiOS SD-WAN Configuration",
+          "description": "Guide for configuring SD-WAN in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/237008/sd-wan"
+        }
+      ]
+    },
+    {
+      "title": "Day 17: FortiOS SSL Inspection",
+      "introduction": "FortiOS SSL Inspection provides visibility and security for encrypted HTTPS traffic without compromising security.",
+      "coreConcept": "FortiOS SSL Inspection decrypts, inspects, and re-encrypts HTTPS traffic to apply security policies to encrypted communications. It uses certificate-based inspection with proper certificate management. For example, it can scan encrypted email attachments for malware while maintaining the security of the SSL connection.",
+      "table": [
+        {
+          "Method": "Certificate inspection",
+          "Function": "Validate SSL certificates",
+          "Use Case": "Basic SSL monitoring",
+          "Advantage": "Low resource usage"
+        },
+        {
+          "Method": "Deep inspection",
+          "Function": "Decrypt and inspect content",
+          "Use Case": "Full security scanning",
+          "Advantage": "Complete visibility"
+        },
+        {
+          "Method": "No inspection",
+          "Function": "Pass-through encrypted",
+          "Use Case": "Privacy-sensitive traffic",
+          "Advantage": "Maintains privacy"
+        }
+      ],
+      "diagram": "SSL Inspection Process:\n  Encrypted Traffic → SSL Handshake Analysis\n  ↓\n  Certificate Validation → Decryption (if policy allows)\n  ↓\n  Security Scanning → Re-encryption → Delivery",
+      "mcq": {
+        "question": "What is required for deep SSL inspection?",
+        "options": [
+          "Only firewall rules",
+          "Certificate authority and policies",
+          "Additional hardware",
+          "User passwords"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Deep SSL inspection requires proper certificate authority setup and inspection policies to decrypt and re-encrypt traffic."
+      },
+      "references": [
+        {
+          "title": "FortiOS SSL Inspection Guide",
+          "description": "Complete guide for SSL inspection configuration.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/304369/ssl-inspection"
+        }
+      ]
+    },
+    {
+      "title": "Day 18: FortiOS Wireless Security",
+      "introduction": "FortiOS provides comprehensive wireless security features for protecting and managing wireless networks.",
+      "coreConcept": "FortiOS wireless security includes WPA3 encryption, rogue AP detection, wireless intrusion prevention, and guest access management. It can secure both internal and guest wireless networks. For example, it can provide separate wireless networks for employees and guests with different security policies and internet access controls.",
+      "table": [
+        {
+          "Feature": "WPA3 encryption",
+          "Function": "Wireless traffic encryption",
+          "Security": "Advanced encryption",
+          "Use Case": "Employee wireless"
+        },
+        {
+          "Feature": "Rogue AP detection",
+          "Function": "Unauthorized AP identification",
+          "Security": "Network protection",
+          "Use Case": "Security monitoring"
+        },
+        {
+          "Feature": "Guest access",
+          "Function": "Visitor network access",
+          "Security": "Isolated network",
+          "Use Case": "Customer WiFi"
+        }
+      ],
+      "diagram": "Wireless Security:\n  Wireless Clients → Access Point → FortiOS\n  ↓\n  Authentication & Encryption → Policy Application\n  ↓\n  Network Access Control → Internet/LAN Access",
+      "mcq": {
+        "question": "What wireless security feature protects against unauthorized access points?",
+        "options": [
+          "WPA3 encryption",
+          "Rogue AP detection",
+          "Guest access",
+          "SSID hiding"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Rogue AP detection identifies unauthorized access points that could compromise network security."
+      },
+      "references": [
+        {
+          "title": "FortiOS Wireless Security",
+          "description": "Guide for wireless security configuration in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/677073/wireless-security"
+        }
+      ]
+    },
+    {
+      "title": "Day 19: FortiOS API and Automation",
+      "introduction": "FortiOS provides REST API and automation capabilities for programmatic management and integration.",
+      "coreConcept": "FortiOS REST API enables automated configuration management, monitoring, and integration with external systems. It supports JSON-based communication for all administrative functions. For example, security policies can be automatically updated based on threat intelligence feeds, or new users can be provisioned through integration with HR systems.",
+      "table": [
+        {
+          "API Type": "REST API",
+          "Function": "HTTP-based management",
+          "Use Case": "Configuration automation",
+          "Advantage": "Standard protocol"
+        },
+        {
+          "API Type": "CLI scripting",
+          "Function": "Command-line automation",
+          "Use Case": "Batch operations",
+          "Advantage": "Familiar interface"
+        },
+        {
+          "API Type": "FortiManager API",
+          "Function": "Centralized management",
+          "Use Case": "Multi-device control",
+          "Advantage": "Scalable management"
+        }
+      ],
+      "diagram": "API Architecture:\n  External System → REST API Call\n  ↓\n  FortiOS API Processing → Configuration Change\n  ↓\n  Response → Confirmation/Status",
+      "mcq": {
+        "question": "What format does FortiOS REST API use for data exchange?",
+        "options": [
+          "XML",
+          "JSON",
+          "CSV",
+          "Binary"
+        ],
+        "correctAnswer": "b",
+        "explanation": "FortiOS REST API uses JSON format for structured data exchange in API communications."
+      },
+      "references": [
+        {
+          "title": "FortiOS API Reference",
+          "description": "Complete API documentation for FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/api-reference"
+        }
+      ]
+    },
+    {
+      "title": "Day 20: FortiOS Performance Optimization",
+      "introduction": "FortiOS performance optimization techniques ensure maximum efficiency and throughput for security and networking operations.",
+      "coreConcept": "FortiOS performance optimization leverages hardware acceleration, efficient security processing, and centralized management to maximize throughput and minimize latency. It uses specialized hardware and software techniques to handle high traffic volumes. For example, ASIC acceleration offloads CPU-intensive tasks like SSL inspection, while FortiGuard services provide real-time threat updates to reduce processing overhead.",
+      "table": [
+        {
+          "Feature": "Security Fabric",
+          "Function": "Unified security management",
+          "Example": "Centralized threat intelligence",
+          "Benefit": "Coordinated defense"
+        },
+        {
+          "Feature": "ASIC Acceleration",
+          "Function": "Hardware-accelerated processing",
+          "Example": "SSL inspection, encryption",
+          "Benefit": "High performance"
+        },
+        {
+          "Feature": "FortiGuard Services",
+          "Function": "Cloud-based threat intelligence",
+          "Example": "Real-time malware updates",
+          "Benefit": "Current protection"
+        }
+      ],
+      "diagram": "FortiOS Architecture:\n  Management Interface (GUI/CLI)\n  ↓\n  FortiOS Kernel\n  ↓\n  Security Services [Firewall, IPS, AV, Web Filter]\n  ↓\n  Hardware/ASIC Layer",
+      "mcq": {
+        "question": "What is the primary advantage of FortiOS ASIC acceleration?",
+        "options": [
+          "Lower cost",
+          "Higher performance for security functions",
+          "Easier configuration",
+          "Better user interface"
+        ],
+        "correctAnswer": "b",
+        "explanation": "ASIC acceleration provides hardware-level processing for security functions, delivering superior performance compared to software-only solutions."
+      },
+      "references": [
+        {
+          "title": "FortiOS Administration Guide",
+          "description": "Official Fortinet documentation for FortiOS administration.",
+          "url": "https://docs.fortinet.com/product/fortigate"
+        }
+      ]
+    },
+    {
+      "title": "Day 2: FortiOS Security Fabric",
+      "introduction": "The Security Fabric is FortiOS's unified security architecture that enables seamless integration and coordination between security devices.",
+      "coreConcept": "Security Fabric creates a unified security posture by connecting FortiGate devices, FortiAnalyzer, FortiManager, and other Fortinet products. It provides centralized visibility, coordinated threat response, and simplified management. For example, when one FortiGate detects a threat, it automatically shares this intelligence with all connected devices in the fabric.",
+      "table": [
+        {
+          "Component": "Root FortiGate",
+          "Role": "Fabric coordinator",
+          "Function": "Central management point",
+          "Capability": "Policy distribution"
+        },
+        {
+          "Component": "Downstream devices",
+          "Role": "Fabric participants",
+          "Function": "Execute coordinated policies",
+          "Capability": "Threat sharing"
+        },
+        {
+          "Component": "FortiAnalyzer",
+          "Role": "Log analysis",
+          "Function": "Centralized reporting",
+          "Capability": "Security analytics"
+        }
+      ],
+      "diagram": "Security Fabric:\n  FortiManager (Management) ← → Root FortiGate\n  ↓\n  Downstream FortiGates + Other Fortinet Products\n  ↓\n  FortiAnalyzer (Logging & Analytics)",
+      "mcq": {
+        "question": "What happens when a threat is detected in a Security Fabric?",
+        "options": [
+          "Only the detecting device responds",
+          "Manual intervention is required",
+          "All fabric devices receive threat intelligence",
+          "The device restarts"
+        ],
+        "correctAnswer": "c",
+        "explanation": "Security Fabric automatically shares threat intelligence across all connected devices for coordinated defense."
+      },
+      "references": [
+        {
+          "title": "Security Fabric Overview",
+          "description": "Fortinet's comprehensive guide to Security Fabric architecture.",
+          "url": "https://www.fortinet.com/products/security-fabric"
+        }
+      ]
+    },
+    {
+      "title": "Day 3: FortiOS Firewall Policies",
+      "introduction": "Firewall policies in FortiOS control network traffic flow and apply security services based on defined rules and conditions.",
+      "coreConcept": "FortiOS firewall policies are rule-based configurations that determine how traffic is processed between network interfaces. Each policy defines source, destination, service, and action, along with security profiles. For example, a policy can allow HTTP traffic from LAN to WAN while applying web filtering and antivirus scanning.",
+      "table": [
+        {
+          "Element": "Source/Destination",
+          "Purpose": "Define traffic endpoints",
+          "Example": "LAN subnet to Internet",
+          "Configuration": "IP addresses or groups"
+        },
+        {
+          "Element": "Service",
+          "Purpose": "Specify protocols/ports",
+          "Example": "HTTPS (TCP/443)",
+          "Configuration": "Predefined or custom"
+        },
+        {
+          "Element": "Action",
+          "Purpose": "Traffic handling decision",
+          "Example": "ACCEPT, DENY, REJECT",
+          "Configuration": "Security profiles applied"
+        }
+      ],
+      "diagram": "Policy Processing:\n  Incoming Traffic → Policy Match (Source/Dest/Service)\n  ↓\n  Action Applied → Security Profiles (AV, IPS, Web Filter)\n  ↓\n  Forward/Block Decision",
+      "mcq": {
+        "question": "What determines the order of policy evaluation in FortiOS?",
+        "options": [
+          "Alphabetical order",
+          "Creation timestamp",
+          "Policy ID sequence",
+          "Priority weight"
+        ],
+        "correctAnswer": "c",
+        "explanation": "FortiOS evaluates policies in order of their Policy ID sequence, with first match taking precedence."
+      },
+      "references": [
+        {
+          "title": "FortiOS Firewall Configuration",
+          "description": "Detailed guide on configuring firewall policies in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/295620/firewall-policies"
+        }
+      ]
+    },
+    {
+      "title": "Day 4: FortiOS VPN Technologies",
+      "introduction": "FortiOS supports multiple VPN technologies for secure remote access and site-to-site connectivity.",
+      "coreConcept": "FortiOS provides comprehensive VPN solutions including IPsec for site-to-site connections, SSL VPN for remote user access, and PPTP/L2TP for legacy support. Each technology offers different advantages for specific use cases. For example, SSL VPN allows remote workers to access corporate resources through a web browser without client software.",
+      "table": [
+        {
+          "Technology": "IPsec VPN",
+          "Use Case": "Site-to-site connectivity",
+          "Authentication": "PSK or certificates",
+          "Advantage": "High performance, standards-based"
+        },
+        {
+          "Technology": "SSL VPN",
+          "Use Case": "Remote user access",
+          "Authentication": "Username/password, certificates",
+          "Advantage": "Browser-based, firewall-friendly"
+        },
+        {
+          "Technology": "PPTP/L2TP",
+          "Use Case": "Legacy device support",
+          "Authentication": "Username/password",
+          "Advantage": "Wide device compatibility"
+        }
+      ],
+      "diagram": "VPN Architecture:\n  Remote Site/User → Internet → FortiGate VPN Gateway\n  ↓\n  Authentication & Encryption\n  ↓\n  Internal Network Access",
+      "mcq": {
+        "question": "Which VPN technology is best for browser-based remote access?",
+        "options": [
+          "IPsec",
+          "SSL VPN",
+          "PPTP",
+          "L2TP"
+        ],
+        "correctAnswer": "b",
+        "explanation": "SSL VPN provides browser-based access without requiring client software installation."
+      },
+      "references": [
+        {
+          "title": "FortiOS VPN Configuration Guide",
+          "description": "Comprehensive guide for configuring VPN technologies in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/954635/vpn"
+        }
+      ]
+    },
+    {
+      "title": "Day 5: FortiOS Intrusion Prevention System (IPS)",
+      "introduction": "FortiOS IPS provides real-time network threat detection and prevention using signature-based and behavioral analysis.",
+      "coreConcept": "FortiOS IPS monitors network traffic for malicious activity, using thousands of signatures and behavioral patterns to detect attacks. It can block, log, or quarantine threats in real-time. For example, IPS can detect and block SQL injection attempts targeting web applications while allowing legitimate database queries.",
+      "table": [
+        {
+          "Detection Method": "Signature-based",
+          "Description": "Known attack patterns",
+          "Example": "SQL injection signatures",
+          "Response": "Block matching traffic"
+        },
+        {
+          "Detection Method": "Anomaly-based",
+          "Description": "Unusual behavior patterns",
+          "Example": "Excessive connection attempts",
+          "Response": "Rate limiting or blocking"
+        },
+        {
+          "Detection Method": "Protocol analysis",
+          "Description": "Protocol compliance checking",
+          "Example": "Malformed HTTP requests",
+          "Response": "Drop invalid packets"
+        }
+      ],
+      "diagram": "IPS Process:\n  Network Traffic → Deep Packet Inspection\n  ↓\n  Signature/Anomaly Detection\n  ↓\n  Action [Block, Log, Quarantine] → Traffic continues or drops",
+      "mcq": {
+        "question": "What type of threats does behavioral IPS analysis detect?",
+        "options": [
+          "Only known malware",
+          "Protocol violations",
+          "Unusual traffic patterns",
+          "Certificate errors"
+        ],
+        "correctAnswer": "c",
+        "explanation": "Behavioral IPS analysis identifies threats based on unusual or suspicious traffic patterns that may indicate new or unknown attacks."
+      },
+      "references": [
+        {
+          "title": "FortiOS IPS Configuration",
+          "description": "Guide for configuring and managing IPS in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/626638/intrusion-prevention"
+        }
+      ]
+    },
+    {
+      "title": "Day 6: FortiOS Web Filtering",
+      "introduction": "FortiOS Web Filtering controls and monitors web access based on categories, URLs, and content analysis.",
+      "coreConcept": "FortiOS Web Filtering provides granular control over web access using FortiGuard web filtering service, local URL filtering, and content inspection. It categorizes websites and can block, monitor, or authenticate access based on policy. For example, it can block social media during business hours while allowing educational content.",
+      "table": [
+        {
+          "Method": "Category-based",
+          "Function": "Block by website type",
+          "Example": "Social media, gambling",
+          "Advantage": "Broad coverage"
+        },
+        {
+          "Method": "URL filtering",
+          "Function": "Specific URL control",
+          "Example": "Allow/block specific sites",
+          "Advantage": "Precise control"
+        },
+        {
+          "Method": "Content filtering",
+          "Function": "Keyword/phrase blocking",
+          "Example": "Block inappropriate content",
+          "Advantage": "Dynamic filtering"
+        }
+      ],
+      "diagram": "Web Filtering Process:\n  User Request → URL Analysis → Category Lookup\n  ↓\n  Policy Check → [Allow/Block/Authenticate]\n  ↓\n  Log Action → Content Delivery or Block Page",
+      "mcq": {
+        "question": "What service provides real-time web category updates in FortiOS?",
+        "options": [
+          "FortiAnalyzer",
+          "FortiGuard",
+          "FortiManager",
+          "FortiCloud"
+        ],
+        "correctAnswer": "b",
+        "explanation": "FortiGuard provides real-time web filtering categories and reputation data to FortiOS devices."
+      },
+      "references": [
+        {
+          "title": "FortiOS Web Filtering Guide",
+          "description": "Complete guide for configuring web filtering in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/549054/web-filtering"
+        }
+      ]
+    },
+    {
+      "title": "Day 7: FortiOS Antivirus and Anti-Malware",
+      "introduction": "FortiOS provides comprehensive antivirus and anti-malware protection using multiple scanning engines and real-time threat intelligence.",
+      "coreConcept": "FortiOS antivirus combines signature-based detection, heuristic analysis, and cloud-based scanning to protect against malware, viruses, and advanced threats. It scans files in real-time across multiple protocols. For example, it can scan email attachments, web downloads, and FTP transfers simultaneously using different detection methods.",
+      "table": [
+        {
+          "Engine": "Signature-based",
+          "Detection": "Known malware patterns",
+          "Protocols": "HTTP, SMTP, FTP, CIFS",
+          "Action": "Block/quarantine matches"
+        },
+        {
+          "Engine": "Heuristic",
+          "Detection": "Suspicious behavior analysis",
+          "Protocols": "All supported protocols",
+          "Action": "Flag potential threats"
+        },
+        {
+          "Engine": "Cloud scanning",
+          "Detection": "FortiCloud analysis",
+          "Protocols": "File uploads to cloud",
+          "Action": "Advanced threat detection"
+        }
+      ],
+      "diagram": "AV Scanning Process:\n  File Transfer → Multiple Engine Scan\n  ↓\n  [Signature + Heuristic + Cloud] Analysis\n  ↓\n  Clean/Infected Decision → Allow/Block + Log",
+      "mcq": {
+        "question": "Which scanning method can detect previously unknown malware?",
+        "options": [
+          "Signature-based only",
+          "Heuristic analysis",
+          "Protocol analysis",
+          "URL filtering"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Heuristic analysis can detect unknown malware by analyzing suspicious behaviors and characteristics."
+      },
+      "references": [
+        {
+          "title": "FortiOS Antivirus Configuration",
+          "description": "Guide for configuring antivirus protection in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/942779/antivirus"
+        }
+      ]
+    },
+    {
+      "title": "Day 8: FortiOS Application Control",
+      "introduction": "FortiOS Application Control provides visibility and control over network applications regardless of port or protocol used.",
+      "coreConcept": "FortiOS Application Control identifies applications using deep packet inspection, behavioral analysis, and protocol decoding. It can control bandwidth, block applications, or require authentication. For example, it can identify Skype traffic even when using non-standard ports and apply specific policies to voice applications.",
+      "table": [
+        {
+          "Detection": "Protocol decoding",
+          "Method": "Analyze application protocols",
+          "Example": "HTTP, HTTPS, P2P protocols",
+          "Control": "Block/allow specific protocols"
+        },
+        {
+          "Detection": "Behavioral analysis",
+          "Method": "Traffic pattern recognition",
+          "Example": "VoIP call patterns",
+          "Control": "QoS prioritization"
+        },
+        {
+          "Detection": "Signature matching",
+          "Method": "Application-specific patterns",
+          "Example": "Social media signatures",
+          "Control": "Time-based restrictions"
+        }
+      ],
+      "diagram": "Application Control:\n  Network Traffic → Deep Packet Inspection\n  ↓\n  Application Identification → Policy Lookup\n  ↓\n  Action [Block/Allow/Shape] → Traffic Control",
+      "mcq": {
+        "question": "How does FortiOS identify applications using non-standard ports?",
+        "options": [
+          "Port number only",
+          "Deep packet inspection",
+          "DNS queries",
+          "User authentication"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Deep packet inspection analyzes packet contents to identify applications regardless of the port used."
+      },
+      "references": [
+        {
+          "title": "FortiOS Application Control Guide",
+          "description": "Comprehensive guide for application control configuration.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/200921/application-control"
+        }
+      ]
+    },
+    {
+      "title": "Day 9: FortiOS High Availability (HA)",
+      "introduction": "FortiOS High Availability provides redundancy and failover capabilities to ensure continuous network security services.",
+      "coreConcept": "FortiOS HA allows two or more FortiGate devices to work together, providing automatic failover and load balancing. It supports Active-Passive and Active-Active configurations with session synchronization. For example, if the primary FortiGate fails, the secondary takes over within seconds while maintaining all active connections.",
+      "table": [
+        {
+          "Mode": "Active-Passive",
+          "Description": "One active, one standby",
+          "Use Case": "Basic redundancy",
+          "Advantage": "Simple configuration"
+        },
+        {
+          "Mode": "Active-Active",
+          "Description": "Both devices active",
+          "Use Case": "Load balancing",
+          "Advantage": "Better resource utilization"
+        },
+        {
+          "Mode": "Virtual Clustering",
+          "Description": "Multiple virtual clusters",
+          "Use Case": "Complex environments",
+          "Advantage": "Granular failover control"
+        }
+      ],
+      "diagram": "HA Architecture:\n  Primary FortiGate ← → Secondary FortiGate\n  ↓ (Heartbeat)\n  Synchronized Sessions/Configs\n  ↓\n  Automatic Failover on Failure",
+      "mcq": {
+        "question": "What is synchronized between HA cluster members?",
+        "options": [
+          "Only configuration",
+          "Only logs",
+          "Sessions and configuration",
+          "Only routing tables"
+        ],
+        "correctAnswer": "c",
+        "explanation": "HA cluster members synchronize both configuration and active sessions to ensure seamless failover."
+      },
+      "references": [
+        {
+          "title": "FortiOS High Availability Guide",
+          "description": "Complete guide for configuring HA in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/142758/high-availability"
+        }
+      ]
+    },
+    {
+      "title": "Day 10: FortiOS Routing and Switching",
+      "introduction": "FortiOS provides advanced routing and switching capabilities for network connectivity and traffic management.",
+      "coreConcept": "FortiOS supports static and dynamic routing protocols, VLAN configuration, and advanced switching features. It can function as a router, switch, or both simultaneously. For example, a FortiGate can route between VLANs while applying security policies and performing NAT for Internet access.",
+      "table": [
+        {
+          "Feature": "Static routing",
+          "Function": "Manual route definition",
+          "Use Case": "Simple networks",
+          "Advantage": "Predictable paths"
+        },
+        {
+          "Feature": "Dynamic routing",
+          "Function": "Automatic route discovery",
+          "Use Case": "Complex networks",
+          "Advantage": "Adaptive routing"
+        },
+        {
+          "Feature": "VLAN support",
+          "Function": "Network segmentation",
+          "Use Case": "Department isolation",
+          "Advantage": "Logical separation"
+        }
+      ],
+      "diagram": "Routing Process:\n  Incoming Packet → Route Table Lookup\n  ↓\n  Best Path Selection → Interface Assignment\n  ↓\n  Security Policy Check → Forward/Drop",
+      "mcq": {
+        "question": "Which routing protocol is commonly used for internet connectivity?",
+        "options": [
+          "OSPF",
+          "BGP",
+          "RIP",
+          "EIGRP"
+        ],
+        "correctAnswer": "b",
+        "explanation": "BGP (Border Gateway Protocol) is the standard routing protocol for internet connectivity and inter-ISP routing."
+      },
+      "references": [
+        {
+          "title": "FortiOS Routing Configuration",
+          "description": "Guide for configuring routing in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/528754/routing"
+        }
+      ]
+    },
+    {
+      "title": "Day 11: FortiOS User Authentication",
+      "introduction": "FortiOS provides comprehensive user authentication and access control using local and external authentication sources.",
+      "coreConcept": "FortiOS supports multiple authentication methods including local users, LDAP, RADIUS, and SAML for user identification and access control. It can integrate with Active Directory and other identity providers. For example, remote VPN users can authenticate against corporate Active Directory while web users use local accounts.",
+      "table": [
+        {
+          "Method": "Local users",
+          "Storage": "FortiOS database",
+          "Use Case": "Small organizations",
+          "Advantage": "Simple management"
+        },
+        {
+          "Method": "LDAP/Active Directory",
+          "Storage": "External directory",
+          "Use Case": "Corporate environments",
+          "Advantage": "Centralized management"
+        },
+        {
+          "Method": "RADIUS",
+          "Storage": "RADIUS server",
+          "Use Case": "Network access control",
+          "Advantage": "Standardized protocol"
+        }
+      ],
+      "diagram": "Authentication Flow:\n  User Request → Authentication Server Query\n  ↓\n  Credential Verification → Access Decision\n  ↓\n  Policy Application → Network Access",
+      "mcq": {
+        "question": "Which authentication method is best for large corporate environments?",
+        "options": [
+          "Local users only",
+          "LDAP/Active Directory",
+          "Guest accounts",
+          "No authentication"
+        ],
+        "correctAnswer": "b",
+        "explanation": "LDAP/Active Directory provides centralized user management suitable for large corporate environments."
+      },
+      "references": [
+        {
+          "title": "FortiOS User Authentication Guide",
+          "description": "Complete guide for user authentication configuration.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/376494/user-authentication"
+        }
+      ]
+    },
+    {
+      "title": "Day 12: FortiOS Logging and Monitoring",
+      "introduction": "FortiOS provides comprehensive logging and monitoring capabilities for security events, traffic analysis, and system performance.",
+      "coreConcept": "FortiOS logs all security events, traffic flows, and system activities with detailed information for analysis and compliance. Logs can be stored locally or sent to external systems like FortiAnalyzer. For example, all blocked connections, virus detections, and policy violations are logged with timestamps, source/destination, and action taken.",
+      "table": [
+        {
+          "Log Type": "Traffic logs",
+          "Content": "Connection details",
+          "Example": "Allowed/blocked sessions",
+          "Use": "Traffic analysis"
+        },
+        {
+          "Log Type": "Security logs",
+          "Content": "Threat detections",
+          "Example": "Virus, IPS alerts",
+          "Use": "Security monitoring"
+        },
+        {
+          "Log Type": "System logs",
+          "Content": "Device operations",
+          "Example": "Configuration changes",
+          "Use": "Administrative audit"
+        }
+      ],
+      "diagram": "Logging Architecture:\n  FortiOS Events → Log Processing\n  ↓\n  Local Storage + Remote Logging\n  ↓\n  FortiAnalyzer/Syslog → Reports & Analysis",
+      "mcq": {
+        "question": "What information is typically included in FortiOS traffic logs?",
+        "options": [
+          "Only blocked connections",
+          "Source, destination, and action",
+          "Only security events",
+          "Configuration changes"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Traffic logs include comprehensive information about connections including source, destination, protocols, and actions taken."
+      },
+      "references": [
+        {
+          "title": "FortiOS Logging Configuration",
+          "description": "Guide for configuring logging in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/230979/logging"
+        }
+      ]
+    },
+    {
+      "title": "Day 13: FortiOS Network Address Translation (NAT)",
+      "introduction": "FortiOS NAT capabilities enable IP address translation for network connectivity and security purposes.",
+      "coreConcept": "FortiOS supports multiple NAT types including source NAT (SNAT), destination NAT (DNAT), and port address translation (PAT) for connecting private networks to the internet and publishing internal services. For example, SNAT allows multiple internal users to share a single public IP address for internet access.",
+      "table": [
+        {
+          "Type": "Source NAT (SNAT)",
+          "Function": "Translate source IP",
+          "Use Case": "Internet access",
+          "Example": "192.168.1.x → Public IP"
+        },
+        {
+          "Type": "Destination NAT (DNAT)",
+          "Function": "Translate destination IP",
+          "Use Case": "Server publishing",
+          "Example": "Public IP → Internal server"
+        },
+        {
+          "Type": "Port Address Translation",
+          "Function": "Translate IP and port",
+          "Use Case": "Multiple connections",
+          "Example": "Many internal → One public IP"
+        }
+      ],
+      "diagram": "NAT Process:\n  Internal Request → NAT Table Lookup\n  ↓\n  Address Translation → External Interface\n  ↓\n  Response Translation → Internal Delivery",
+      "mcq": {
+        "question": "What type of NAT is used to publish internal web servers?",
+        "options": [
+          "Source NAT",
+          "Destination NAT",
+          "Port NAT",
+          "Dynamic NAT"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Destination NAT (DNAT) translates public IP addresses to internal server addresses for publishing services."
+      },
+      "references": [
+        {
+          "title": "FortiOS NAT Configuration",
+          "description": "Guide for configuring NAT in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/590067/nat"
+        }
+      ]
+    },
+    {
+      "title": "Day 14: FortiOS Quality of Service (QoS)",
+      "introduction": "FortiOS QoS features enable traffic prioritization and bandwidth management for optimal network performance.",
+      "coreConcept": "FortiOS QoS provides traffic shaping, prioritization, and bandwidth allocation to ensure critical applications receive adequate resources. It can classify traffic and apply different service levels. For example, VoIP traffic can be prioritized over file downloads to ensure call quality during network congestion.",
+      "table": [
+        {
+          "Feature": "Traffic shaping",
+          "Function": "Bandwidth control",
+          "Application": "Limit P2P traffic",
+          "Benefit": "Prevents congestion"
+        },
+        {
+          "Feature": "Traffic prioritization",
+          "Function": "Queue management",
+          "Application": "Prioritize VoIP",
+          "Benefit": "Ensures service quality"
+        },
+        {
+          "Feature": "Bandwidth allocation",
+          "Function": "Guaranteed bandwidth",
+          "Application": "Business applications",
+          "Benefit": "Predictable performance"
+        }
+      ],
+      "diagram": "QoS Process:\n  Traffic Classification → Queue Assignment\n  ↓\n  Priority Scheduling → Bandwidth Allocation\n  ↓\n  Traffic Shaping → Network Transmission",
+      "mcq": {
+        "question": "What QoS feature ensures critical applications get sufficient bandwidth?",
+        "options": [
+          "Traffic blocking",
+          "Bandwidth allocation",
+          "Port filtering",
+          "Protocol analysis"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Bandwidth allocation reserves specific amounts of bandwidth for critical applications to ensure consistent performance."
+      },
+      "references": [
+        {
+          "title": "FortiOS QoS Configuration",
+          "description": "Guide for configuring QoS in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/133453/qos"
+        }
+      ]
+    },
+    {
+      "title": "Day 15: FortiOS Advanced Threat Protection",
+      "introduction": "FortiOS Advanced Threat Protection provides defense against sophisticated attacks using multiple security technologies.",
+      "coreConcept": "FortiOS ATP combines sandboxing, behavior analysis, and threat intelligence to detect and prevent advanced persistent threats (APTs) and zero-day attacks. It analyzes suspicious files in isolated environments. For example, unknown executables are sent to FortiSandbox for analysis while known good files are allowed immediately.",
+      "table": [
+        {
+          "Technology": "Sandboxing",
+          "Function": "Isolated file analysis",
+          "Detection": "Unknown file behavior",
+          "Response": "Block malicious files"
+        },
+        {
+          "Technology": "Behavior analysis",
+          "Function": "Activity monitoring",
+          "Detection": "Suspicious patterns",
+          "Response": "Alert and investigate"
+        },
+        {
+          "Technology": "Threat intelligence",
+          "Function": "Known threat data",
+          "Detection": "IOC matching",
+          "Response": "Immediate blocking"
+        }
+      ],
+      "diagram": "ATP Process:\n  Suspicious File → Sandbox Analysis\n  ↓\n  Behavior Monitoring → Threat Classification\n  ↓\n  Decision [Clean/Malicious] → Action [Allow/Block]",
+      "mcq": {
+        "question": "What is the primary advantage of sandbox analysis?",
+        "options": [
+          "Faster processing",
+          "Detecting unknown threats",
+          "Reducing false positives",
+          "Lower resource usage"
+        ],
+        "correctAnswer": "b",
+        "explanation": "Sandbox analysis can detect unknown threats by observing file behavior in an isolated environment."
+      },
+      "references": [
+        {
+          "title": "FortiOS Advanced Threat Protection",
+          "description": "Guide for configuring ATP in FortiOS.",
+          "url": "https://docs.fortinet.com/document/fortigate/7.4.0/administration-guide/912337/advanced-threat-protection"
+        }
+      ]
+    }
+  ]
+}
