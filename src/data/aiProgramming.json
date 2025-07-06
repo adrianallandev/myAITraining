@@ -1,0 +1,294 @@
+{
+  "lessons": [
+    {
+      "title": "Data Preprocessing for AI (Python)",
+      "introduction": "AI models require clean data. This lesson uses pandas to preprocess a dataset, handling missing values and encoding categories for machine learning.",
+      "coreConcept": "Data preprocessing cleans and transforms raw data (e.g., filling nulls, encoding text) using pandas to prepare it for AI models.",
+      "table": [
+        {
+          "Concept 1": "Handling Missing Values",
+          "Code": "import pandas as pd\ndf = pd.DataFrame({'age': [25, None, 30], 'salary': [50000, 60000, None]})\ndf['age'] = df['age'].fillna(df['age'].mean())\nprint(df)"
+        },
+        {
+          "Concept 2": "Encoding Categories",
+          "Code": "df['gender'] = pd.Categorical(df.get('gender', ['M', 'F', 'M'])).codes\nprint(df)"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Preprocess dataset for AI\n# Save as preprocess_data.py in VS Code\n# Install pandas: pip install pandas\n# Run: Right-click in VS Code, select 'Run Python File in Terminal'\n\nimport pandas as pd\n# Step 1: Create sample dataset\ndata = {'name': ['Alice', 'Bob', None], 'age': [25, None, 30], 'city': ['NY', 'LA', 'NY']}\ndf = pd.DataFrame(data)\n# Step 2: Handle missing values\ndf['age'] = df['age'].fillna(df['age'].mean())\ndf['name'] = df['name'].fillna('Unknown')\n# Step 3: Encode categorical data\ndf['city_code'] = pd.Categorical(df['city']).codes\n# Step 4: Print result\nprint(df)",
+      "mcq": {
+        "question": "What does pandas’ fillna() do?",
+        "options": ["Sorts data", "Removes rows", "Fills missing values", "Encodes categories"],
+        "correctAnswer": "c",
+        "explanation": "fillna() replaces missing (NaN) values with a specified value, like the column mean, for AI-ready data."
+      },
+      "references": [
+        {
+          "title": "Pandas Documentation",
+          "description": "Guide to data preprocessing with pandas.",
+          "url": "https://pandas.pydata.org/docs/user_guide/index.html"
+        }
+      ]
+    },
+    {
+      "title": "Data Preprocessing in JavaScript",
+      "introduction": "JavaScript can preprocess data for AI in browsers. This lesson uses TensorFlow.js to normalize numerical data for machine learning.",
+      "coreConcept": "Normalization scales data to [0,1] to improve AI model performance, using TensorFlow.js in browsers.",
+      "table": [
+        {
+          "Concept 1": "Normalization",
+          "Code": "import * as tf from 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest';\nconst data = tf.tensor1d([100, 200, 300]);\nconst normalized = data.sub(data.min()).div(data.max().sub(data.min()));\nconsole.log(normalized.arraySync());"
+        },
+        {
+          "Concept 2": "Handling Arrays",
+          "Code": "const data = [[100, 'A'], [200, 'B'], [300, 'A']];\nconst values = data.map(row => row[0]);\nconst labels = data.map(row => row[1] === 'A' ? 0 : 1);\nconsole.log(values, labels);"
+        }
+      ],
+      "diagram": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Normalize Data</title>\n    <script src=\"https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest\"></script>\n</head>\n<body>\n    <input type=\"text\" id=\"inputData\" placeholder=\"Enter numbers (e.g., 100,200,300)\">\n    <button onclick=\"normalizeData()\">Normalize</button>\n    <p id=\"result\"></p>\n    <script>\n        async function normalizeData() {\n            // Step 1: Get input\n            let input = document.getElementById('inputData').value;\n            let data = input.split(',').map(Number);\n            // Step 2: Normalize with TensorFlow.js\n            const tensor = tf.tensor1d(data);\n            const normalized = tensor.sub(tensor.min()).div(tensor.max().sub(tensor.min()));\n            // Step 3: Show result\n            document.getElementById('result').innerText = `Normalized: ${normalized.arraySync()}`;\n        }\n    </script>\n</body>\n</html>",
+      "mcq": {
+        "question": "Why normalize data for AI?",
+        "options": ["To sort it", "To scale values", "To remove duplicates", "To encode text"],
+        "correctAnswer": "b",
+        "explanation": "Normalization scales data (e.g., to [0,1]) to improve AI model training and performance."
+      },
+      "references": [
+        {
+          "title": "TensorFlow.js Data",
+          "description": "Guide to data preprocessing in TensorFlow.js.",
+          "url": "https://www.tensorflow.org/js/guide/data"
+        }
+      ]
+    },
+    {
+      "title": "Neural Networks in Python",
+      "introduction": "Neural networks power advanced AI. This lesson uses TensorFlow to build a neural network for classifying Iris flowers.",
+      "coreConcept": "TensorFlow’s Keras API creates neural networks with layers to learn complex patterns, like classifying flowers by measurements.",
+      "table": [
+        {
+          "Concept 1": "Build Neural Network",
+          "Code": "import tensorflow as tf\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Dense(10, activation='relu', input_shape=(4,)),\n    tf.keras.layers.Dense(3, activation='softmax')\n])\nmodel.compile(optimizer='adam', loss='sparse_categorical_crossentropy')"
+        },
+        {
+          "Concept 2": "Train Model",
+          "Code": "from sklearn.datasets import load_iris\niris = load_iris()\nX, y = iris.data, iris.target\nmodel.fit(X, y, epochs=50, verbose=0)"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Neural network for Iris classification\n# Save as iris_classifier.py in VS Code\n# Install: pip install tensorflow scikit-learn\n# Run: Right-click, select 'Run Python File in Terminal'\n\nimport tensorflow as tf\nfrom sklearn.datasets import load_iris\n# Step 1: Load data\niris = load_iris()\nX, y = iris.data, iris.target\n# Step 2: Build model\nmodel = tf.keras.Sequential([\n    tf.keras.layers.Dense(10, activation='relu', input_shape=(4,)),\n    tf.keras.layers.Dense(3, activation='softmax')\n])\nmodel.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])\n# Step 3: Train\nmodel.fit(X, y, epochs=50, verbose=0)\n# Step 4: Predict\nsample = [[5.0, 3.4, 1.5, 0.2]]  # Example Iris features\nprediction = model.predict(sample)\nprint(f'Predicted class: {prediction.argmax()}')  # 0, 1, or 2",
+      "mcq": {
+        "question": "What does the softmax activation do?",
+        "options": ["Scales inputs", "Predicts probabilities", "Removes outliers", "Sorts data"],
+        "correctAnswer": "b",
+        "explanation": "Softmax converts outputs to probabilities, summing to 1, for multi-class classification."
+      },
+      "references": [
+        {
+          "title": "TensorFlow Keras",
+          "description": "Guide to neural networks with Keras.",
+          "url": "https://www.tensorflow.org/guide/keras"
+        }
+      ]
+    },
+    {
+      "title": "Neural Networks in JavaScript",
+      "introduction": "Neural networks in browsers enable real-time AI. This lesson uses TensorFlow.js to predict house prices based on size.",
+      "coreConcept": "TensorFlow.js builds neural networks in browsers to learn patterns, like predicting house prices from sizes.",
+      "table": [
+        {
+          "Concept 1": "Build Model",
+          "Code": "import * as tf from 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest';\nconst model = tf.sequential();\nmodel.add(tf.layers.dense({ units: 10, activation: 'relu', inputShape: [1] }));\nmodel.add(tf.layers.dense({ units: 1 }));\nmodel.compile({ optimizer: 'adam', loss: 'meanSquaredError' });"
+        },
+        {
+          "Concept 2": "Train Model",
+          "Code": "const xs = tf.tensor2d([1000, 2000, 3000], [3, 1]);\nconst ys = tf.tensor2d([200000, 400000, 600000], [3, 1]);\nawait model.fit(xs, ys, { epochs: 100 });"
+        }
+      ],
+      "diagram": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>House Price Predictor</title>\n    <script src=\"https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest\"></script>\n</head>\n<body>\n    <input type=\"number\" id=\"size\" placeholder=\"Enter house size (sq ft)\">\n    <button onclick=\"predictPrice()\">Predict</button>\n    <p id=\"result\"></p>\n    <script>\n        async function predictPrice() {\n            // Step 1: Create data\n            const xs = tf.tensor2d([1000, 2000, 3000], [3, 1]);\n            const ys = tf.tensor2d([200000, 400000, 600000], [3, 1]);\n            // Step 2: Build model\n            const model = tf.sequential();\n            model.add(tf.layers.dense({ units: 10, activation: 'relu', inputShape: [1] }));\n            model.add(tf.layers.dense({ units: 1 }));\n            model.compile({ optimizer: 'adam', loss: 'meanSquaredError' });\n            // Step 3: Train\n            await model.fit(xs, ys, { epochs: 100, verbose: 0 });\n            // Step 4: Predict\n            let size = Number(document.getElementById('size').value);\n            let prediction = model.predict(tf.tensor2d([size], [1, 1])).dataSync()[0];\n            document.getElementById('result').innerText = `Predicted price: $${prediction.toFixed(0)}`;\n        }\n    </script>\n</body>\n</html>",
+      "mcq": {
+        "question": "What is the role of the ReLU activation?",
+        "options": ["Normalizes data", "Introduces non-linearity", "Predicts classes", "Reduces dimensions"],
+        "correctAnswer": "b",
+        "explanation": "ReLU (Rectified Linear Unit) introduces non-linearity, allowing neural networks to learn complex patterns."
+      },
+      "references": [
+        {
+          "title": "TensorFlow.js Models",
+          "description": "Guide to neural networks in TensorFlow.js.",
+          "url": "https://www.tensorflow.org/js/guide/models_and_layers"
+        }
+      ]
+    },
+    {
+      "title": "Text Classification in Python",
+      "introduction": "AI can classify text, like spam detection. This lesson uses scikit-learn to build a sentiment classifier for movie reviews.",
+      "coreConcept": "Text classification converts text to numbers with TF-IDF and uses a classifier (e.g., SVM) to predict labels like positive/negative.",
+      "table": [
+        {
+          "Concept 1": "Text to Numbers",
+          "Code": "from sklearn.feature_extraction.text import TfidfVectorizer\ntexts = ['I love this', 'I hate this']\nvectorizer = TfidfVectorizer()\nX = vectorizer.fit_transform(texts)\nprint(X.toarray())"
+        },
+        {
+          "Concept 2": "Train Classifier",
+          "Code": "from sklearn.svm import SVC\nclassifier = SVC(kernel='linear')\nclassifier.fit(X, [1, 0])  # 1=positive, 0=negative"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Sentiment analysis classifier\n# Save as sentiment_classifier.py in VS Code\n# Install: pip install scikit-learn\n# Run: Right-click, select 'Run Python File in Terminal'\n\nfrom sklearn.feature_extraction.text import TfidfVectorizer\nfrom sklearn.svm import SVC\n# Step 1: Create data\ntexts = ['I love this movie', 'This movie is terrible', 'Great film', 'Awful experience']\nlabels = [1, 0, 1, 0]  # 1=positive, 0=negative\n# Step 2: Convert text to numbers\nvectorizer = TfidfVectorizer()\nX = vectorizer.fit_transform(texts)\n# Step 3: Train classifier\nclassifier = SVC(kernel='linear')\nclassifier.fit(X, labels)\n# Step 4: Predict\nnew_text = ['This film is amazing']\nX_new = vectorizer.transform(new_text)\nprediction = classifier.predict(X_new)\nprint(f'Sentiment: {'Positive' if prediction[0] == 1 else 'Negative'}')",
+      "mcq": {
+        "question": "What does TF-IDF do in text classification?",
+        "options": ["Predicts labels", "Converts text to numbers", "Trains models", "Removes stopwords"],
+        "correctAnswer": "b",
+        "explanation": "TF-IDF converts text to numerical features based on word importance, enabling AI classification."
+      },
+      "references": [
+        {
+          "title": "Scikit-learn Text Processing",
+          "description": "Guide to text classification.",
+          "url": "https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction"
+        }
+      ]
+    },
+    {
+      "title": "Text Classification in JavaScript",
+      "introduction": "JavaScript can classify text in browsers. This lesson uses TensorFlow.js to build a sentiment classifier for movie reviews.",
+      "coreConcept": "TensorFlow.js converts text to embeddings and uses a neural network to classify sentiments (e.g., positive/negative).",
+      "table": [
+        {
+          "Concept 1": "Text to Tensor",
+          "Code": "import * as tf from 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest';\nconst texts = ['love', 'hate'];\nconst vocab = [...new Set(texts)].reduce((acc, word, i) => ({ ...acc, [word]: i + 1 }), {});\nconst encoded = texts.map(word => vocab[word]);\nconst tensor = tf.tensor2d(encoded, [encoded.length, 1]);\nconsole.log(tensor.arraySync());"
+        },
+        {
+          "Concept 2": "Train Classifier",
+          "Code": "const model = tf.sequential();\nmodel.add(tf.layers.dense({ units: 10, activation: 'relu', inputShape: [1] }));\nmodel.add(tf.layers.dense({ units: 1, activation: 'sigmoid' }));\nmodel.compile({ optimizer: 'adam', loss: 'binaryCrossentropy' });"
+        }
+      ],
+      "diagram": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Sentiment Classifier</title>\n    <script src=\"https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest\"></script>\n</head>\n<body>\n    <input type=\"text\" id=\"review\" placeholder=\"Enter review (e.g., love movie)\">\n    <button onclick=\"predictSentiment()\">Predict</button>\n    <p id=\"result\"></p>\n    <script>\n        async function predictSentiment() {\n            // Step 1: Create data\n            const texts = ['love movie', 'hate movie', 'great film', 'bad film'];\n            const labels = [1, 0, 1, 0];  // 1=positive, 0=negative\n            const vocab = [...new Set(texts.join(' ').split(' '))].reduce((acc, word, i) => ({ ...acc, [word]: i + 1 }), {});\n            const encoded = texts.map(text => text.split(' ').reduce((sum, word) => sum + (vocab[word] || 0), 0));\n            const xs = tf.tensor2d(encoded, [encoded.length, 1]);\n            const ys = tf.tensor1d(labels);\n            // Step 2: Build model\n            const model = tf.sequential();\n            model.add(tf.layers.dense({ units: 10, activation: 'relu', inputShape: [1] }));\n            model.add(tf.layers.dense({ units: 1, activation: 'sigmoid' }));\n            model.compile({ optimizer: 'adam', loss: 'binaryCrossentropy' });\n            // Step 3: Train\n            await model.fit(xs, ys, { epochs: 100, verbose: 0 });\n            // Step 4: Predict\n            let review = document.getElementById('review').value;\n            let encodedReview = review.split(' ').reduce((sum, word) => sum + (vocab[word] || 0), 0);\n            let prediction = model.predict(tf.tensor2d([encodedReview], [1, 1])).dataSync()[0];\n            document.getElementById('result').innerText = `Sentiment: ${prediction > 0.5 ? 'Positive' : 'Negative'}`;\n        }\n    </script>\n</body>\n</html>",
+      "mcq": {
+        "question": "What does the sigmoid activation do in this classifier?",
+        "options": ["Scales inputs", "Predicts probabilities", "Removes outliers", "Encodes text"],
+        "correctAnswer": "b",
+        "explanation": "Sigmoid outputs a value between 0 and 1, representing the probability of a positive class."
+      },
+      "references": [
+        {
+          "title": "TensorFlow.js Text",
+          "description": "Guide to text processing in TensorFlow.js.",
+          "url": "https://www.tensorflow.org/js/guide"
+        }
+      ]
+    },
+    {
+      "title": "Clustering in Python",
+      "introduction": "Clustering groups similar data points, like customer segments. This lesson uses scikit-learn’s KMeans to cluster user data.",
+      "coreConcept": "KMeans clustering groups data into clusters based on feature similarity, useful for unsupervised AI tasks.",
+      "table": [
+        {
+          "Concept 1": "KMeans Clustering",
+          "Code": "from sklearn.cluster import KMeans\nimport numpy as np\nX = np.array([[1, 2], [1, 4], [10, 0]])\nkmeans = KMeans(n_clusters=2)\nkmeans.fit(X)\nprint(kmeans.labels_)"
+        },
+        {
+          "Concept 2": "Predict Clusters",
+          "Code": "new_data = np.array([[0, 0], [12, 3]])\npredictions = kmeans.predict(new_data)\nprint(predictions)"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# KMeans clustering for user data\n# Save as kmeans_clustering.py in VS Code\n# Install: pip install scikit-learn numpy\n# Run: Right-click, select 'Run Python File in Terminal'\n\nfrom sklearn.cluster import KMeans\nimport numpy as np\n# Step 1: Create data (age, spending score)\ndata = np.array([[25, 60], [30, 80], [45, 20], [50, 30]])\n# Step 2: Apply KMeans\nkmeans = KMeans(n_clusters=2, random_state=0)\nkmeans.fit(data)\n# Step 3: Predict cluster for new user\nnew_user = np.array([[35, 50]])\nprediction = kmeans.predict(new_user)\n# Step 4: Print result\nprint(f'Cluster for new user: {prediction[0]}')",
+      "mcq": {
+        "question": "What does KMeans do in AI?",
+        "options": ["Classifies labels", "Groups similar data", "Predicts numbers", "Encodes text"],
+        "correctAnswer": "b",
+        "explanation": "KMeans groups data into clusters based on feature similarity, used in unsupervised learning."
+      },
+      "references": [
+        {
+          "title": "Scikit-learn KMeans",
+          "description": "Guide to KMeans clustering.",
+          "url": "https://scikit-learn.org/stable/modules/clustering.html#k-means"
+        }
+      ]
+    },
+    {
+      "title": "Recommendation Systems in Python",
+      "introduction": "Recommendation systems suggest items, like movies. This lesson uses collaborative filtering to recommend movies based on user ratings.",
+      "coreConcept": "Collaborative filtering predicts user preferences using matrix factorization, implemented with scikit-learn’s SVD.",
+      "table": [
+        {
+          "Concept 1": "Matrix Factorization",
+          "Code": "from sklearn.decomposition import TruncatedSVD\nimport numpy as np\nratings = np.array([[5, 3, 0], [4, 0, 0], [0, 2, 5]])\nsvd = TruncatedSVD(n_components=2)\nlatent = svd.fit_transform(ratings)\nprint(latent)"
+        },
+        {
+          "Concept 2": "Predict Ratings",
+          "Code": "predicted_ratings = np.dot(latent, svd.components_)\nprint(predicted_ratings)"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Movie recommendation system\n# Save as movie_recommender.py in VS Code\n# Install: pip install scikit-learn numpy\n# Run: Right-click, select 'Run Python File in Terminal'\n\nfrom sklearn.decomposition import TruncatedSVD\nimport numpy as np\n# Step 1: Create ratings matrix (users x movies)\nratings = np.array([[5, 3, 0], [4, 0, 0], [0, 2, 5]])\n# Step 2: Apply SVD\nsvd = TruncatedSVD(n_components=2)\nlatent = svd.fit_transform(ratings)\n# Step 3: Predict ratings\npredicted_ratings = np.dot(latent, svd.components_)\n# Step 4: Recommend for user 0\nuser_ratings = predicted_ratings[0]\nmovie_idx = np.argmax(user_ratings)\nprint(f'Recommended movie index: {movie_idx}')",
+      "mcq": {
+        "question": "What does SVD do in recommendation systems?",
+        "options": ["Clusters data", "Reduces dimensions", "Classifies text", "Predicts classes"],
+        "correctAnswer": "b",
+        "explanation": "SVD reduces the ratings matrix to latent factors, enabling preference predictions."
+      },
+      "references": [
+        {
+          "title": "Scikit-learn SVD",
+          "description": "Guide to matrix factorization.",
+          "url": "https://scikit-learn.org/stable/modules/decomposition.html#truncated-svd"
+        }
+      ]
+    },
+    {
+      "title": "Real-Time Predictions in JavaScript",
+      "introduction": "JavaScript enables real-time AI predictions in browsers. This lesson uses TensorFlow.js for live stock price predictions.",
+      "coreConcept": "TensorFlow.js can predict time-series data, like stock prices, using a neural network in real time.",
+      "table": [
+        {
+          "Concept 1": "Time-Series Data",
+          "Code": "import * as tf from 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest';\nconst prices = [100, 102, 101, 103];\nconst xs = tf.tensor2d(prices.slice(0, -1), [3, 1]);\nconst ys = tf.tensor2d(prices.slice(1), [3, 1]);\nconsole.log(xs.arraySync(), ys.arraySync());"
+        },
+        {
+          "Concept 2": "Train Model",
+          "Code": "const model = tf.sequential();\nmodel.add(tf.layers.dense({ units: 10, activation: 'relu', inputShape: [1] }));\nmodel.add(tf.layers.dense({ units: 1 }));\nmodel.compile({ optimizer: 'adam', loss: 'meanSquaredError' });\nawait model.fit(xs, ys, { epochs: 100 });"
+        }
+      ],
+      "diagram": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Stock Price Predictor</title>\n    <script src=\"https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest\"></script>\n</head>\n<body>\n    <input type=\"text\" id=\"prices\" placeholder=\"Enter prices (e.g., 100,102,101)\">\n    <button onclick=\"predictPrice()\">Predict</button>\n    <p id=\"result\"></p>\n    <script>\n        async function predictPrice() {\n            // Step 1: Get input\n            let prices = document.getElementById('prices').value.split(',').map(Number);\n            // Step 2: Prepare data\n            const xs = tf.tensor2d(prices.slice(0, -1), [prices.length - 1, 1]);\n            const ys = tf.tensor2d(prices.slice(1), [prices.length - 1, 1]);\n            // Step 3: Build model\n            const model = tf.sequential();\n            model.add(tf.layers.dense({ units: 10, activation: 'relu', inputShape: [1] }));\n            model.add(tf.layers.dense({ units: 1 }));\n            model.compile({ optimizer: 'adam', loss: 'meanSquaredError' });\n            // Step 4: Train\n            await model.fit(xs, ys, { epochs: 100, verbose: 0 });\n            // Step 5: Predict\n            let lastPrice = prices[prices.length - 1];\n            let prediction = model.predict(tf.tensor2d([lastPrice], [1, 1])).dataSync()[0];\n            document.getElementById('result').innerText = `Next price: $${prediction.toFixed(2)}`;\n        }\n    </script>\n</body>\n</html>",
+      "mcq": {
+        "question": "What is time-series prediction?",
+        "options": ["Classifying text", "Predicting future values", "Clustering data", "Encoding features"],
+        "correctAnswer": "b",
+        "explanation": "Time-series prediction forecasts future values based on past data, like stock prices."
+      },
+      "references": [
+        {
+          "title": "TensorFlow.js Time Series",
+          "description": "Guide to time-series prediction.",
+          "url": "https://www.tensorflow.org/js/tutorials"
+        }
+      ]
+    },
+    {
+      "title": "Model Evaluation in Python",
+      "introduction": "Evaluating AI models ensures reliability. This lesson uses scikit-learn to evaluate a classifier’s performance on a dataset.",
+      "coreConcept": "Model evaluation uses metrics like accuracy and confusion matrix to assess AI performance, implemented with scikit-learn.",
+      "table": [
+        {
+          "Concept 1": "Accuracy Score",
+          "Code": "from sklearn.metrics import accuracy_score\ny_true = [0, 1, 1, 0]\ny_pred = [0, 1, 0, 0]\naccuracy = accuracy_score(y_true, y_pred)\nprint(accuracy)"
+        },
+        {
+          "Concept 2": "Confusion Matrix",
+          "Code": "from sklearn.metrics import confusion_matrix\nmatrix = confusion_matrix(y_true, y_pred)\nprint(matrix)"
+        }
+      ],
+      "diagram": "#!/usr/bin/env python3\n# -*- coding: utf-8 -*-\n# Evaluate classifier performance\n# Save as model_evaluation.py in VS Code\n# Install: pip install scikit-learn\n# Run: Right-click, select 'Run Python File in Terminal'\n\nfrom sklearn.datasets import load_iris\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.svm import SVC\nfrom sklearn.metrics import accuracy_score, confusion_matrix\n# Step 1: Load data\niris = load_iris()\nX, y = iris.data, iris.target\n# Step 2: Split data\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)\n# Step 3: Train classifier\nclassifier = SVC(kernel='linear')\nclassifier.fit(X_train, y_train)\n# Step 4: Evaluate\ny_pred = classifier.predict(X_test)\naccuracy = accuracy_score(y_test, y_pred)\nmatrix = confusion_matrix(y_test, y_pred)\nprint(f'Accuracy: {accuracy:.2f}\\nConfusion Matrix:\\n{matrix}')",
+      "mcq": {
+        "question": "What does a confusion matrix show?",
+        "options": ["Data distribution", "Prediction errors", "Feature importance", "Training time"],
+        "correctAnswer": "b",
+        "explanation": "A confusion matrix shows true vs. predicted labels, highlighting classification errors."
+      },
+      "references": [
+        {
+          "title": "Scikit-learn Metrics",
+          "description": "Guide to model evaluation.",
+          "url": "https://scikit-learn.org/stable/modules/model_evaluation.html"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import lessons from './data/lessons.json';
+import anotherTraining from './data/anotherTraining.json';
+import aiProgramming from './data/aiProgramming.json';
 
 function App() {
   const [currentLesson, setCurrentLesson] = useState(() => {
@@ -17,7 +19,88 @@ function App() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isCorrect, setIsCorrect] = useState(null);
+  const [trainingFile, setTrainingFile] = useState('lessons.json');
+  const [lessonsData, setLessonsData] = useState(null);
+  const [error, setError] = useState(null);
 
+  const trainingFiles = ['lessons.json', 'anotherTraining.json', 'aiProgramming.json'];
+  const displayNames = {
+    'lessons.json': 'AI Basics',
+    'anotherTraining.json': 'Advanced AI Techniques',
+    'aiProgramming.json': 'AI Programming with Python & JS'
+  };
+  const dataMap = {
+    'lessons.json': lessons,
+    'anotherTraining.json': anotherTraining,
+    'aiProgramming.json': aiProgramming
+  };
+
+  const fallbackData = {
+    lessons: [
+      {
+        title: 'Fallback Lesson',
+        introduction: 'This is a fallback lesson due to invalid data.',
+        coreConcept: 'Please check your JSON files in src/data/.',
+        table: [{ Message: 'No data available' }],
+        diagram: 'N/A',
+        mcq: {
+          question: 'What is this lesson?',
+          options: ['Fallback', 'Error'],
+          correctAnswer: 'a',
+          explanation: 'This is a fallback lesson due to invalid JSON data.'
+        },
+        references: [{ title: 'Support', description: 'Contact support for help.' }]
+      }
+    ]
+  };
+
+  // Validate data and set lessonsData
+  useEffect(() => {
+    const validateData = (data, file) => {
+      if (!data?.lessons || !Array.isArray(data.lessons) || data.lessons.length === 0) {
+        console.error('Invalid data structure for', file, ':', data);
+        return { valid: false, error: `Invalid structure in ${file}: Must have non-empty lessons array` };
+      }
+      console.log('Validated data for', file, ':', data);
+      return { valid: true, data };
+    };
+
+    const loadTraining = () => {
+      setError(null);
+      const selectedData = dataMap[trainingFile];
+      const defaultFile = 'lessons.json';
+      let result = { valid: false, error: `Data not found for ${trainingFile}` };
+
+      if (selectedData) {
+        result = validateData(selectedData, trainingFile);
+      }
+
+      if (!result.valid && trainingFile !== defaultFile) {
+        console.warn(`Falling back to default file: ${defaultFile}`);
+        const defaultData = dataMap[defaultFile];
+        if (defaultData) {
+          result = validateData(defaultData, defaultFile);
+          if (result.valid) {
+            setTrainingFile(defaultFile);
+            setError(`Invalid data in ${displayNames[trainingFile] || trainingFile}. Loaded ${displayNames[defaultFile]} instead.`);
+          }
+        }
+      }
+
+      if (!result.valid) {
+        console.warn('All data invalid, using fallback data');
+        setLessonsData(fallbackData);
+        setError(`Failed to load valid data for ${displayNames[trainingFile] || trainingFile}${trainingFile !== defaultFile ? ` and ${displayNames[defaultFile]}` : ''}. Using fallback data.`);
+      } else {
+        setLessonsData(result.data);
+        setCurrentLesson(0); // Reset to first lesson
+      }
+    };
+
+    loadTraining();
+  }, [trainingFile]);
+
+  // Save currentLesson to localStorage
   useEffect(() => {
     try {
       localStorage.setItem('currentLesson', currentLesson);
@@ -27,21 +110,24 @@ function App() {
     }
   }, [currentLesson]);
 
+  // Reset MCQ state when lesson or file changes
   useEffect(() => {
     console.log('Resetting MCQ state for lesson:', currentLesson, 'isSubmitted:', false);
     setSelectedOption(null);
     setIsSubmitted(false);
     setIsCorrect(null);
-  }, [currentLesson]);
+  }, [currentLesson, trainingFile]);
 
+  // Reset currentLesson if invalid
   useEffect(() => {
-    if (!lessons?.lessons || !Array.isArray(lessons.lessons) || lessons.lessons.length === 0 || currentLesson >= lessons.lessons.length || currentLesson < 0) {
+    if (lessonsData && (!lessonsData.lessons || !Array.isArray(lessonsData.lessons) || lessonsData.lessons.length === 0 || currentLesson >= lessonsData.lessons.length || currentLesson < 0)) {
       console.log('Resetting currentLesson to 0 due to invalid index or lessons data');
       setCurrentLesson(0);
       localStorage.removeItem('currentLesson');
     }
-  }, [currentLesson, lessons]);
+  }, [currentLesson, lessonsData]);
 
+  // Handle ESC key for modal
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -52,14 +138,24 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  if (!lessons?.lessons || !Array.isArray(lessons.lessons) || lessons.lessons.length === 0) {
-    return <div className="p-2 text-red-600">Error: Lessons data is not loaded or invalid</div>;
-  }
+  // Define lesson with useMemo before any rendering
+  const lesson = useMemo(() => {
+    if (!lessonsData?.lessons || !Array.isArray(lessonsData.lessons) || lessonsData.lessons.length === 0) {
+      return null;
+    }
+    return lessonsData.lessons[currentLesson];
+  }, [currentLesson, lessonsData]);
 
-  const lesson = useMemo(() => lessons.lessons[currentLesson], [currentLesson, lessons]);
-
-  if (!lesson) {
-    return <div className="p-2 text-red-600">Error: Invalid lesson data</div>;
+  // Render error or invalid data states
+  if (error || !lessonsData?.lessons || !Array.isArray(lessonsData.lessons) || lessonsData.lessons.length === 0 || !lesson) {
+    return (
+      <div className="container">
+        <div className="error-message p-2 mb-2">
+          <p>{error || 'Error: Lessons data is not loaded or invalid'}</p>
+          <p>Ensure valid JSON files are in src/data/ or contact support.</p>
+        </div>
+      </div>
+    );
   }
 
   const getCorrectOptionIndex = (correctAnswer) => {
@@ -102,8 +198,22 @@ function App() {
   return (
     <div className="container">
       <div className="bg-gray-50 p-2 mb-2">
+        <select
+          className="training-selector"
+          value={trainingFile}
+          onChange={(e) => setTrainingFile(e.target.value)}
+        >
+          {trainingFiles.map((file) => (
+            <option key={file} value={file}>
+              {displayNames[file] || file.replace('.json', '')}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="bg-gray-50 p-2 mb-2">
         <p className="text-lg font-semibold">
-          Lesson {currentLesson + 1} of {lessons.lessons.length}
+          Lesson {currentLesson + 1} of {lessonsData.lessons.length}
         </p>
       </div>
 
@@ -231,9 +341,9 @@ function App() {
           Show References 📚
         </button>
         <button
-          className={`nav-button w-full ${currentLesson === lessons.lessons.length - 1 ? 'nav-button-disabled' : ''}`}
-          onClick={() => setCurrentLesson((prev) => Math.min(lessons.lessons.length - 1, prev + 1))}
-          disabled={currentLesson === lessons.lessons.length - 1}
+          className={`nav-button w-full ${currentLesson === lessonsData.lessons.length - 1 ? 'nav-button-disabled' : ''}`}
+          onClick={() => setCurrentLesson((prev) => Math.min(lessonsData.lessons.length - 1, prev + 1))}
+          disabled={currentLesson === lessonsData.lessons.length - 1}
         >
           Next
         </button>

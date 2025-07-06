@@ -1,0 +1,18 @@
+{
+  "lessons": [
+    {
+      "title": "Lesson 1",
+      "introduction": "Intro text",
+      "coreConcept": "Core concept",
+      "table": [{"Column1": "Value1", "Column2": "Value2"}],
+      "diagram": "Diagram text",
+      "mcq": {
+        "question": "Question?",
+        "options": ["Option A", "Option B"],
+        "correctAnswer": "a",
+        "explanation": "Explanation"
+      },
+      "references": [{"title": "Ref", "description": "Desc", "url": "http://example.com"}]
+    }
+  ]
+}
