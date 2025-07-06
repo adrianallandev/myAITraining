@@ -1,0 +1,481 @@
+{
+  "displayName": "Azure Data Mesh Masterclass",
+  "lessons": [
+    {
+      "title": "Introduction to Data Mesh",
+      "introduction": "Data Mesh is a decentralized data architecture paradigm that shifts data ownership to domain teams, enabling scalable and agile analytics. Learn how Azure supports Data Mesh to address challenges of centralized data platforms in large organizations.",
+      "coreConcept": "Data Mesh organizes data by business domains, treating data as a product with domain-driven ownership, self-serve platforms, and federated governance.",
+      "table": [
+        {
+          "Concept": "Decentralized Ownership",
+          "Code": "Domain teams own and manage their data products."
+        },
+        {
+          "Concept": "Data as a Product",
+          "Code": "Data products include data, pipelines, and interfaces."
+        }
+      ],
+      "diagram": "// Data Mesh Principles Overview\n// No code execution; conceptual diagram\nDomains: { Marketing, Sales, HR }\nData Products: {\n  Marketing: { data: 'customer_profiles', pipeline: 'ADF_pipeline', interface: 'API' },\n  Sales: { data: 'orders', pipeline: 'Synapse_pipeline', interface: 'SQL_view' }\n}\nGovernance: Microsoft Purview\nSelf-Serve Platform: Azure Data Lake Storage, Synapse Analytics\nFederated Governance: { policies: ['access_control', 'encryption'], team: ['domain_experts', 'data_engineers'] }",
+      "mcq": {
+        "question": "What is the primary goal of Data Mesh?",
+        "options": ["Centralize data storage", "Enable domain-driven data ownership", "Replace data warehouses", "Automate all data pipelines"],
+        "correctAnswer": "b",
+        "explanation": "Data Mesh aims to enable domain-driven data ownership, allowing teams to manage their data products autonomously."
+      },
+      "references": [
+        {
+          "title": "Microsoft Learn: What is a Data Mesh?",
+          "description": "Overview of Data Mesh principles in Azure.",
+          "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/cloud-scale-analytics/architectures/data-mesh"
+        },
+        {
+          "title": "Data Mesh Learning Resources",
+          "description": "Community-driven Data Mesh examples.",
+          "url": "https://datameshlearning.com/resources"
+        }
+      ]
+    },
+    {
+      "title": "Core Principles of Data Mesh",
+      "introduction": "Understand the four key principles of Data Mesh: domain-oriented ownership, data as a product, self-serve platforms, and federated governance. These principles guide implementation in Azure for scalable analytics.",
+      "coreConcept": "Data Mesh principles ensure decentralization, product thinking, self-service, and standardized governance across domains.",
+      "table": [
+        {
+          "Concept": "Domain-Oriented Ownership",
+          "Code": "Assign data to business domains (e.g., Sales, HR)."
+        },
+        {
+          "Concept": "Federated Governance",
+          "Code": "Use Microsoft Purview for centralized policies."
+        }
+      ],
+      "diagram": "// Federated Governance Example\n// No code execution; conceptual\nGovernance Layer: {\n  Tool: 'Microsoft Purview',\n  Policies: ['data_access', 'encryption', 'lineage'],\n  Team: ['domain_experts', 'compliance_officers']\n}\nDomains: {\n  Sales: { data_product: 'orders', owner: 'sales_team' },\n  Marketing: { data_product: 'campaigns', owner: 'marketing_team' }\n}\nSelf-Serve Platform: Azure Synapse Analytics",
+      "mcq": {
+        "question": "Which principle emphasizes treating data like a product?",
+        "options": ["Domain-Oriented Ownership", "Data as a Product", "Self-Serve Platform", "Federated Governance"],
+        "correctAnswer": "b",
+        "explanation": "Data as a Product ensures data is treated with clear interfaces, quality standards, and documentation."
+      },
+      "references": [
+        {
+          "title": "DataCamp: What is Data Mesh?",
+          "description": "Detailed guide on Data Mesh principles.",
+          "url": "https://www.datacamp.com/blog/what-is-data-mesh"
+        },
+        {
+          "title": "Zhamak Dehghani’s Data Mesh Introduction",
+          "description": "Original Data Mesh concept by its creator.",
+          "url": "https://www.datamesh-architecture.com/"
+        }
+      ]
+    },
+    {
+      "title": "Setting Up Azure Data Lake for Data Mesh",
+      "introduction": "Azure Data Lake Storage (ADLS) Gen2 is a cornerstone for Data Mesh, providing a scalable storage layer for domain data products. Learn to configure ADLS for decentralized data management.",
+      "coreConcept": "ADLS Gen2 supports hierarchical namespaces and fine-grained access control for domain-specific data products.",
+      "table": [
+        {
+          "Concept": "Create Storage Account",
+          "Code": "az storage account create --name mydatalake --resource-group mygroup --location eastus --sku Standard_LRS --kind StorageV2 --hns true"
+        },
+        {
+          "Concept": "Set Access Control",
+          "Code": "az storage fs access set --path sales/ --permissions rwxr-x--- --group sales_team --account-name mydatalake"
+        }
+      ],
+      "diagram": "// Run in Azure CLI\n// Save as setup_adls.sh\n// Run: bash /Users/adrian/Desktop/AI_Expert_Course_App/src/setup_adls.sh\naz storage account create --name mydatalake --resource-group mygroup --location eastus --sku Standard_LRS --kind StorageV2 --hns true\naz storage fs create -n sales --account-name mydatalake\naz storage fs create -n marketing --account-name mydatalake\naz storage fs access set --path sales/ --permissions rwxr-x--- --group sales_team --account-name mydatalake\naz storage fs access set --path marketing/ --permissions rwxr-x--- --group marketing_team --account-name mydatalake\necho 'ADLS Gen2 configured with domain folders: sales/, marketing/'",
+      "mcq": {
+        "question": "What feature of ADLS Gen2 supports Data Mesh?",
+        "options": ["Relational tables", "Hierarchical namespaces", "SQL queries", "Virtual machines"],
+        "correctAnswer": "b",
+        "explanation": "Hierarchical namespaces enable folder-based organization and access control for domains."
+      },
+      "references": [
+        {
+          "title": "Azure Data Lake Storage Gen2",
+          "description": "Guide to ADLS for data storage.",
+          "url": "https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction"
+        },
+        {
+          "title": "Azure CLI for ADLS",
+          "description": "Commands for managing ADLS.",
+          "url": "https://learn.microsoft.com/en-us/cli/azure/storage/fs"
+        }
+      ]
+    },
+    {
+      "title": "Building Data Products with Azure Synapse Analytics",
+      "introduction": "Azure Synapse Analytics enables domain teams to create data products with pipelines, SQL views, and Spark processing. Learn to build a data product for a Sales domain.",
+      "coreConcept": "Synapse integrates SQL, Spark, and pipelines to create and share domain-specific data products.",
+      "table": [
+        {
+          "Concept": "Create Synapse Pipeline",
+          "Code": "Pipeline: Copy data from ADLS to Synapse SQL pool."
+        },
+        {
+          "Concept": "Share Data Product",
+          "Code": "CREATE VIEW sales.orders_view AS SELECT * FROM sales_table;"
+        }
+      ],
+      "diagram": "// Synapse Pipeline Example\n// Run in Azure Synapse Studio\n// Save pipeline as sales_pipeline.json\n{\n  \"name\": \"SalesPipeline\",\n  \"activities\": [\n    {\n      \"name\": \"CopySalesData\",\n      \"type\": \"Copy\",\n      \"inputs\": [{ \"referenceName\": \"SalesADLS\", \"type\": \"DatasetReference\" }],\n      \"outputs\": [{ \"referenceName\": \"SalesSQLPool\", \"type\": \"DatasetReference\" }]\n    }\n  ]\n}\n// SQL View\nCREATE VIEW sales.orders_view AS\nSELECT order_id, customer_id, amount FROM sales_table;\n// Publish to Purview\nCALL system.purview.register_data_product('sales.orders_view', 'Sales Domain');",
+      "mcq": {
+        "question": "What Synapse feature supports data product sharing?",
+        "options": ["Virtual machines", "SQL views", "Web apps", "Containers"],
+        "correctAnswer": "b",
+        "explanation": "SQL views provide a standardized interface for sharing data products across domains."
+      },
+      "references": [
+        {
+          "title": "Azure Synapse Analytics",
+          "description": "Guide to Synapse for data products.",
+          "url": "https://learn.microsoft.com/en-us/azure/synapse-analytics/"
+        },
+        {
+          "title": "Synapse Pipeline Tutorial",
+          "description": "Video on Synapse pipelines.",
+          "url": "https://www.youtube.com/watch?v=PoRJizFvM7s"
+        }
+      ]
+    },
+    {
+      "title": "Federated Governance with Microsoft Purview",
+      "introduction": "Microsoft Purview provides centralized governance for Data Mesh, ensuring data discoverability, lineage, and compliance across domains. Learn to set up Purview for governance.",
+      "coreConcept": "Purview enables federated governance with data cataloging, lineage tracking, and access policies.",
+      "table": [
+        {
+          "Concept": "Register Data Product",
+          "Code": "CALL system.purview.register('sales.orders', 'Sales Domain');"
+        },
+        {
+          "Concept": "Set Access Policy",
+          "Code": "az purview policy create --account-name mypurview --policy-name sales_access --rules '[{\"effect\": \"allow\", \"principal\": \"marketing_team\", \"actions\": [\"read\"]}]'"
+        }
+      ],
+      "diagram": "// Purview Governance Setup\n// Run in Azure CLI\n// Save as setup_purview.sh\n// Run: bash /Users/adrian/Desktop/AI_Expert_Course_App/src/setup_purview.sh\naz purview account create --name mypurview --resource-group mygroup --location eastus\naz purview collection create --account-name mypurview --collection-name Sales\naz purview policy create --account-name mypurview --policy-name sales_access --rules '[{\"effect\": \"allow\", \"principal\": \"marketing_team\", \"actions\": [\"read\"]}]'\n// Register Data Product\nCALL system.purview.register('sales.orders_view', 'Sales Domain', 'ADLS://mydatalake/sales/orders.parquet');\necho 'Purview configured with Sales collection and access policy.'",
+      "mcq": {
+        "question": "What does Microsoft Purview provide in Data Mesh?",
+        "options": ["Compute resources", "Data cataloging", "Virtual networks", "Web hosting"],
+        "correctAnswer": "b",
+        "explanation": "Purview provides data cataloging, lineage, and governance for Data Mesh."
+      },
+      "references": [
+        {
+          "title": "Microsoft Purview Overview",
+          "description": "Guide to Purview for governance.",
+          "url": "https://learn.microsoft.com/en-us/azure/purview/"
+        },
+        {
+          "title": "Purview Governance Video",
+          "description": "Video on setting up Purview.",
+          "url": "https://www.youtube.com/watch?v=8pKjULHzs0s"
+        }
+      ]
+    },
+    {
+      "title": "Creating a Self-Serve Data Platform",
+      "introduction": "A self-serve data platform empowers domain teams to build data products independently. Learn to configure Azure services like Synapse, ADLS, and Purview for self-service.",
+      "coreConcept": "Self-serve platforms provide tools and APIs for domains to manage data products without central team dependency.",
+      "table": [
+        {
+          "Concept": "Enable Self-Service",
+          "Code": "Provide Synapse Studio access to domain teams."
+        },
+        {
+          "Concept": "API for Data Access",
+          "Code": "REST API: GET /api/data/sales/orders"
+        }
+      ],
+      "diagram": "// Self-Serve Platform Setup\n// Run in Azure CLI\n// Save as setup_self_serve.sh\n// Run: bash /Users/adrian/Desktop/AI_Expert_Course_App/src/setup_self_serve.sh\naz synapse workspace create --name mysynapse --resource-group mygroup --storage-account mydatalake --location eastus\naz role assignment create --role 'Contributor' --assignee sales_team --scope /subscriptions/my-sub/resourceGroups/mygroup/providers/Microsoft.Synapse/workspaces/mysynapse\naz function create --name SalesAPI --resource-group mygroup --location eastus --runtime python --functions-version 4\n// Deploy API (simplified)\necho 'def main(req): return func.HttpResponse(json.dumps({\"data\": \"sales_orders\"}))' > SalesAPI/function.py\necho 'Self-serve platform: Synapse workspace and Sales API deployed.'",
+      "mcq": {
+        "question": "What is the role of a self-serve platform in Data Mesh?",
+        "options": ["Centralize data", "Enable domain autonomy", "Run ML models", "Host websites"],
+        "correctAnswer": "b",
+        "explanation": "Self-serve platforms enable domains to build and manage data products independently."
+      },
+      "references": [
+        {
+          "title": "Self-Serve Data Platforms",
+          "description": "Design considerations for self-serve platforms.",
+          "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/cloud-scale-analytics/architectures/data-mesh-self-serve-platform"
+        },
+        {
+          "title": "Azure Synapse Studio Tutorial",
+          "description": "Video on Synapse Studio.",
+          "url": "https://www.youtube.com/watch?v=PoRJizFvM7s"
+        }
+      ]
+    },
+    {
+      "title": "Coding Data Pipelines in Azure Synapse",
+      "introduction": "Data pipelines in Synapse transform raw data into data products. Learn to code a pipeline for a Sales domain using Synapse’s Python SDK.",
+      "coreConcept": "Synapse pipelines use Python or visual interfaces to process and transform domain data.",
+      "table": [
+        {
+          "Concept": "Python SDK Pipeline",
+          "Code": "from azure.synapse.artifacts import ArtifactsClient\nclient = ArtifactsClient(credential, endpoint)"
+        },
+        {
+          "Concept": "Copy Activity",
+          "Code": "pipeline = PipelineResource(activities=[CopyActivity(...)])"
+        }
+      ],
+      "diagram": "// Save as sales_pipeline.py\n// Run: python /Users/adrian/Desktop/AI_Expert_Course_App/src/sales_pipeline.py\n// Requires: pip install azure-synapse-artifacts azure-identity\nfrom azure.synapse.artifacts import ArtifactsClient\nfrom azure.identity import DefaultAzureCredential\nfrom azure.synapse.artifacts.models import *\ncredential = DefaultAzureCredential()\nclient = ArtifactsClient(credential, 'https://mysynapse.dev.azuresynapse.net')\npipeline = PipelineResource(\n  activities=[\n    CopyActivity(\n      name='CopySalesData',\n      inputs=[DatasetReference(reference_name='SalesADLS')],\n      outputs=[DatasetReference(reference_name='SalesSQLPool')]\n    )\n  ]\n)\nclient.pipeline.create_or_update_pipeline('SalesPipeline', pipeline)\nprint('Pipeline created: SalesPipeline')",
+      "mcq": {
+        "question": "What does a Synapse pipeline’s CopyActivity do?",
+        "options": ["Run ML models", "Copy data between sources", "Create databases", "Host APIs"],
+        "correctAnswer": "b",
+        "explanation": "CopyActivity moves data from a source (e.g., ADLS) to a sink (e.g., SQL pool)."
+      },
+      "references": [
+        {
+          "title": "Synapse Python SDK",
+          "description": "Guide to Synapse Python SDK.",
+          "url": "https://learn.microsoft.com/en-us/azure/synapse-analytics/spark/synapse-spark-python-sdk"
+        },
+        {
+          "title": "Synapse Pipeline Video",
+          "description": "Video on coding Synapse pipelines.",
+          "url": "https://www.youtube.com/watch?v=PoRJizFvM7s"
+        }
+      ]
+    },
+    {
+      "title": "Feature Engineering for AI/ML in Data Mesh",
+      "introduction": "Data Mesh supports AI/ML by decentralizing feature engineering to domain teams. Learn to create a feature store in Azure Databricks for a Marketing domain.",
+      "coreConcept": "Feature stores in Databricks store domain-specific features for AI/ML model training and inference.",
+      "table": [
+        {
+          "Concept": "Create Feature Store",
+          "Code": "from databricks.feature_store import FeatureStoreClient\nfs = FeatureStoreClient()"
+        },
+        {
+          "Concept": "Register Features",
+          "Code": "fs.create_table(name='marketing.features', schema=...)"
+        }
+      ],
+      "diagram": "// Save as marketing_features.py\n// Run in Databricks Notebook\n// Requires: databricks-feature-store\nfrom databricks.feature_store import FeatureStoreClient\nfs = FeatureStoreClient()\nfeatures_df = spark.sql('SELECT customer_id, campaign_clicks FROM marketing.campaigns')\nfs.create_table(\n  name='marketing.features',\n  primary_keys=['customer_id'],\n  schema=features_df.schema,\n  description='Marketing campaign features'\n)\nfs.write_table('marketing.features', features_df)\n# Publish to Purview\ndbutils.notebook.run('publish_to_purview', 60, {'table': 'marketing.features'})\ndisplay(spark.sql('SELECT * FROM marketing.features LIMIT 1'))",
+      "mcq": {
+        "question": "What is the purpose of a feature store in Data Mesh?",
+        "options": ["Store raw data", "Manage ML features", "Run pipelines", "Host APIs"],
+        "correctAnswer": "b",
+        "explanation": "Feature stores manage domain-specific features for AI/ML model training."
+      },
+      "references": [
+        {
+          "title": "Azure Databricks Feature Store",
+          "description": "Guide to feature stores in Databricks.",
+          "url": "https://learn.microsoft.com/en-us/azure/databricks/feature-store/"
+        },
+        {
+          "title": "Feature Engineering Video",
+          "description": "Video on Databricks feature stores.",
+          "url": "https://www.youtube.com/watch?v=T3Px88x_PsA"
+        }
+      ]
+    },
+    {
+      "title": "Cross-Domain Data Sharing",
+      "introduction": "Data Mesh enables domains to share data products for analytics, like a 360° customer view. Learn to integrate Sales and Marketing data using Synapse and Purview.",
+      "coreConcept": "Cross-domain sharing uses data products with standardized interfaces and Purview for discoverability.",
+      "table": [
+        {
+          "Concept": "Query Across Domains",
+          "Code": "SELECT s.order_id, m.customer_id FROM sales.orders s JOIN marketing.customers m ON s.customer_id = m.customer_id"
+        },
+        {
+          "Concept": "Discover Data",
+          "Code": "Purview: Search 'customer_view' in catalog"
+        }
+      ],
+      "diagram": "// Cross-Domain Query\n// Run in Synapse SQL Pool\n// Save as customer_360.sql\nCREATE VIEW customer_360 AS\nSELECT s.order_id, s.amount, m.customer_id, m.campaign_clicks\nFROM sales.orders_view s\nJOIN marketing.customers_view m\nON s.customer_id = m.customer_id;\n// Register in Purview\nCALL system.purview.register('customer_360', 'Cross-Domain', 'Synapse://mysynapse/customer_360');\n-- Query\nSELECT * FROM customer_360 LIMIT 5;",
+      "mcq": {
+        "question": "What enables cross-domain data discovery in Data Mesh?",
+        "options": ["Virtual machines", "Data catalog", "Web servers", "Pipelines"],
+        "correctAnswer": "b",
+        "explanation": "Data catalogs like Purview enable discovery of data products across domains."
+      },
+      "references": [
+        {
+          "title": "Cross-Domain Data Sharing",
+          "description": "Guide to sharing data in Data Mesh.",
+          "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/cloud-scale-analytics/architectures/data-mesh"
+        },
+        {
+          "title": "Synapse SQL Video",
+          "description": "Video on Synapse SQL queries.",
+          "url": "https://www.youtube.com/watch?v=PoRJizFvM7s"
+        }
+      ]
+    },
+    {
+      "title": "Scaling Data Mesh with Landing Zones",
+      "introduction": "Azure’s landing zones scale Data Mesh by isolating domain workloads. Learn to set up landing zones for Sales and Marketing domains.",
+      "coreConcept": "Landing zones are isolated Azure subscriptions with virtual network peering for domain autonomy and data sharing.",
+      "table": [
+        {
+          "Concept": "Create Landing Zone",
+          "Code": "az group create --name sales-landing-zone --location eastus"
+        },
+        {
+          "Concept": "Configure Peering",
+          "Code": "az network vnet peering create --name SalesToMgmt --vnet-name sales-vnet --remote-vnet mgmt-vnet-id"
+        }
+      ],
+      "diagram": "// Landing Zone Setup\n// Run in Azure CLI\n// Save as setup_landing_zones.sh\n// Run: bash /Users/adrian/Desktop/AI_Expert_Course_App/src/setup_landing_zones.sh\naz group create --name sales-landing-zone --location eastus\naz group create --name marketing-landing-zone --location eastus\naz network vnet create --name sales-vnet --resource-group sales-landing-zone --address-prefix 10.1.0.0/16\naz network vnet create --name marketing-vnet --resource-group marketing-landing-zone --address-prefix 10.2.0.0/16\naz network vnet peering create --name SalesToMgmt --vnet-name sales-vnet --remote-vnet /subscriptions/my-sub/resourceGroups/mgmt-group/providers/Microsoft.Network/virtualNetworks/mgmt-vnet --allow-vnet-access\necho 'Landing zones created with VNet peering.'",
+      "mcq": {
+        "question": "What is the purpose of landing zones in Data Mesh?",
+        "options": ["Run ML models", "Isolate domain workloads", "Host websites", "Store raw data"],
+        "correctAnswer": "b",
+        "explanation": "Landing zones isolate domain workloads for scalability and autonomy."
+      },
+      "references": [
+        {
+          "title": "Cloud-Scale Analytics Landing Zones",
+          "description": "Guide to landing zones in Azure.",
+          "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/cloud-scale-analytics/architectures/data-mesh"
+        },
+        {
+          "title": "Azure VNet Peering",
+          "description": "Video on virtual network peering.",
+          "url": "https://www.youtube.com/watch?v=8pKjULHzs0s"
+        }
+      ]
+    },
+    {
+      "title": "Implementing Data Quality in Data Mesh",
+      "introduction": "Data quality is a domain responsibility in Data Mesh. Learn to implement quality checks in Synapse for a Sales data product.",
+      "coreConcept": "Domain teams use Synapse data flows or Spark to enforce data quality rules.",
+      "table": [
+        {
+          "Concept": "Data Quality Check",
+          "Code": "df = df.filter(df['amount'] > 0)"
+        },
+        {
+          "Concept": "Log Quality Issues",
+          "Code": "df.write.mode('append').save('logs/quality_issues')"
+        }
+      ],
+      "diagram": "// Save as sales_quality.py\n// Run in Synapse Spark Notebook\n// Requires: pyspark\nfrom pyspark.sql.functions import col\ndf = spark.read.parquet('dbfs:/sales/orders.parquet')\n# Quality Check: Remove negative amounts\nclean_df = df.filter(col('amount') > 0)\n# Log invalid rows\ninvalid_df = df.filter(col('amount') <= 0)\ninvalid_df.write.mode('append').parquet('dbfs:/logs/quality_issues')\nclean_df.write.mode('overwrite').parquet('dbfs:/sales/orders_clean.parquet')\n# Publish to Purview\ndbutils.notebook.run('publish_to_purview', 60, {'table': 'sales.orders_clean'})\ndisplay(clean_df.limit(5))",
+      "mcq": {
+        "question": "Who is responsible for data quality in Data Mesh?",
+        "options": ["Central IT", "Domain teams", "Data scientists", "DevOps"],
+        "correctAnswer": "b",
+        "explanation": "Domain teams ensure the quality of their data products."
+      },
+      "references": [
+        {
+          "title": "Synapse Data Quality",
+          "description": "Guide to data quality in Synapse.",
+          "url": "https://learn.microsoft.com/en-us/azure/synapse-analytics/spark/apache-spark-data-quality"
+        },
+        {
+          "title": "Spark Data Quality Video",
+          "description": "Video on Spark data quality.",
+          "url": "https://www.youtube.com/watch?v=T3Px88x_PsA"
+        }
+      ]
+    },
+    {
+      "title": "Monitoring and Observability",
+      "introduction": "Monitoring Data Mesh ensures data product reliability. Learn to use Azure Monitor and Purview for observability across domains.",
+      "coreConcept": "Azure Monitor tracks pipeline performance; Purview logs lineage and usage.",
+      "table": [
+        {
+          "Concept": "Monitor Pipeline",
+          "Code": "az monitor metrics list --resource /subscriptions/my-sub/resourceGroups/mygroup/providers/Microsoft.Synapse/workspaces/mysynapse"
+        },
+        {
+          "Concept": "Track Lineage",
+          "Code": "Purview: View lineage for 'sales.orders_view'"
+        }
+      ],
+      "diagram": "// Monitoring Setup\n// Run in Azure CLI\n// Save as setup_monitoring.sh\n// Run: bash /Users/adrian/Desktop/AI_Expert_Course_App/src/setup_monitoring.sh\naz monitor diagnostic-settings create --name synapse-monitoring --resource /subscriptions/my-sub/resourceGroups/mygroup/providers/Microsoft.Synapse/workspaces/mysynapse --logs '[{\"category\": \"PipelineRuns\", \"enabled\": true}]' --metrics '[{\"category\": \"AllMetrics\", \"enabled\": true}]' --workspace /subscriptions/my-sub/resourceGroups/mygroup/providers/Microsoft.OperationalInsights/workspaces/myloganalytics\necho 'Monitoring enabled for Synapse pipelines.'\n// In Purview: View lineage for 'sales.orders_view'\n// UI: Search 'sales.orders_view' -> Lineage tab",
+      "mcq": {
+        "question": "What tool monitors Synapse pipeline performance?",
+        "options": ["Azure Monitor", "Purview", "Data Factory", "Databricks"],
+        "correctAnswer": "a",
+        "explanation": "Azure Monitor tracks metrics and logs for Synapse pipelines."
+      },
+      "references": [
+        {
+          "title": "Azure Monitor for Synapse",
+          "description": "Guide to monitoring Synapse.",
+          "url": "https://learn.microsoft.com/en-us/azure/synapse-analytics/monitoring/"
+        },
+        {
+          "title": "Azure Monitor Video",
+          "description": "Video on monitoring Azure services.",
+          "url": "https://www.youtube.com/watch?v=8pKjULHzs0s"
+        }
+      ]
+    },
+    {
+      "title": "Real-World Data Mesh Scenario: Financial Institution",
+      "introduction": "Explore a real-world Data Mesh scenario for a financial institution like Woodgrove Bank, using Azure’s cloud-scale analytics framework.",
+      "coreConcept": "Azure’s cloud-scale analytics uses landing zones and Purview to implement Data Mesh for financial data.",
+      "table": [
+        {
+          "Concept": "Data Management Zone",
+          "Code": "Central governance with Purview and landing zones."
+        },
+        {
+          "Concept": "Domain Data Product",
+          "Code": "Parquet file: /bank/transactions.parquet"
+        }
+      ],
+      "diagram": "// Financial Data Mesh\n// No code execution; conceptual\nData Management Zone: {\n  Governance: 'Microsoft Purview',\n  Subscription: 'mgmt-sub',\n  Services: ['ADLS', 'Synapse', 'Monitor']\n}\nDomain Zones: [\n  { name: 'Transactions', subscription: 'trans-sub', data_product: '/bank/transactions.parquet' },\n  { name: 'Customers', subscription: 'cust-sub', data_product: '/bank/customers.parquet' }\n]\nVNet Peering: trans-sub -> mgmt-sub, cust-sub -> mgmt-sub\n// Query\nSELECT t.transaction_id, c.customer_name\nFROM transactions.transactions_view t\nJOIN customers.customers_view c\nON t.customer_id = c.customer_id;",
+      "mcq": {
+        "question": "What framework supports Data Mesh in financial institutions?",
+        "options": ["Azure Web Apps", "Cloud-Scale Analytics", "Azure Kubernetes", "Power BI"],
+        "correctAnswer": "b",
+        "explanation": "Cloud-Scale Analytics provides a blueprint for Data Mesh in Azure."
+      },
+      "references": [
+        {
+          "title": "Financial Institution Data Mesh",
+          "description": "Scenario for Data Mesh in banking.",
+          "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/cloud-scale-analytics/data-mesh-financial-services"
+        },
+        {
+          "title": "Cloud-Scale Analytics Video",
+          "description": "Video on Azure analytics.",
+          "url": "https://www.youtube.com/watch?v=PoRJizFvM7s"
+        }
+      ]
+    },
+    {
+      "title": "Challenges and Best Practices",
+      "introduction": "Implementing Data Mesh requires cultural and technical shifts. Learn common challenges and best practices for success in Azure.",
+      "coreConcept": "Address cultural resistance and technical complexity with training, modular design, and governance.",
+      "table": [
+        {
+          "Concept": "Cultural Shift",
+          "Code": "Train domain teams on data ownership."
+        },
+        {
+          "Concept": "Modular Design",
+          "Code": "Use landing zones for domain isolation."
+        }
+      ],
+      "diagram": "// Best Practices\n// No code execution; conceptual\nChallenges: {\n  Cultural: 'Resistance to decentralization',\n  Technical: 'Tool complexity, skill gaps'\n}\nBest Practices: {\n  Training: 'Educate teams on Synapse, Purview',\n  Governance: 'Federated policies via Purview',\n  Modularity: 'Separate landing zones per domain'\n}\n// Example: Train Sales team\n// Workshop: Azure Synapse Studio, ADLS access\n// Governance: Assign Purview roles to Sales admins",
+      "mcq": {
+        "question": "What is a major challenge in adopting Data Mesh?",
+        "options": ["Lack of data", "Cultural shift", "No Azure tools", "Centralized teams"],
+        "correctAnswer": "b",
+        "explanation": "Cultural shift to decentralized ownership is a key challenge."
+      },
+      "references": [
+        {
+          "title": "Data Mesh Challenges",
+          "description": "Guide to overcoming Data Mesh hurdles.",
+          "url": "https://www.datacamp.com/blog/what-is-data-mesh"
+        },
+        {
+          "title": "Data Mesh Best Practices Video",
+          "description": "Video on Data Mesh adoption.",
+          "url": "https://www.youtube.com/watch?v=9jO8zSzS4gQ"
+        }
+      ]
+    }
+  ]
+}
