@@ -1,0 +1,413 @@
+{
+  "displayName": "Networking for Cloud and On-Premises",
+  "lessons": [
+    {
+      "title": "Introduction to Networking",
+      "introduction": "Learn the fundamentals of networking, including the OSI model and TCP/IP, essential for cloud and on-premises environments.",
+      "coreConcept": "The OSI model defines seven layers of networking, while TCP/IP is a practical protocol suite for data communication.",
+      "table": [
+        {
+          "Concept": "OSI Model",
+          "Description": "Physical, Data Link, Network, Transport, Session, Presentation, Application"
+        },
+        {
+          "Concept": "TCP/IP",
+          "Description": "Link, Internet, Transport, Application"
+        }
+      ],
+      "diagram": "# Save as network_basics.py\n# Run: python3 /Users/adrian/Desktop/projects/network_basics.py\n# Requires: pip install scapy\nfrom scapy.all import *\n# Capture packets to demonstrate layers\npacket = IP(dst='8.8.8.8')/TCP(dport=80)\nprint('Packet Summary:', packet.summary())\nprint('Layers:', [layer.__class__.__name__ for layer in packet])",
+      "mcq": {
+        "question": "Which OSI layer handles IP addressing?",
+        "options": ["Physical", "Data Link", "Network", "Transport"],
+        "correctAnswer": "c",
+        "explanation": "The Network layer (Layer 3) handles IP addressing and routing."
+      },
+      "references": [
+        {
+          "title": "OSI Model Guide",
+          "description": "Overview of OSI model.",
+          "url": "https://www.cloudflare.com/learning/ddos/glossary/open-systems-interconnection-model-osi/"
+        },
+        {
+          "title": "TCP/IP Video",
+          "description": "Video on TCP/IP basics.",
+          "url": "https://www.youtube.com/watch?v=7_SI7qUjkhM"
+        }
+      ]
+    },
+    {
+      "title": "Subnets and VLANs",
+      "introduction": "Understand subnets and VLANs for segmenting networks in on-premises and cloud setups.",
+      "coreConcept": "Subnets divide IP networks, while VLANs separate traffic logically without additional hardware.",
+      "table": [
+        {
+          "Concept": "Subnetting",
+          "Description": "Divide 192.168.1.0/24 into smaller networks, e.g., 192.168.1.0/25"
+        },
+        {
+          "Concept": "VLAN",
+          "Description": "Tag packets with VLAN IDs (e.g., VLAN 10) for logical separation"
+        }
+      ],
+      "diagram": "# Save as subnet_calc.py\n# Run: python3 /Users/adrian/Desktop/projects/subnet_calc.py\n# Requires: pip install ipaddress\nimport ipaddress\nnetwork = ipaddress.ip_network('192.168.1.0/24')\nsubnets = list(network.subnets(new_prefix=25))\nprint('Original Network:', network)\nfor subnet in subnets:\n    print('Subnet:', subnet)\n# Example VLAN config (CLI for Cisco switch)\n# switch(config)# vlan 10\n# switch(config-vlan)# name SALES\n# switch(config-vlan)# exit",
+      "mcq": {
+        "question": "What is the purpose of VLANs?",
+        "options": ["Increase bandwidth", "Logical traffic separation", "Encrypt data", "Route packets"],
+        "correctAnswer": "b",
+        "explanation": "VLANs separate network traffic logically without requiring separate hardware."
+      },
+      "references": [
+        {
+          "title": "Subnetting Guide",
+          "description": "Guide to IP subnetting.",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        },
+        {
+          "title": "VLAN Basics",
+          "description": "Video on VLAN configuration.",
+          "url": "https://www.youtube.com/watch?v=0g7q3uK3b0I"
+        }
+      ]
+    },
+    {
+      "title": "TCP/IP in Practice",
+      "introduction": "Explore TCP/IP protocols like TCP, UDP, and ICMP for reliable communication.",
+      "coreConcept": "TCP ensures reliable data delivery, UDP is faster but unreliable, and ICMP aids diagnostics.",
+      "table": [
+        {
+          "Concept": "TCP",
+          "Description": "Connection-oriented, reliable, used for HTTP, HTTPS"
+        },
+        {
+          "Concept": "UDP",
+          "Description": "Connectionless, used for streaming, DNS"
+        }
+      ],
+      "diagram": "# Save as tcp_probe.py\n# Run: python3 /Users/adrian/Desktop/projects/tcp_probe.py\n# Requires: pip install scapy\nfrom scapy.all import *\n# Send TCP SYN to Google DNS\npacket = IP(dst='8.8.8.8')/TCP(dport=53, flags='S')\nresponse = sr1(packet, timeout=2, verbose=0)\nif response:\n    print('TCP Response:', response.summary())\nelse:\n    print('No response')\n# Send ICMP ping\nping = sr1(IP(dst='8.8.8.8')/ICMP(), timeout=2, verbose=0)\nif ping:\n    print('Ping Response:', ping.summary())",
+      "mcq": {
+        "question": "Which protocol is best for video streaming?",
+        "options": ["TCP", "UDP", "ICMP", "HTTP"],
+        "correctAnswer": "b",
+        "explanation": "UDP is preferred for streaming due to lower latency, despite potential packet loss."
+      },
+      "references": [
+        {
+          "title": "TCP vs UDP",
+          "description": "Comparison of TCP and UDP.",
+          "url": "https://www.cloudflare.com/learning/ddos/glossary/tcp-ip/"
+        },
+        {
+          "title": "Protocol Video",
+          "description": "Video on TCP/IP protocols.",
+          "url": "https://www.youtube.com/watch?v=3QhU9jd03a0"
+        }
+      ]
+    },
+    {
+      "title": "Cloud Networking: Virtual Private Clouds (VPCs)",
+      "introduction": "Learn how Virtual Private Clouds (VPCs) provide isolated network environments in the cloud.",
+      "coreConcept": "VPCs allow you to define virtual networks with subnets, routing, and security groups in providers like AWS and Azure.",
+      "table": [
+        {
+          "Concept": "AWS VPC",
+          "Description": "Define CIDR block, e.g., 10.0.0.0/16, with subnets and route tables"
+        },
+        {
+          "Concept": "Security Groups",
+          "Description": "Act as virtual firewalls, controlling inbound/outbound traffic"
+        }
+      ],
+      "diagram": "# Save as vpc_setup.sh\n# Run: bash /Users/adrian/Desktop/projects/vpc_setup.sh\n# Requires: AWS CLI configured\naws ec2 create-vpc --cidr-block 10.0.0.0/16\naws ec2 create-subnet --vpc-id vpc-12345678 --cidr-block 10.0.1.0/24\naws ec2 create-security-group --group-name MySG --description 'My security group' --vpc-id vpc-12345678\naws ec2 authorize-security-group-ingress --group-id sg-12345678 --protocol tcp --port 80 --cidr 0.0.0.0/0\n# Replace vpc-12345678, sg-12345678 with actual IDs\necho 'VPC and subnet created, HTTP access allowed'",
+      "mcq": {
+        "question": "What is the role of a security group in a VPC?",
+        "options": ["Routes traffic", "Encrypts data", "Controls access", "Assigns IPs"],
+        "correctAnswer": "c",
+        "explanation": "Security groups act as virtual firewalls to control network access."
+      },
+      "references": [
+        {
+          "title": "AWS VPC Guide",
+          "description": "Guide to AWS Virtual Private Cloud.",
+          "url": "https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html"
+        },
+        {
+          "title": "VPC Video",
+          "description": "Video on setting up VPCs.",
+          "url": "https://www.youtube.com/watch?v=jZAvKg9Xzss"
+        }
+      ]
+    },
+    {
+      "title": "Cloud Interconnects and Load Balancing",
+      "introduction": "Explore cloud interconnects and load balancing for high availability and performance.",
+      "coreConcept": "Interconnects provide dedicated connections, and load balancers distribute traffic across instances.",
+      "table": [
+        {
+          "Concept": "AWS Direct Connect",
+          "Description": "Dedicated network connection from on-premises to AWS"
+        },
+        {
+          "Concept": "Load Balancer",
+          "Description": "Distributes traffic, e.g., AWS ELB, Azure Load Balancer"
+        }
+      ],
+      "diagram": "# Save as elb_setup.sh\n# Run: bash /Users/adrian/Desktop/projects/elb_setup.sh\n# Requires: AWS CLI configured\naws elbv2 create-load-balancer --name my-load-balancer --subnets subnet-12345678 subnet-87654321 --security-groups sg-12345678\naws elbv2 create-target-group --name my-targets --protocol HTTP --port 80 --vpc-id vpc-12345678\naws elbv2 register-targets --target-group-arn arn:aws:elasticloadbalancing:region:account-id:targetgroup/my-targets/12345678 --targets Id=i-12345678\n# Replace IDs with actual values\necho 'Load balancer and target group created'",
+      "mcq": {
+        "question": "What does a load balancer do?",
+        "options": ["Encrypts data", "Distributes traffic", "Assigns IPs", "Monitors latency"],
+        "correctAnswer": "b",
+        "explanation": "Load balancers distribute traffic across multiple servers for availability."
+      },
+      "references": [
+        {
+          "title": "AWS Direct Connect",
+          "description": "Guide to AWS Direct Connect.",
+          "url": "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html"
+        },
+        {
+          "title": "Load Balancing Video",
+          "description": "Video on cloud load balancing.",
+          "url": "https://www.youtube.com/watch?v=7VvrBrnNdeQ"
+        }
+      ]
+    },
+    {
+      "title": "Cloud Security and Compliance",
+      "introduction": "Secure cloud networks with encryption, access controls, and compliance strategies.",
+      "coreConcept": "Use VPNs, encryption, and IAM to ensure security and meet regulatory requirements.",
+      "table": [
+        {
+          "Concept": "VPN",
+          "Description": "Secure tunnel for data between on-premises and cloud"
+        },
+        {
+          "Concept": "IAM",
+          "Description": "Identity and Access Management for role-based access"
+        }
+      ],
+      "diagram": "# Save as iam_setup.sh\n# Run: bash /Users/adrian/Desktop/projects/iam_setup.sh\n# Requires: AWS CLI configured\naws iam create-role --role-name MyRole --assume-role-policy-document file://trust-policy.json\naws iam attach-role-policy --role-name MyRole --policy-arn arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess\n# Create trust-policy.json first:\n# echo '{\"Version\": \"2012-10-17\", \"Statement\": [{\"Effect\": \"Allow\", \"Principal\": {\"Service\": \"ec2.amazonaws.com\"}, \"Action\": \"sts:AssumeRole\"}]}' > /Users/adrian/Desktop/projects/trust-policy.json\necho 'IAM role created with S3 read-only access'",
+      "mcq": {
+        "question": "What is IAM used for?",
+        "options": ["Routing traffic", "Managing access", "Monitoring latency", "Load balancing"],
+        "correctAnswer": "b",
+        "explanation": "IAM manages user and role-based access to cloud resources."
+      },
+      "references": [
+        {
+          "title": "AWS IAM Guide",
+          "description": "Guide to Identity and Access Management.",
+          "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html"
+        },
+        {
+          "title": "Cloud Security Video",
+          "description": "Video on securing cloud networks.",
+          "url": "https://www.youtube.com/watch?v=8fY_6a0BtkQ"
+        }
+      ]
+    },
+    {
+      "title": "On-Premises Networking: Data Centers",
+      "introduction": "Learn how on-premises data centers manage networking with switches, routers, and firewalls.",
+      "coreConcept": "Data centers use physical and virtual networking for high performance and security.",
+      "table": [
+        {
+          "Concept": "Switches",
+          "Description": "Connect devices within a LAN, e.g., Cisco Catalyst"
+        },
+        {
+          "Concept": "Firewalls",
+          "Description": "Filter traffic, e.g., Cisco ASA, Palo Alto"
+        }
+      ],
+      "diagram": "# Save as switch_config.sh\n# Run: bash /Users/adrian/Desktop/projects/switch_config.sh\n# Requires: Cisco switch access\n# Connect to switch via SSH or console\n# switch> enable\n# switch# configure terminal\n# switch(config)# interface vlan 10\n# switch(config-if)# ip address 192.168.10.1 255.255.255.0\n# switch(config-if)# no shutdown\n# switch(config-if)# exit\n# switch(config)# ip default-gateway 192.168.10.254\necho 'VLAN 10 configured with IP and gateway'",
+      "mcq": {
+        "question": "What is the role of a firewall in a data center?",
+        "options": ["Routes traffic", "Filters traffic", "Assigns IPs", "Monitors performance"],
+        "correctAnswer": "b",
+        "explanation": "Firewalls filter network traffic for security."
+      },
+      "references": [
+        {
+          "title": "Cisco Data Center Networking",
+          "description": "Guide to data center networks.",
+          "url": "https://www.cisco.com/c/en/us/solutions/data-center-virtualization/index.html"
+        },
+        {
+          "title": "Firewall Config Video",
+          "description": "Video on configuring firewalls.",
+          "url": "https://www.youtube.com/watch?v=7dE8mQb0L0Y"
+        }
+      ]
+    },
+    {
+      "title": "On-Premises: SD-WAN",
+      "introduction": "Explore Software-Defined WAN (SD-WAN) for efficient on-premises and cloud connectivity.",
+      "coreConcept": "SD-WAN optimizes traffic routing across WANs using software-defined policies.",
+      "table": [
+        {
+          "Concept": "SD-WAN",
+          "Description": "Centralized control for WAN traffic, e.g., Cisco Catalyst SD-WAN"
+        },
+        {
+          "Concept": "Benefits",
+          "Description": "Cost-effective, scalable, improves application performance"
+        }
+      ],
+      "diagram": "# Save as sdwan_monitor.py\n# Run: python3 /Users/adrian/Desktop/projects/sdwan_monitor.py\n# Requires: pip install requests\nimport requests\n# Mock SD-WAN API monitoring (using JSONPlaceholder)\nurl = 'https://jsonplaceholder.typicode.com/posts'\nresponse = requests.get(url)\nif response.status_code == 200:\n    print('SD-WAN Status: OK, Sample Data:', response.json()[0])\nelse:\n    print('SD-WAN Status: Error, Code:', response.status_code)",
+      "mcq": {
+        "question": "What does SD-WAN improve?",
+        "options": ["CPU performance", "Application performance", "Storage capacity", "Encryption strength"],
+        "correctAnswer": "b",
+        "explanation": "SD-WAN optimizes application performance across WANs."
+      },
+      "references": [
+        {
+          "title": "Cisco SD-WAN",
+          "description": "Guide to Software-Defined WAN.",
+          "url": "https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html"
+        },
+        {
+          "title": "SD-WAN Video",
+          "description": "Video on SD-WAN setup.",
+          "url": "https://www.youtube.com/watch?v=9mWvE4H0k3c"
+        }
+      ]
+    },
+    {
+      "title": "Hybrid Cloud Solutions (HCS)",
+      "introduction": "Understand Hybrid Cloud Solutions (HCS) like AWS Outposts and Azure Stack for unified environments.",
+      "coreConcept": "HCS integrates on-premises and cloud infrastructure for workload portability and scalability.",
+      "table": [
+        {
+          "Concept": "AWS Outposts",
+          "Description": "Run AWS services on-premises for consistent hybrid experience"
+        },
+        {
+          "Concept": "Azure Stack",
+          "Description": "Extend Azure services to on-premises data centers"
+        }
+      ],
+      "diagram": "# Save as outpost_setup.sh\n# Run: bash /Users/adrian/Desktop/projects/outpost_setup.sh\n# Requires: AWS CLI configured\naws outposts create-outpost --name MyOutpost --site-id site-12345678 --availability-zone us-east-1a\necho 'AWS Outpost created'\n# Replace site-12345678 with actual site ID\n# Verify Outpost status\naws outposts get-outpost --outpost-id op-12345678\necho 'Outpost status checked'",
+      "mcq": {
+        "question": "What is a key benefit of HCS?",
+        "options": ["Local storage only", "Workload portability", "Reduced security", "Higher latency"],
+        "correctAnswer": "b",
+        "explanation": "HCS enables seamless workload movement between on-premises and cloud."
+      },
+      "references": [
+        {
+          "title": "AWS Outposts",
+          "description": "Guide to AWS Outposts.",
+          "url": "https://aws.amazon.com/outposts/"
+        },
+        {
+          "title": "Azure Stack Video",
+          "description": "Video on Azure Stack setup.",
+          "url": "https://www.youtube.com/watch?v=7U2yX1vO-iM"
+        }
+      ]
+    },
+    {
+      "title": "Network Stretching with VMware HCX",
+      "introduction": "Learn network stretching to extend Layer 2 networks across hybrid clouds using VMware HCX.",
+      "coreConcept": "Network stretching extends VLANs between on-premises and cloud for seamless migration.",
+      "table": [
+        {
+          "Concept": "VMware HCX",
+          "Description": "Enables Layer 2 extension and workload migration"
+        },
+        {
+          "Concept": "Layer 2 Extension",
+          "Description": "Extends VLANs across sites without changing IPs"
+        }
+      ],
+      "diagram": "# Save as hcx_config.sh\n# Run: bash /Users/adrian/Desktop/projects/hcx_config.sh\n# Requires: VMware HCX access\n# Login to HCX Manager\n# hcxmgr> enable network-extension\n# hcxmgr> create network-extension --vlan-id 10 --destination-cloud OracleCloud\n# hcxmgr> start migration --vm MyVM --network VLAN10\necho 'Network extension configured for VLAN 10'\n# Replace MyVM, VLAN10 with actual values",
+      "mcq": {
+        "question": "What does network stretching preserve?",
+        "options": ["CPU usage", "IP addresses", "Storage size", "Encryption keys"],
+        "correctAnswer": "b",
+        "explanation": "Network stretching preserves IP addresses during migration."
+      },
+      "references": [
+        {
+          "title": "VMware HCX Guide",
+          "description": "Guide to VMware HCX.",
+          "url": "https://docs.vmware.com/en/VMware-HCX/index.html"
+        },
+        {
+          "title": "HCX Video",
+          "description": "Video on network stretching.",
+          "url": "https://www.youtube.com/watch?v=3y8qK3Z7X0A"
+        }
+      ]
+    },
+    {
+      "title": "Monitoring Hybrid Cloud Networks",
+      "introduction": "Monitor hybrid cloud networks using tools like Kentik and Cisco Catalyst for performance and anomalies.",
+      "coreConcept": "Observability platforms centralize data to detect latency, packet loss, and other issues.",
+      "table": [
+        {
+          "Concept": "Kentik",
+          "Description": "Analyzes traffic flow across cloud and on-premises"
+        },
+        {
+          "Concept": "Cisco Catalyst",
+          "Description": "Monitors network performance with analytics"
+        }
+      ],
+      "diagram": "# Save as network_monitor.py\n# Run: python3 /Users/adrian/Desktop/projects/network_monitor.py\n# Requires: pip install requests\n# Mock monitoring using JSONPlaceholder\nimport requests\nurl = 'https://jsonplaceholder.typicode.com/posts'\nresponse = requests.get(url)\nif response.status_code == 200:\n    latency = response.elapsed.total_seconds()\n    print(f'Network Latency: {latency:.2f}s')\n    if latency > 1:\n        print('Anomaly: High latency detected')\nelse:\n    print('Error: Network unreachable, Code:', response.status_code)",
+      "mcq": {
+        "question": "What does network observability provide?",
+        "options": ["Encryption", "Centralized monitoring", "IP assignment", "Routing"],
+        "correctAnswer": "b",
+        "explanation": "Observability platforms centralize data for performance monitoring."
+      },
+      "references": [
+        {
+          "title": "Kentik Observability",
+          "description": "Guide to Kentik platform.",
+          "url": "https://www.kentik.com/products/kentik-cloud/"
+        },
+        {
+          "title": "Cisco Catalyst Video",
+          "description": "Video on network monitoring.",
+          "url": "https://www.youtube.com/watch?v=9qK3m8z5v8Y"
+        }
+      ]
+    },
+    {
+      "title": "Automating Anomaly Detection",
+      "introduction": "Automate detection of common network anomalies like packet loss and jitter for troubleshooting.",
+      "coreConcept": "Scripts can monitor metrics and alert personnel to anomalies like high latency or packet drops.",
+      "table": [
+        {
+          "Concept": "Packet Loss",
+          "Description": "Lost packets due to congestion or errors"
+        },
+        {
+          "Concept": "Jitter",
+          "Description": "Variation in packet arrival times"
+        }
+      ],
+      "diagram": "# Save as anomaly_detect.py\n# Run: python3 /Users/adrian/Desktop/projects/anomaly_detect.py\n# Requires: pip install scapy\nfrom scapy.all import *\nimport time\n# Monitor packet loss and jitter\ndef monitor_network(dst='8.8.8.8', count=10):\n    sent, received = 0, 0\n    times = []\n    for _ in range(count):\n        packet = IP(dst=dst)/ICMP()\n        start = time.time()\n        reply = sr1(packet, timeout=2, verbose=0)\n        sent += 1\n        if reply:\n            received += 1\n            times.append((time.time() - start) * 1000)  # ms\n    loss = (sent - received) / sent * 100\n    jitter = max(times) - min(times) if times else 0\n    print(f'Packet Loss: {loss:.2f}%')\n    print(f'Jitter: {jitter:.2f}ms')\n    if loss > 5:\n        print('Anomaly: High packet loss')\n    if jitter > 50:\n        print('Anomaly: High jitter')\nmonitor_network()",
+      "mcq": {
+        "question": "What does high jitter indicate?",
+        "options": ["Stable network", "Variable packet delays", "High bandwidth", "Encrypted traffic"],
+        "correctAnswer": "b",
+        "explanation": "High jitter indicates variable delays in packet delivery."
+      },
+      "references": [
+        {
+          "title": "Network Troubleshooting",
+          "description": "Guide to detecting network issues.",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13730-5.html"
+        },
+        {
+          "title": "Anomaly Detection Video",
+          "description": "Video on automating network monitoring.",
+          "url": "https://www.youtube.com/watch?v=5z5z7z2Q3kY"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,515 @@
+{
+  "displayName": "Managing VMware and Azure VMware Solution",
+  "lessons": [
+    {
+      "title": "Introduction to VMware vSphere",
+      "introduction": "Learn the core components of VMware vSphere, the foundation for virtualization in on-premises and cloud environments.",
+      "coreConcept": "vSphere uses ESXi hypervisors and vCenter Server to manage virtual machines (VMs) and resources.",
+      "table": [
+        {
+          "Component": "ESXi",
+          "Description": "Bare-metal hypervisor for running VMs"
+        },
+        {
+          "Component": "vCenter Server",
+          "Description": "Centralized management for ESXi hosts and VMs"
+        }
+      ],
+      "diagram": "# Save as check_esxi.py\n# Run: python3 /Users/adrian/Desktop/projects/check_esxi.py\n# Requires: pip install pyvmomi\nfrom pyvmomi import vim\nfrom pyVim.connect import SmartConnect, Disconnect\nsi = SmartConnect(host='vcenter.example.com', user='administrator@vsphere.local', pwd='password', port=443)\ncontent = si.RetrieveContent()\nhosts = content.rootFolder.childEntity[0].hostFolder.childEntity\nfor host in hosts:\n    print(f'Host: {host.name}, Status: {host.summary.overallStatus}')\nDisconnect(si)",
+      "mcq": {
+        "question": "What is the role of vCenter Server?",
+        "options": ["Runs VMs", "Manages ESXi hosts", "Configures networks", "Stores data"],
+        "correctAnswer": "b",
+        "explanation": "vCenter Server provides centralized management for ESXi hosts and VMs."
+      },
+      "references": [
+        {
+          "title": "VMware vSphere Overview",
+          "description": "Introduction to vSphere.",
+          "url": "https://www.vmware.com/products/vsphere.html"
+        },
+        {
+          "title": "vSphere Video",
+          "description": "Video on vSphere basics.",
+          "url": "https://www.youtube.com/watch?v=8yX2b1sLq8Q"
+        }
+      ]
+    },
+    {
+      "title": "Understanding NSX and vSAN",
+      "introduction": "Explore VMware NSX for networking and vSAN for storage in virtualized environments.",
+      "coreConcept": "NSX provides software-defined networking, and vSAN offers hyper-converged storage.",
+      "table": [
+        {
+          "Component": "NSX-T",
+          "Description": "Virtual networking with micro-segmentation"
+        },
+        {
+          "Component": "vSAN",
+          "Description": "Aggregates local storage into a shared datastore"
+        }
+      ],
+      "diagram": "# Save as nsx_check.sh\n# Run: bash /Users/adrian/Desktop/projects/nsx_check.sh\n# Requires: NSX Manager access\n# Login to NSX Manager\n# nsxcli> get controllers\n# nsxcli> get logical-switches\n# Example vSAN check via vCenter\n# esxcli vsan cluster get\necho 'NSX and vSAN status checked'",
+      "mcq": {
+        "question": "What does vSAN provide?",
+        "options": ["Networking", "Storage", "Compute", "Security"],
+        "correctAnswer": "b",
+        "explanation": "vSAN aggregates local storage for VMs."
+      },
+      "references": [
+        {
+          "title": "VMware NSX Guide",
+          "description": "Overview of NSX-T.",
+          "url": "https://docs.vmware.com/en/VMware-NSX-T-Data-Center/index.html"
+        },
+        {
+          "title": "vSAN Guide",
+          "description": "Guide to vSAN storage.",
+          "url": "https://www.vmware.com/products/vsan.html"
+        }
+      ]
+    },
+    {
+      "title": "VMware HCX for Hybrid Cloud",
+      "introduction": "Learn VMware HCX for workload migration and network stretching in hybrid clouds.",
+      "coreConcept": "HCX enables seamless VM migration and Layer 2 network extension across sites.",
+      "table": [
+        {
+          "Feature": "HCX vMotion",
+          "Description": "Live migration of VMs without downtime"
+        },
+        {
+          "Feature": "Network Extension",
+          "Description": "Extends VLANs across on-premises and cloud"
+        }
+      ],
+      "diagram": "# Save as hcx_status.sh\n# Run: bash /Users/adrian/Desktop/projects/hcx_status.sh\n# Requires: HCX Manager access\n# Login to HCX Manager\n# hcxmgr> get migration-status\n# hcxmgr> get network-extension-status\necho 'HCX migration and network extension status checked'",
+      "mcq": {
+        "question": "What does HCX network extension preserve?",
+        "options": ["CPU usage", "IP addresses", "Storage size", "Firewall rules"],
+        "correctAnswer": "b",
+        "explanation": "HCX network extension preserves IP addresses during migration."
+      },
+      "references": [
+        {
+          "title": "VMware HCX Guide",
+          "description": "Guide to VMware HCX.",
+          "url": "https://docs.vmware.com/en/VMware-HCX/index.html"
+        },
+        {
+          "title": "HCX Video",
+          "description": "Video on HCX setup.",
+          "url": "https://www.youtube.com/watch?v=3y8qK3Z7X0A"
+        }
+      ]
+    },
+    {
+      "title": "Introduction to Azure VMware Solution (AVS)",
+      "introduction": "Understand Azure VMware Solution (AVS) for running VMware workloads in Azure.",
+      "coreConcept": "AVS provides a managed VMware environment (vSphere, NSX, vSAN, HCX) on Azure infrastructure.",
+      "table": [
+        {
+          "Component": "AVS Private Cloud",
+          "Description": "Dedicated VMware cluster with 3–16 hosts"
+        },
+        {
+          "Component": "Azure Integration",
+          "Description": "Connects via ExpressRoute to Azure services"
+        }
+      ],
+      "diagram": "# Save as avs_deploy.sh\n# Run: bash /Users/adrian/Desktop/projects/avs_deploy.sh\n# Requires: Azure CLI, az login\naz vmware private-cloud create --resource-group MyResourceGroup --name MyPrivateCloud --location eastus --sku AV36 --cluster-size 3 --network-block 192.168.0.0/22\necho 'AVS private cloud created'\naz vmware private-cloud show --resource-group MyResourceGroup --name MyPrivateCloud",
+      "mcq": {
+        "question": "What is the minimum number of hosts in an AVS cluster?",
+        "options": ["1", "2", "3", "4"],
+        "correctAnswer": "c",
+        "explanation": "AVS requires a minimum of 3 hosts per cluster."
+      },
+      "references": [
+        {
+          "title": "AVS Introduction",
+          "description": "Overview of Azure VMware Solution.",
+          "url": "https://learn.microsoft.com/en-us/azure/azure-vmware/introduction"
+        },
+        {
+          "title": "AVS Video",
+          "description": "Video on AVS deployment.",
+          "url": "https://www.youtube.com/watch?v=7U2yX1vO-iM"
+        }
+      ]
+    },
+    {
+      "title": "AVS Networking with ExpressRoute",
+      "introduction": "Configure networking for AVS using ExpressRoute for connectivity to Azure and on-premises.",
+      "coreConcept": "ExpressRoute provides low-latency, secure connectivity between AVS and Azure VNets or on-premises networks.",
+      "table": [
+        {
+          "Concept": "ExpressRoute",
+          "Description": "Dedicated connection for AVS to Azure VNet"
+        },
+        {
+          "Concept": "Global Reach",
+          "Description": "Connects AVS to on-premises via ExpressRoute"
+        }
+      ],
+      "diagram": "# Save as avs_network.sh\n# Run: bash /Users/adrian/Desktop/projects/avs_network.sh\n# Requires: Azure CLI, az login\naz network express-route create --resource-group MyResourceGroup --name MyExpressRoute --location eastus --bandwidth 100 --provider 'Equinix' --peering-location 'Washington DC'\naz vmware private-cloud add-identity-source --resource-group MyResourceGroup --name MyPrivateCloud --identity-source vsphere.local\necho 'ExpressRoute configured for AVS'",
+      "mcq": {
+        "question": "What does ExpressRoute Global Reach enable?",
+        "options": ["VM migration", "On-premises to AVS connectivity", "Storage expansion", "Security policies"],
+        "correctAnswer": "b",
+        "explanation": "Global Reach connects AVS to on-premises networks via ExpressRoute."
+      },
+      "references": [
+        {
+          "title": "AVS Networking",
+          "description": "Guide to AVS networking.",
+          "url": "https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-networking"
+        },
+        {
+          "title": "ExpressRoute Video",
+          "description": "Video on ExpressRoute setup.",
+          "url": "https://www.youtube.com/watch?v=7qK3m8z5v8Y"
+        }
+      ]
+    },
+    {
+      "title": "AVS Storage Management",
+      "introduction": "Manage vSAN and external storage in AVS to optimize performance and capacity.",
+      "coreConcept": "vSAN is the default storage, with options to expand using Azure Blob Storage for non-VM data.",
+      "table": [
+        {
+          "Concept": "vSAN SLA",
+          "Description": "Requires 25% slack space, FTT=1 for 3–5 hosts"
+        },
+        {
+          "Concept": "Azure Blob",
+          "Description": "Use for VM templates and backups to save vSAN space"
+        }
+      ],
+      "diagram": "# Save as vsan_check.py\n# Run: python3 /Users/adrian/Desktop/projects/vsan_check.py\n# Requires: pip install pyvmomi\nfrom pyvmomi import vim\nfrom pyVim.connect import SmartConnect, Disconnect\nsi = SmartConnect(host='vcenter.example.com', user='administrator@vsphere.local', pwd='password', port=443)\ncontent = si.RetrieveContent()\nvsan = content.vsanDataStoreSystem\nclusters = content.rootFolder.childEntity[0].hostFolder.childEntity\nfor cluster in clusters:\n    health = vsan.QueryVsanClusterHealth(cluster)\n    print(f'vSAN Health: {health.overallHealth}')\nDisconnect(si)",
+      "mcq": {
+        "question": "Why use Azure Blob Storage with AVS?",
+        "options": ["Run VMs", "Reduce vSAN usage", "Improve networking", "Manage users"],
+        "correctAnswer": "b",
+        "explanation": "Azure Blob Storage offloads VM templates and backups to save vSAN space."
+      },
+      "references": [
+        {
+          "title": "AVS Storage",
+          "description": "Guide to vSAN and storage in AVS.",
+          "url": "https://learn.microsoft.com/en-us/azure/azure-vmware/concepts-storage"
+        },
+        {
+          "title": "vSAN Video",
+          "description": "Video on vSAN management.",
+          "url": "https://www.youtube.com/watch?v=9qK3m8z5v8Y"
+        }
+      ]
+    },
+    {
+      "title": "Common Issue: Connectivity Problems",
+      "introduction": "Troubleshoot connectivity issues in VMware and AVS, such as ExpressRoute or NSX failures.",
+      "coreConcept": "Use Connection Monitor and NSX diagnostics to identify and resolve connectivity issues.",
+      "table": [
+        {
+          "Issue": "ExpressRoute Failure",
+          "Solution": "Check Azure Network Watcher Connection Monitor"
+        },
+        {
+          "Issue": "NSX Misconfiguration",
+          "Solution": "Verify Tier-0/Tier-1 gateways and firewall rules"
+        }
+      ],
+      "diagram": "# Save as connection_check.sh\n# Run: bash /Users/adrian/Desktop/projects/connection_check.sh\n# Requires: Azure CLI, az login\naz network watcher connection-monitor create --name MyConnectionMonitor --resource-group MyResourceGroup --source-resource MyPrivateCloud --dest-resource MyVNet --protocol Tcp --destination-port 80\necho 'Connection Monitor set up'\n# Check NSX status\n# nsxcli> get tier-0 gateways\n# nsxcli> get firewall status",
+      "mcq": {
+        "question": "What tool monitors AVS connectivity?",
+        "options": ["vCenter", "Network Watcher", "vSAN", "Aria Operations"],
+        "correctAnswer": "b",
+        "explanation": "Azure Network Watcher monitors connectivity between AVS and other resources."
+      },
+      "references": [
+        {
+          "title": "AVS Connectivity Troubleshooting",
+          "description": "Guide to network issues.",
+          "url": "https://learn.microsoft.com/en-us/azure/azure-vmware/known-issues"
+        },
+        {
+          "title": "Network Troubleshooting Video",
+          "description": "Video on network diagnostics.",
+          "url": "https://www.youtube.com/watch?v=5z5z7z2Q3kY"
+        }
+      ]
+    },
+    {
+      "title": "Common Issue: vSAN Performance",
+      "introduction": "Address vSAN performance issues like high latency or low IOPS in VMware and AVS.",
+      "coreConcept": "Monitor vSAN metrics (latency, IOPS) via vCenter and optimize storage policies.",
+      "table": [
+        {
+          "Issue": "High Latency",
+          "Solution": "Check IOPS limits, adjust VM storage policies"
+        },
+        {
+          "Issue": "Low Capacity",
+          "Solution": "Expand with Azure Blob or add hosts"
+        }
+      ],
+      "diagram": "# Save as vsan_metrics.py\n# Run: python3 /Users/adrian/Desktop/projects/vsan_metrics.py\n# Requires: pip install pyvmomi\nfrom pyvmomi import vim\nfrom pyVim.connect import SmartConnect, Disconnect\nsi = SmartConnect(host='vcenter.example.com', user='administrator@vsphere.local', pwd='password', port=443)\ncontent = si.RetrieveContent()\nvsan = content.vsanDataStoreSystem\nclusters = content.rootFolder.childEntity[0].hostFolder.childEntity\nfor cluster in clusters:\n    stats = vsan.QueryVsanStatistics(cluster, ['latency', 'iops'])\n    print(f'vSAN Latency: {stats.get('latency')} ms, IOPS: {stats.get('iops')}')\nDisconnect(si)",
+      "mcq": {
+        "question": "What metric indicates vSAN performance issues?",
+        "options": ["CPU usage", "Latency", "Memory", "Network bandwidth"],
+        "correctAnswer": "b",
+        "explanation": "High latency in vSAN metrics indicates performance issues."
+      },
+      "references": [
+        {
+          "title": "vSAN Performance",
+          "description": "Guide to vSAN performance.",
+          "url": "https://docs.vmware.com/en/VMware-vSAN/8.0/monitoring-vsan/GUID-6C6F0F6B-8F2B-4F9C-9F2C-8F7C6F7B9A2D.html"
+        },
+        {
+          "title": "vSAN Troubleshooting Video",
+          "description": "Video on vSAN issues.",
+          "url": "https://www.youtube.com/watch?v=9qK3m8z5v8Y"
+        }
+      ]
+    },
+    {
+      "title": "Common Issue: Upgrade Failures",
+      "introduction": "Handle VMware and AVS upgrade issues, such as NSX or vSphere failures.",
+      "coreConcept": "Avoid configuration changes during upgrades and use Azure Service Health for scheduling.",
+      "table": [
+        {
+          "Issue": "NSX Upgrade Block",
+          "Solution": "Avoid NSX config changes during upgrade window"
+        },
+        {
+          "Issue": "vSphere Upgrade Failure",
+          "Solution": "Check Azure Service Health for notifications"
+        }
+      ],
+      "diagram": "# Save as upgrade_check.sh\n# Run: bash /Users/adrian/Desktop/projects/upgrade_check.sh\n# Requires: Azure CLI, az login\naz monitor scheduled-query list --resource-group MyResourceGroup\necho 'Check Azure Service Health for upgrade notifications'\n# Verify vSphere version\n# esxcli system version get\n# vcenter> show version\necho 'vSphere and NSX version checked'",
+      "mcq": {
+        "question": "What should you avoid during an NSX upgrade?",
+        "options": ["Monitoring", "Config changes", "VM migration", "Backups"],
+        "correctAnswer": "b",
+        "explanation": "Config changes during NSX upgrades can cause failures."
+      },
+      "references": [
+        {
+          "title": "AVS Upgrades",
+          "description": "Guide to AVS upgrades.",
+          "url": "https://learn.microsoft.com/en-us/azure/azure-vmware/whats-new"
+        },
+        {
+          "title": "Upgrade Video",
+          "description": "Video on VMware upgrades.",
+          "url": "https://www.youtube.com/watch?v=5z5z7z2Q3kY"
+        }
+      ]
+    },
+    {
+      "title": "Monitoring with VMware Aria Operations",
+      "introduction": "Use VMware Aria Operations to monitor VMware and AVS environments for performance and health.",
+      "coreConcept": "Aria Operations collects metrics from vCenter, NSX, and vSAN for centralized monitoring.",
+      "table": [
+        {
+          "Tool": "Aria Operations",
+          "Description": "Monitors vCenter, NSX, vSAN metrics"
+        },
+        {
+          "Tool": "Remote Collector",
+          "Description": "Deploys in AVS for local data collection"
+        }
+      ],
+      "diagram": "# Save as aria_setup.sh\n# Run: bash /Users/adrian/Desktop/projects/aria_setup.sh\n# Requires: Aria Operations access\n# Login to Aria Operations\n# aria> add adapter --type vcenter --host vcenter.example.com --user cloudadmin@vsphere.local\n# aria> add adapter --type nsx --host nsx.example.com --user auditor\necho 'Aria Operations adapters configured for vCenter and NSX'",
+      "mcq": {
+        "question": "What role is needed for NSX in Aria Operations?",
+        "options": ["admin", "auditor", "user", "guest"],
+        "correctAnswer": "b",
+        "explanation": "The 'auditor' role is required for NSX integration in Aria Operations."
+      },
+      "references": [
+        {
+          "title": "Aria Operations Guide",
+          "description": "Guide to VMware Aria Operations.",
+          "url": "https://learn.microsoft.com/en-us/azure/azure-vmware/configure-aria-operations"
+        },
+        {
+          "title": "Aria Operations Video",
+          "description": "Video on Aria setup.",
+          "url": "https://www.youtube.com/watch?v=9qK3m8z5v8Y"
+        }
+      ]
+    },
+    {
+      "title": "Monitoring with Azure Monitor",
+      "introduction": "Integrate AVS with Azure Monitor for logs and metrics across hybrid environments.",
+      "coreConcept": "Azure Monitor collects logs from AVS components and VMs for centralized observability.",
+      "table": [
+        {
+          "Tool": "Log Analytics",
+          "Description": "Stores and queries AVS and VM logs"
+        },
+        {
+          "Tool": "Connection Monitor",
+          "Description": "Tracks network performance and availability"
+        }
+      ],
+      "diagram": "# Save as azure_monitor.sh\n# Run: bash /Users/adrian/Desktop/projects/azure_monitor.sh\n# Requires: Azure CLI, az login\naz monitor log-analytics workspace create --resource-group MyResourceGroup --workspace-name MyWorkspace\naz vmware private-cloud enable-azure-monitor --resource-group MyResourceGroup --name MyPrivateCloud --workspace-id /subscriptions/12345678/resourceGroups/MyResourceGroup/providers/Microsoft.OperationalInsights/workspaces/MyWorkspace\necho 'Azure Monitor enabled for AVS'",
+      "mcq": {
+        "question": "What does Azure Monitor’s Log Analytics store?",
+        "options": ["VM images", "Logs and metrics", "Network configs", "User accounts"],
+        "correctAnswer": "b",
+        "explanation": "Log Analytics stores logs and metrics for analysis."
+      },
+      "references": [
+        {
+          "title": "Azure Monitor for AVS",
+          "description": "Guide to monitoring AVS.",
+          "url": "https://learn.microsoft.com/en-us/azure/azure-vmware/monitoring-considerations"
+        },
+        {
+          "title": "Azure Monitor Video",
+          "description": "Video on Azure Monitor setup.",
+          "url": "https://www.youtube.com/watch?v=7qK3m8z5v8Y"
+        }
+      ]
+    },
+    {
+      "title": "vSphere Health Status",
+      "introduction": "Use vSphere Health Status to detect misconfigurations and performance issues.",
+      "coreConcept": "vSphere Health monitors ESXi, vSAN, and VMs for proactive issue detection.",
+      "table": [
+        {
+          "Metric": "Health Status",
+          "Description": "Checks ESXi, vSAN, and VM configurations"
+        },
+        {
+          "Metric": "Performance",
+          "Description": "Monitors CPU, memory, and storage bottlenecks"
+        }
+      ],
+      "diagram": "# Save as vsphere_health.py\n# Run: python3 /Users/adrian/Desktop/projects/vsphere_health.py\n# Requires: pip install pyvmomi\nfrom pyvmomi import vim\nfrom pyVim.connect import SmartConnect, Disconnect\nsi = SmartConnect(host='vcenter.example.com', user='administrator@vsphere.local', pwd='password', port=443)\ncontent = si.RetrieveContent()\nhealth = content.healthSystem\nstatus = health.RetrieveSystemHealthInfo()\nprint(f'vSphere Health: {status.overallStatus}')\nDisconnect(si)",
+      "mcq": {
+        "question": "What does vSphere Health detect?",
+        "options": ["Network latency", "Misconfigurations", "User accounts", "Firewall rules"],
+        "correctAnswer": "b",
+        "explanation": "vSphere Health detects misconfigurations and performance issues."
+      },
+      "references": [
+        {
+          "title": "vSphere Health",
+          "description": "Guide to vSphere Health Status.",
+          "url": "https://docs.vmware.com/en/VMware-vSphere/8.0/monitoring-vsan/GUID-6C6F0F6B-8F2B-4F9C-9F2C-8F7C6F7B9A2D.html"
+        },
+        {
+          "title": "vSphere Health Video",
+          "description": "Video on health monitoring.",
+          "url": "https://www.youtube.com/watch?v=5z5z7z2Q3kY"
+        }
+      ]
+    },
+    {
+      "title": "Automating VM Backups",
+      "introduction": "Automate VM backups in VMware and AVS using certified solutions or scripts.",
+      "coreConcept": "Scripts and tools like Azure Site Recovery ensure VM backup compliance and DR.",
+      "table": [
+        {
+          "Tool": "Azure Site Recovery",
+          "Description": "Replicates VMs for DR and backups"
+        },
+        {
+          "Tool": "PowerShell",
+          "Description": "Automates VM snapshot creation"
+        }
+      ],
+      "diagram": "# Save as vm_backup.ps1\n# Run: powershell /Users/adrian/Desktop/projects/vm_backup.ps1\n# Requires: PowerShell, VMware PowerCLI\n# Install: Install-Module -Name VMware.PowerCLI\nConnect-VIServer -Server vcenter.example.com -User administrator@vsphere.local -Password password\n$vm = Get-VM -Name MyVM\nNew-Snapshot -VM $vm -Name 'Backup_$(Get-Date -Format yyyyMMdd)' -Description 'Automated backup'\nDisconnect-VIServer -Server vcenter.example.com -Confirm:$false\nWrite-Output 'Snapshot created for MyVM'",
+      "mcq": {
+        "question": "What is a benefit of Azure Site Recovery?",
+        "options": ["Network monitoring", "VM replication", "Storage expansion", "User management"],
+        "correctAnswer": "b",
+        "explanation": "Azure Site Recovery replicates VMs for disaster recovery and backups."
+      },
+      "references": [
+        {
+          "title": "Azure Site Recovery",
+          "description": "Guide to VM backups.",
+          "url": "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-quickstart"
+        },
+        {
+          "title": "PowerCLI Video",
+          "description": "Video on PowerCLI automation.",
+          "url": "https://www.youtube.com/watch?v=9qK3m8z5v8Y"
+        }
+      ]
+    },
+    {
+      "title": "Automating AVS Scaling",
+      "introduction": "Automate scaling of AVS clusters to meet workload demands.",
+      "coreConcept": "Use Azure CLI or scripts to add/remove hosts in AVS clusters dynamically.",
+      "table": [
+        {
+          "Concept": "Scale Up",
+          "Description": "Add hosts to AVS cluster (3–16 hosts)"
+        },
+        {
+          "Concept": "Scale Down",
+          "Description": "Remove hosts while maintaining SLA"
+        }
+      ],
+      "diagram": "# Save as avs_scale.sh\n# Run: bash /Users/adrian/Desktop/projects/avs_scale.sh\n# Requires: Azure CLI, az login\naz vmware private-cloud add-cluster --resource-group MyResourceGroup --name MyPrivateCloud --cluster-name Cluster2 --sku AV36 --size 4\necho 'Added new cluster with 4 hosts'\naz vmware private-cloud delete-cluster --resource-group MyResourceGroup --name MyPrivateCloud --cluster-name Cluster2\necho 'Removed cluster'",
+      "mcq": {
+        "question": "What is the maximum number of hosts in an AVS cluster?",
+        "options": ["8", "12", "16", "20"],
+        "correctAnswer": "c",
+        "explanation": "AVS clusters support up to 16 hosts."
+      },
+      "references": [
+        {
+          "title": "AVS Scaling",
+          "description": "Guide to scaling AVS clusters.",
+          "url": "https://learn.microsoft.com/en-us/azure/azure-vmware/whats-new"
+        },
+        {
+          "title": "Scaling Video",
+          "description": "Video on AVS scaling.",
+          "url": "https://www.youtube.com/watch?v=7qK3m8z5v8Y"
+        }
+      ]
+    },
+    {
+      "title": "Automating Anomaly Detection",
+      "introduction": "Automate detection of VMware and AVS anomalies like high CPU or network issues.",
+      "coreConcept": "Scripts monitor metrics (CPU, memory, network) and alert on anomalies.",
+      "table": [
+        {
+          "Anomaly": "High CPU",
+          "Solution": "Alert if CPU usage exceeds 80%"
+        },
+        {
+          "Anomaly": "Network Drops",
+          "Solution": "Monitor packet loss via scripts"
+        }
+      ],
+      "diagram": "# Save as anomaly_detect.py\n# Run: python3 /Users/adrian/Desktop/projects/anomaly_detect.py\n# Requires: pip install pyvmomi requests\nfrom pyvmomi import vim\nfrom pyVim.connect import SmartConnect, Disconnect\nsi = SmartConnect(host='vcenter.example.com', user='administrator@vsphere.local', pwd='password', port=443)\ncontent = si.RetrieveContent()\nvms = content.rootFolder.childEntity[0].vmFolder.childEntity\nfor vm in vms:\n    cpu = vm.summary.quickStats.overallCpuUsage\n    if cpu > 800:  # MHz threshold\n        print(f'Anomaly: High CPU on {vm.name}: {cpu} MHz')\nDisconnect(si)\n# Mock Azure Monitor check\nimport requests\nresponse = requests.get('https://jsonplaceholder.typicode.com/posts')\nif response.status_code != 200:\n    print('Anomaly: Network issue, Code:', response.status_code)",
+      "mcq": {
+        "question": "What indicates a potential VM anomaly?",
+        "options": ["Low memory", "High CPU usage", "Stable network", "Low IOPS"],
+        "correctAnswer": "b",
+        "explanation": "High CPU usage can indicate performance issues in a VM."
+      },
+      "references": [
+        {
+          "title": "VMware Monitoring",
+          "description": "Guide to anomaly detection.",
+          "url": "https://learn.microsoft.com/en-us/azure/azure-vmware/monitoring-considerations"
+        },
+        {
+          "title": "Anomaly Detection Video",
+          "description": "Video on monitoring automation.",
+          "url": "https://www.youtube.com/watch?v=5z5z7z2Q3kY"
+        }
+      ]
+    }
+  ]
+}
