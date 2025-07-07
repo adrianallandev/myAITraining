@@ -389,7 +389,7 @@
           "Code": "const dataMap = {};\nfor (const [path, module] of Object.entries(files)) {\n  dataMap[path.split('/').pop()] = module.default;\n}"
         }
       ],
-      "diagram": "// Save as LessonLoader.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/LessonLoader.jsx\n// Create src/data/lessons.json: {\"displayName\": \"Course\", \"lessons\": [{\"title\": \"Test\"}]}\nimport React, { useState, useEffect } from 'react';\nfunction LessonLoader() {\n  const [dataMap, setDataMap] = useState({});\n  useEffect(() => {\n    const files = import.meta.glob('./data/*.json', { eager: true });\n    const loadedData = {};\n    for (const [path, module] of Object.entries(files)) {\n      loadedData[path.split('/').pop()] = module.default;\n    }\n    setDataMap(loadedData);\n  }, []);\n  return (\n    <div className='container'>\n      {Object.values(dataMap).map((data, index) => (\n        <p key={index} className='p-2'>{data.displayName}</p>\n      ))}\n    </div>\n  );\n}\nexport default LessonLoader;\n// In App.jsx: import LessonLoader from './components/LessonLoader'; <LessonLoader />",
+      "diagram": "// Save as LessonLoader.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/LessonLoader.jsx\n// Create src/data/lessons.json: {\"displayName\": \"Course\", \"lessons\": [{\"title\": \"Test\"}]}\n// Add to src/styles.css: .lesson-item { padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.875rem; }\nimport React, { useState, useEffect } from 'react';\nfunction LessonLoader() {\n  const [dataMap, setDataMap] = useState({});\n  useEffect(() => {\n    const files = import.meta.glob('./data/*.json', { eager: true });\n    const loadedData = {};\n    for (const [path, module] of Object.entries(files)) {\n      loadedData[path.split('/').pop()] = module.default;\n    }\n    setDataMap(loadedData);\n  }, []);\n  return (\n    <div className='container'>\n      {Object.values(dataMap).map((data, index) => (\n        <p key={index} className='lesson-item'>{data.displayName}</p>\n      ))}\n    </div>\n  );\n}\nexport default LessonLoader;\n// In App.jsx: import LessonLoader from './components/LessonLoader'; <LessonLoader />",
       "mcq": {
         "question": "What does import.meta.glob do?",
         "options": ["Fetches APIs", "Maps files to modules", "Creates components", "Manages state"],
@@ -420,10 +420,10 @@
         },
         {
           "Concept": "Handle Change",
-          "Code": "<select onChange={(e) => setLessonIndex(e.target.value)}>"
+          "Code": "<select onChange={(e) => setLessonIndex(Number(e.target.value))}>"
         }
       ],
-      "diagram": "// Save as LessonSelector.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/LessonSelector.jsx\nimport React, { useState } from 'react';\nfunction LessonSelector({ lessons }) {\n  const [lessonIndex, setLessonIndex] = useState(0);\n  return (\n    <div className='bg-gray-50 p-2 mb-2'>\n      <select\n        className='lesson-selector'\n        value={lessonIndex}\n        onChange={(e) => setLessonIndex(Number(e.target.value))}\n      >\n        {lessons.map((lesson, index) => (\n          <option key={index} value={index}>{lesson.title}</option>\n        ))}\n      </select>\n      <p className='text-lg mt-2'>Selected: {lessons[lessonIndex]?.title}</p>\n    </div>\n  );\n}\nexport default LessonSelector;\n// In App.jsx: import LessonSelector from './components/LessonSelector'; <LessonSelector lessons={[{title: 'JS'}, {title: 'React'}]} />",
+      "diagram": "// Save as LessonSelector.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/LessonSelector.jsx\n// Add to src/styles.css: .lesson-selector { padding: 0.5rem; border: 2px solid #60a5fa; border-radius: 0.875rem; }\nimport React, { useState } from 'react';\nfunction LessonSelector({ lessons }) {\n  const [lessonIndex, setLessonIndex] = useState(0);\n  return (\n    <div className='bg-gray-50 p-2 mb-2'>\n      <select\n        className='lesson-selector'\n        value={lessonIndex}\n        onChange={(e) => setLessonIndex(Number(e.target.value))}\n      >\n        {lessons.map((lesson, index) => (\n          <option key={index} value={index}>{lesson.title}</option>\n        ))}\n      </select>\n      <p className='text-lg mt-2'>Selected: {lessons[lessonIndex]?.title}</p>\n    </div>\n  );\n}\nexport default LessonSelector;\n// In App.jsx: import LessonSelector from './components/LessonSelector'; <LessonSelector lessons={[{title: 'JS'}, {title: 'React'}]} />",
       "mcq": {
         "question": "What updates the dropdown’s value?",
         "options": ["onClick", "onChange", "onSubmit", "onSelect"],
@@ -521,21 +521,21 @@
           "Code": "<input value={text} onChange={(e) => setText(e.target.value)} />"
         },
         {
-          "Concept": "Handle Submission",
-          "Code": "const handleSubmit = () => console.log(text);"
+          "Concept": "Handle Submit",
+          "Code": "<form onSubmit={(e) => { e.preventDefault(); console.log(text); }}>"
         }
       ],
-      "diagram": "// Save as SearchForm.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/SearchForm.jsx\nimport React, { useState } from 'react';\nfunction SearchForm() {\n  const [text, setText] = useState('');\n  return (\n    <div className='container'>\n      <input\n        type='text'\n        value={text}\n        onChange={(e) => setText(e.target.value)}\n        className='border p-2 w-full rounded'\n        placeholder='Search lessons'\n      />\n      <button className='nav-button mt-2 w-full' onClick={() => console.log('Search:', text)}>\n        Search\n      </button>\n      <p className='text-lg mt-2'>You typed: {text}</p>\n    </div>\n  );\n}\nexport default SearchForm;\n// In App.jsx: import SearchForm from './components/SearchForm'; <SearchForm />",
+      "diagram": "// Save as SearchForm.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/SearchForm.jsx\n// Add to src/styles.css: .input-field { padding: 0.5rem; border: 2px solid #60a5fa; border-radius: 0.875rem; width: 100%; }\n// .input-field:focus { outline: none; box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.5); }\nimport React, { useState } from 'react';\nfunction SearchForm() {\n  const [text, setText] = useState('');\n  return (\n    <form className='bg-gray-50 p-2 mb-2' onSubmit={(e) => { e.preventDefault(); console.log('Search:', text); }}>\n      <input\n        className='input-field'\n        value={text}\n        onChange={(e) => setText(e.target.value)}\n        placeholder='Enter search term'\n      />\n      <button className='nav-button mt-2 w-full' type='submit'>\n        Search\n      </button>\n    </form>\n  );\n}\nexport default SearchForm;\n// In App.jsx: import SearchForm from './components/SearchForm'; <SearchForm />",
       "mcq": {
-        "question": "What makes an input controlled?",
-        "options": ["CSS styling", "State binding", "Props", "Functions"],
+        "question": "What makes an input 'controlled' in React?",
+        "options": ["It uses props", "Its value is tied to state", "It has no state", "It uses refs"],
         "correctAnswer": "b",
-        "explanation": "Controlled inputs bind their value to a state variable."
+        "explanation": "A controlled input’s value is managed by React state, updated via onChange."
       },
       "references": [
         {
           "title": "React Forms",
-          "description": "Guide to controlled inputs.",
+          "description": "Guide to controlled inputs in React.",
           "url": "https://react.dev/reference/react-dom/components/input"
         },
         {
@@ -546,206 +546,70 @@
       ]
     },
     {
-      "title": "Form Validation",
-      "introduction": "Validate inputs in the course app to ensure valid user data, like lesson answers.",
-      "coreConcept": "Validation checks input data and displays error messages.",
+      "title": "Dropdown Layout Enhancement",
+      "introduction": "Improve the course app’s usability by placing Training and Lesson dropdowns on separate lines for better readability.",
+      "coreConcept": "CSS Flexbox with column direction stacks dropdowns vertically for clarity.",
       "table": [
         {
-          "Concept": "Validate Input",
-          "Code": "const isValid = answer.length > 0;"
+          "Concept": "Flexbox Column",
+          "Code": ".nav-container { display: flex; flex-direction: column; gap: 1rem; }"
         },
         {
-          "Concept": "Show Error",
-          "Code": "{!isValid && <p className='text-red-600'>Answer required</p>}"
+          "Concept": "Styled Dropdown",
+          "Code": ".training-selector, .lesson-selector { padding: 0.5rem; border: 2px solid #60a5fa; border-radius: 0.875rem; width: 100%; }"
         }
       ],
-      "diagram": "// Save as AnswerForm.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/AnswerForm.jsx\nimport React, { useState } from 'react';\nfunction AnswerForm() {\n  const [answer, setAnswer] = useState('');\n  const [error, setError] = useState('');\n  const handleSubmit = () => {\n    if (answer.length === 0) {\n      setError('Answer is required');\n    } else {\n      setError('');\n      console.log('Submitted:', answer);\n    }\n  };\n  return (\n    <div className='container'>\n      <input\n        type='text'\n        value={answer}\n        onChange={(e) => setAnswer(e.target.value)}\n        className='border p-2 w-full rounded'\n        placeholder='Enter answer'\n      />\n      {error && <p className='text-red-600 mt-2'>{error}</p>}\n      <button className='nav-button mt-2 w-full' onClick={handleSubmit}>Submit</button>\n    </div>\n  );\n}\nexport default AnswerForm;\n// In App.jsx: import AnswerForm from './components/AnswerForm'; <AnswerForm />",
+      "diagram": "// Update src/styles.css\n.nav-container {\n  display: flex;\n  flex-direction: column;\n  gap: 1rem;\n  align-items: flex-start;\n}\n.selector-container {\n  display: flex;\n  flex-direction: column;\n  gap: 0.5rem;\n  width: 100%;\n}\n.training-selector, .lesson-selector {\n  background: linear-gradient(135deg, #fafbff 0%, #ffffff 100%);\n  color: #111827;\n  font-size: 1rem;\n  padding: 0.5rem;\n  border: 2px solid #60a5fa;\n  border-radius: 0.875rem;\n  width: 100%;\n  max-width: 20rem;\n}\n// Update src/App.jsx\n<div className='bg-gray-50 p-2 mb-2 nav-container'>\n  <div className='selector-container'>\n    <label htmlFor='training-selector' className='text-lg font-semibold'>Select Training:</label>\n    <select id='training-selector' className='training-selector' value={trainingFile} onChange={(e) => setTrainingFile(e.target.value)}>\n      {trainingFiles.map((file) => (\n        <option key={file} value={file}>{dataMap[file]?.displayName || file}</option>\n      ))}\n    </select>\n  </div>\n  <div className='selector-container'>\n    <label htmlFor='lesson-selector' className='text-lg font-semibold'>Select Lesson:</label>\n    <select id='lesson-selector' className='lesson-selector' value={currentLesson} onChange={(e) => setCurrentLesson(Number(e.target.value))}>\n      {lessonsData?.lessons?.map((lesson, index) => (\n        <option key={index} value={index}>{lesson.title}</option>\n      ))}\n    </select>\n  </div>\n</div>",
       "mcq": {
-        "question": "What is the purpose of form validation?",
-        "options": ["Style inputs", "Ensure data quality", "Fetch data", "Render UI"],
+        "question": "What CSS property stacks dropdowns vertically?",
+        "options": ["display: grid", "flex-direction: column", "align-items: center", "justify-content: space-between"],
         "correctAnswer": "b",
-        "explanation": "Validation ensures user inputs meet requirements."
+        "explanation": "flex-direction: column arranges flex items vertically."
       },
       "references": [
         {
-          "title": "React Form Validation",
-          "description": "Guide to validating forms.",
-          "url": "https://react.dev/learn/keeping-components-pure#step-3-add-some-input-handling"
+          "title": "MDN Flexbox",
+          "description": "Guide to CSS Flexbox.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout"
         },
         {
-          "title": "Validation Video",
-          "description": "Video on form validation.",
-          "url": "https://www.youtube.com/watch?v=b0IZo2Aho9Y"
+          "title": "Flexbox Video",
+          "description": "Video on CSS Flexbox.",
+          "url": "https://www.youtube.com/watch?v=phWxA89Dy94"
         }
       ]
     },
     {
-      "title": "Fetching Remote Data",
-      "introduction": "Fetch lesson data from an API to display in the course app dynamically.",
-      "coreConcept": "The fetch API retrieves JSON data for rendering in React components.",
+      "title": "Persisting State with localStorage",
+      "introduction": "Persist the selected training file and lesson in the course app using localStorage to maintain state across sessions.",
+      "coreConcept": "localStorage stores key-value pairs as strings, persisting data in the browser.",
       "table": [
         {
-          "Concept": "Fetch Data",
-          "Code": "fetch('url').then(res => res.json()).then(setData);"
+          "Concept": "Save to localStorage",
+          "Code": "localStorage.setItem('currentLesson', lessonIndex);"
         },
         {
-          "Concept": "Render Data",
-          "Code": "{data.map(item => <p key={item.id}>{item.name}</p>)}"
+          "Concept": "Read from localStorage",
+          "Code": "const savedLesson = localStorage.getItem('currentLesson');"
         }
       ],
-      "diagram": "// Save as DataFetcher.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/DataFetcher.jsx\nimport React, { useState, useEffect } from 'react';\nfunction DataFetcher() {\n  const [data, setData] = useState([]);\n  useEffect(() => {\n    fetch('https://jsonplaceholder.typicode.com/users')\n      .then(res => res.json())\n      .then(setData);\n  }, []);\n  return (\n    <div className='container'>\n      {data.map(user => (\n        <p key={user.id} className='p-2 text-lg'>{user.name}</p>\n      ))}\n    </div>\n  );\n}\nexport default DataFetcher;\n// In App.jsx: import DataFetcher from './components/DataFetcher'; <DataFetcher />",
+      "diagram": "// Update src/App.jsx\nimport React, { useState, useEffect } from 'react';\nfunction App() {\n  const [currentLesson, setCurrentLesson] = useState(() => {\n    const savedLesson = localStorage.getItem('currentLesson');\n    return savedLesson && !isNaN(parseInt(savedLesson, 10)) ? parseInt(savedLesson, 10) : 0;\n  });\n  const [trainingFile, setTrainingFile] = useState(() => {\n    const savedFile = localStorage.getItem('trainingFile');\n    return savedFile || 'lessons.json';\n  });\n  useEffect(() => {\n    localStorage.setItem('trainingFile', trainingFile);\n    localStorage.setItem('currentLesson', currentLesson);\n  }, [trainingFile, currentLesson]);\n  const handleStartOver = () => {\n    setTrainingFile('lessons.json');\n    setCurrentLesson(0);\n    localStorage.setItem('trainingFile', 'lessons.json');\n    localStorage.setItem('currentLesson', '0');\n  };\n  return (\n    <div className='container'>\n      <button className='nav-button w-full' onClick={handleStartOver}>Start Over</button>\n      <p>Selected: {trainingFile}, Lesson {currentLesson + 1}</p>\n    </div>\n  );\n}\nexport default App;",
       "mcq": {
-        "question": "What does fetch return?",
-        "options": ["A JSON object", "A Promise", "A component", "An array"],
+        "question": "What does localStorage persist?",
+        "options": ["Component props", "Browser data", "Server data", "React state"],
         "correctAnswer": "b",
-        "explanation": "fetch returns a Promise resolving to a Response object."
+        "explanation": "localStorage persists key-value pairs in the browser across sessions."
       },
       "references": [
         {
-          "title": "Fetch API",
-          "description": "Guide to using fetch.",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"
+          "title": "MDN localStorage",
+          "description": "Guide to localStorage API.",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"
         },
         {
-          "title": "API Fetch Video",
-          "description": "Video on fetching data.",
-          "url": "https://www.youtube.com/watch?v=T3Px88x_PsA"
-        }
-      ]
-    },
-    {
-      "title": "Error Handling",
-      "introduction": "Handle errors in the course app, like failed API calls, to improve reliability.",
-      "coreConcept": "Try-catch and state manage errors for user feedback.",
-      "table": [
-        {
-          "Concept": "Catch Errors",
-          "Code": "fetch(url).catch(err => setError(err.message));"
-        },
-        {
-          "Concept": "Display Error",
-          "Code": "{error && <p className='error-message'>{error}</p>}"
-        }
-      ],
-      "diagram": "// Save as ErrorHandler.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/ErrorHandler.jsx\nimport React, { useState, useEffect } from 'react';\nfunction ErrorHandler() {\n  const [data, setData] = useState([]);\n  const [error, setError] = useState(null);\n  useEffect(() => {\n    fetch('https://jsonplaceholder.typicode.com/users')\n      .then(res => {\n        if (!res.ok) throw new Error('Failed to fetch');\n        return res.json();\n      })\n      .then(setData)\n      .catch(err => setError(err.message));\n  }, []);\n  return (\n    <div className='container'>\n      {error && <p className='error-message'>{error}</p>}\n      {data.map(item => <p key={item.id} className='p-2'>{item.name}</p>)}\n    </div>\n  );\n}\nexport default ErrorHandler;\n// In App.jsx: import ErrorHandler from './components/ErrorHandler'; <ErrorHandler />",
-      "mcq": {
-        "question": "How do you handle fetch errors?",
-        "options": ["Use loops", "Use try-catch", "Use props", "Use JSX"],
-        "correctAnswer": "b",
-        "explanation": "Try-catch captures errors in async operations like fetch."
-      },
-      "references": [
-        {
-          "title": "React Error Handling",
-          "description": "Guide to error handling.",
-          "url": "https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary"
-        },
-        {
-          "title": "Error Handling Video",
-          "description": "Video on error handling.",
-          "url": "https://www.youtube.com/watch?v=8pKjULHzs0s"
-        }
-      ]
-    },
-    {
-      "title": "Styling with CSS",
-      "introduction": "Style the course app with CSS to match its blue-gray aesthetic, like the toggle switch.",
-      "coreConcept": "CSS with Tailwind-like classes styles components for consistency.",
-      "table": [
-        {
-          "Concept": "Style Component",
-          "Code": ".container { max-width: 100%; padding: 0.5rem; }"
-        },
-        {
-          "Concept": "Gradient Background",
-          "Code": ".bg-gray-800 { background: linear-gradient(135deg, #1f2937, #374151); }"
-        }
-      ],
-      "diagram": "// Save as styles.css\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/styles.css\n.container {\n  max-width: 100%;\n  padding: 0.5rem;\n  color: #111827;\n}\n.bg-gray-50 {\n  background: linear-gradient(135deg, #f9fafb, #e5e7eb);\n}\n.toggle-switch-label {\n  display: flex;\n  align-items: center;\n  gap: 0.5rem;\n  font-size: 1rem;\n  color: #111827;\n}\n.toggle-switch {\n  width: 48px;\n  height: 24px;\n  background: linear-gradient(135deg, #6b7280, #4b5563);\n  border-radius: 9999px;\n}\n.toggle-switch:checked {\n  background: linear-gradient(135deg, #3b82f6, #2563eb);\n}\n.toggle-slider {\n  width: 24px;\n  height: 24px;\n  background: #ffffff;\n  border: 1px solid #111827;\n  border-radius: 50%;\n}\n.toggle-switch:checked + .toggle-slider {\n  transform: translateX(24px);\n}\n// In App.jsx: import './styles.css'; <div className='container'><DiagramToggle /></div>",
-      "mcq": {
-        "question": "What does border-radius: 9999px do?",
-        "options": ["Sets color", "Rounds corners", "Adds padding", "Changes font"],
-        "correctAnswer": "b",
-        "explanation": "border-radius: 9999px creates fully rounded corners."
-      },
-      "references": [
-        {
-          "title": "MDN CSS",
-          "description": "Guide to CSS styling.",
-          "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
-        },
-        {
-          "title": "CSS Styling Video",
-          "description": "Video on CSS for React.",
-          "url": "https://www.youtube.com/watch?v=1Rs2ND1ryYc"
-        }
-      ]
-    },
-    {
-      "title": "Component Composition",
-      "introduction": "Combine components in the course app for a modular, reusable structure.",
-      "coreConcept": "Compose components by nesting them to build complex UIs.",
-      "table": [
-        {
-          "Concept": "Nest Components",
-          "Code": "<Parent><Child /></Parent>"
-        },
-        {
-          "Concept": "Pass Props",
-          "Code": "<Child title='Lesson' />"
-        }
-      ],
-      "diagram": "// Save as CourseApp.jsx\n// Create: /Users/adrian/Desktop/AI_Expert_Course_App/src/components/CourseApp.jsx\nimport React from 'react';\nimport LessonTitle from './LessonTitle';\nimport DiagramToggle from './DiagramToggle';\nfunction CourseApp({ lesson }) {\n  return (\n    <div className='container'>\n      <LessonTitle title={lesson.title} />\n      <DiagramToggle diagram={lesson.diagram} />\n    </div>\n  );\n}\nexport default CourseApp;\n// In App.jsx: import CourseApp from './components/CourseApp'; <CourseApp lesson={{title: 'JS', diagram: 'Sample'}} />",
-      "mcq": {
-        "question": "What is component composition?",
-        "options": ["Styling", "Nesting components", "Fetching data", "Managing state"],
-        "correctAnswer": "b",
-        "explanation": "Composition involves nesting components to build UIs."
-      },
-      "references": [
-        {
-          "title": "React Composition",
-          "description": "Guide to component composition.",
-          "url": "https://react.dev/learn/sharing-state-between-components"
-        },
-        {
-          "title": "Composition Video",
-          "description": "Video on React composition.",
-          "url": "https://www.youtube.com/watch?v=3xaO-7w2X_k"
-        }
-      ]
-    },
-    {
-      "title": "Deploying the App",
-      "introduction": "Deploy the course app to share it online using Vite’s build tools.",
-      "coreConcept": "Vite’s build command creates optimized files for production deployment.",
-      "table": [
-        {
-          "Concept": "Build App",
-          "Code": "npm run build"
-        },
-        {
-          "Concept": "Deploy to GitHub Pages",
-          "Code": "npm run deploy"
-        }
-      ],
-      "diagram": "// Run in /Users/adrian/Desktop/AI_Expert_Course_App/\n// Create vite.config.js: echo 'export default { base: \"/AI_Expert_Course_App/\" }' > vite.config.js\n// Install gh-pages: npm install --save-dev gh-pages\n// Add to package.json: \"scripts\": { \"deploy\": \"gh-pages -d dist\" }\nnpm run build\nnpm run deploy\n// Access at: https://<your-username>.github.io/AI_Expert_Course_App/\n// In App.jsx: Ensure all components (e.g., LessonSelector, DiagramToggle) are imported",
-      "mcq": {
-        "question": "What does npm run build produce?",
-        "options": ["Dev server", "Optimized files", "JSON data", "Components"],
-        "correctAnswer": "b",
-        "explanation": "npm run build creates optimized files for production."
-      },
-      "references": [
-        {
-          "title": "Vite Deployment",
-          "description": "Guide to deploying Vite apps.",
-          "url": "https://vitejs.dev/guide/static-deploy.html"
-        },
-        {
-          "title": "Deployment Video",
-          "description": "Video on deploying React apps.",
-          "url": "https://www.youtube.com/watch?v=7Vo_VhSwq0U"
+          "title": "localStorage Video",
+          "description": "Video on using localStorage.",
+          "url": "https://www.youtube.com/watch?v=AwicscsvGLg"
         }
       ]
     }

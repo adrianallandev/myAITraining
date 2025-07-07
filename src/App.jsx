@@ -8,8 +8,18 @@ function App() {
       const parsedLesson = parseInt(savedLesson, 10);
       return savedLesson && !isNaN(parsedLesson) ? parsedLesson : 0;
     } catch (error) {
-      console.error('Failed to read from localStorage:', error);
+      console.error('Failed to read currentLesson from localStorage:', error);
       return 0;
+    }
+  });
+
+  const [trainingFile, setTrainingFile] = useState(() => {
+    try {
+      const savedFile = localStorage.getItem('trainingFile');
+      return savedFile || 'lessons.json';
+    } catch (error) {
+      console.error('Failed to read trainingFile from localStorage:', error);
+      return 'lessons.json';
     }
   });
 
@@ -18,7 +28,6 @@ function App() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isCorrect, setIsCorrect] = useState(null);
-  const [trainingFile, setTrainingFile] = useState('lessons.json');
   const [lessonsData, setLessonsData] = useState(null);
   const [error, setError] = useState(null);
   const [trainingFiles, setTrainingFiles] = useState([]);
@@ -94,6 +103,17 @@ function App() {
     loadTrainingFiles();
   }, []);
 
+  // Save trainingFile and currentLesson to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('trainingFile', trainingFile);
+      localStorage.setItem('currentLesson', currentLesson);
+      console.log('Saved to localStorage:', { trainingFile, currentLesson });
+    } catch (error) {
+      console.error('Failed to save to localStorage:', error);
+    }
+  }, [trainingFile, currentLesson]);
+
   // Validate data and set lessonsData
   useEffect(() => {
     const validateData = (data, file) => {
@@ -133,7 +153,10 @@ function App() {
         setTrainingFiles(['fallback']);
       } else {
         setLessonsData(result.data);
-        setCurrentLesson(0); // Reset to first lesson
+        if (currentLesson >= result.data.lessons.length || currentLesson < 0) {
+          console.log('Resetting currentLesson to 0 due to invalid index');
+          setCurrentLesson(0);
+        }
       }
     };
 
@@ -141,16 +164,6 @@ function App() {
       loadTraining();
     }
   }, [trainingFile, dataMap]);
-
-  // Save currentLesson to localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem('currentLesson', currentLesson);
-      console.log('Saved currentLesson:', currentLesson);
-    } catch (error) {
-      console.error('Failed to save to localStorage:', error);
-    }
-  }, [currentLesson]);
 
   // Reset MCQ state when lesson or file changes
   useEffect(() => {
@@ -165,15 +178,6 @@ function App() {
     window.scrollTo(0, 0);
     console.log('Scrolled to top for lesson:', currentLesson);
   }, [currentLesson]);
-
-  // Reset currentLesson if invalid
-  useEffect(() => {
-    if (lessonsData && (!lessonsData.lessons || !Array.isArray(lessonsData.lessons) || lessonsData.lessons.length === 0 || currentLesson >= lessonsData.lessons.length || currentLesson < 0)) {
-      console.log('Resetting currentLesson to 0 due to invalid index or lessons data');
-      setCurrentLesson(0);
-      localStorage.removeItem('currentLesson');
-    }
-  }, [currentLesson, lessonsData]);
 
   // Handle ESC key for modal
   useEffect(() => {
@@ -202,7 +206,21 @@ function App() {
     });
   };
 
-  // Define lesson with useMemo before any rendering
+  // Handle reset to start
+  const handleStartOver = () => {
+    console.log('Starting over: resetting to lessons.json and lesson 0');
+    setTrainingFile('lessons.json');
+    setCurrentLesson(0);
+    try {
+      localStorage.setItem('trainingFile', 'lessons.json');
+      localStorage.setItem('currentLesson', '0');
+      console.log('Reset localStorage:', { trainingFile: 'lessons.json', currentLesson: 0 });
+    } catch (error) {
+      console.error('Failed to reset localStorage:', error);
+    }
+  };
+
+  // Define lesson with useMemo
   const lesson = useMemo(() => {
     if (!lessonsData?.lessons || !Array.isArray(lessonsData.lessons) || lessonsData.lessons.length === 0) {
       console.warn('No valid lessons data, returning null');
@@ -218,6 +236,9 @@ function App() {
         <div className="error-message p-2 mb-2">
           <p>{error}</p>
           <p>Ensure valid JSON files are in src/data/ or contact support.</p>
+          <button className="retry-button" onClick={handleStartOver}>
+            Start Over
+          </button>
         </div>
       </div>
     );
@@ -265,13 +286,16 @@ function App() {
       {error && (
         <div className="error-message p-2 mb-2">
           <p>{error}</p>
+          <button className="retry-button" onClick={handleStartOver}>
+            Start Over
+          </button>
         </div>
       )}
 
-      <div className="bg-gray-50 p-2 mb-2">
-        <div className="flex items-center gap-2 flex-wrap">
+      <div className="bg-gray-50 p-2 mb-2 nav-container">
+        <div className="selector-container">
           <label htmlFor="training-selector" className="text-lg font-semibold">
-            Training:
+            Select Training:
           </label>
           <select
             id="training-selector"
@@ -292,8 +316,10 @@ function App() {
               <option value="fallback">Fallback Training</option>
             )}
           </select>
+        </div>
+        <div className="selector-container">
           <label htmlFor="lesson-selector" className="text-lg font-semibold">
-            Lesson:
+            Select Lesson:
           </label>
           <select
             id="lesson-selector"
@@ -312,6 +338,9 @@ function App() {
             )}
           </select>
         </div>
+        <button className="nav-button w-full" onClick={handleStartOver}>
+          Start Over
+        </button>
         {lessonsData && (
           <p className="text-lg font-semibold mt-2">
             Lesson {currentLesson + 1} of {lessonsData.lessons.length}
@@ -322,6 +351,9 @@ function App() {
       {!lesson ? (
         <div className="error-message p-2 mb-2">
           <p>Loading lesson data...</p>
+          <button className="retry-button" onClick={handleStartOver}>
+            Start Over
+          </button>
         </div>
       ) : (
         <>
