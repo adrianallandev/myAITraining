@@ -4,11 +4,14 @@ import './styles.css';
 function App() {
   const [currentLesson, setCurrentLesson] = useState(() => {
     try {
-      const savedLesson = localStorage.getItem('currentLesson');
+      const savedLessons = localStorage.getItem('lessonHistory');
+      const savedFile = localStorage.getItem('trainingFile') || 'lessons.json';
+      const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+      const savedLesson = lessonMap[savedFile];
       const parsedLesson = parseInt(savedLesson, 10);
-      return savedLesson && !isNaN(parsedLesson) ? parsedLesson : 0;
+      return savedLesson !== undefined && !isNaN(parsedLesson) ? parsedLesson : 0;
     } catch (error) {
-      console.error('Failed to read currentLesson from localStorage:', error);
+      console.error('Failed to read lessonHistory from localStorage:', error);
       return 0;
     }
   });
@@ -81,6 +84,15 @@ function App() {
           setTrainingFiles(['fallback']);
           setDataMap({ 'fallback': fallbackData });
           setTrainingFile('fallback');
+          setCurrentLesson(0);
+          try {
+            const savedLessons = localStorage.getItem('lessonHistory');
+            const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+            lessonMap['fallback'] = 0;
+            localStorage.setItem('lessonHistory', JSON.stringify(lessonMap));
+          } catch (error) {
+            console.error('Failed to initialize lessonHistory for fallback:', error);
+          }
         } else {
           console.log('Loaded training files:', loadedFiles);
           setTrainingFiles(loadedFiles);
@@ -88,6 +100,15 @@ function App() {
           if (!loadedFiles.includes(trainingFile)) {
             console.warn(`Selected file ${trainingFile} not found, defaulting to lessons.json`);
             setTrainingFile('lessons.json');
+            setCurrentLesson(0);
+            try {
+              const savedLessons = localStorage.getItem('lessonHistory');
+              const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+              lessonMap['lessons.json'] = 0;
+              localStorage.setItem('lessonHistory', JSON.stringify(lessonMap));
+            } catch (error) {
+              console.error('Failed to initialize lessonHistory:', error);
+            }
           }
         }
       } catch (err) {
@@ -97,22 +118,74 @@ function App() {
         setTrainingFiles(['fallback']);
         setDataMap({ 'fallback': fallbackData });
         setTrainingFile('fallback');
+        setCurrentLesson(0);
+        try {
+          const savedLessons = localStorage.getItem('lessonHistory');
+          const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+          lessonMap['fallback'] = 0;
+          localStorage.setItem('lessonHistory', JSON.stringify(lessonMap));
+        } catch (error) {
+          console.error('Failed to initialize lessonHistory for fallback:', error);
+        }
       }
     };
 
     loadTrainingFiles();
   }, []);
 
-  // Save trainingFile and currentLesson to localStorage
+  // Save trainingFile to localStorage
   useEffect(() => {
     try {
       localStorage.setItem('trainingFile', trainingFile);
-      localStorage.setItem('currentLesson', currentLesson);
-      console.log('Saved to localStorage:', { trainingFile, currentLesson });
+      console.log('Saved trainingFile to localStorage:', trainingFile);
     } catch (error) {
-      console.error('Failed to save to localStorage:', error);
+      console.error('Failed to save trainingFile to localStorage:', error);
     }
-  }, [trainingFile, currentLesson]);
+  }, [trainingFile]);
+
+  // Save lessonHistory to localStorage only when currentLesson changes
+  useEffect(() => {
+    try {
+      const savedLessons = localStorage.getItem('lessonHistory');
+      const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+      lessonMap[trainingFile] = currentLesson;
+      localStorage.setItem('lessonHistory', JSON.stringify(lessonMap));
+      console.log('Saved lessonHistory to localStorage:', { trainingFile, lessonHistory: lessonMap });
+    } catch (error) {
+      console.error('Failed to save lessonHistory to localStorage:', error);
+    }
+  }, [currentLesson]);
+
+  // Load lesson history when trainingFile or dataMap changes
+  useEffect(() => {
+    try {
+      const savedLessons = localStorage.getItem('lessonHistory');
+      const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+      const savedLesson = lessonMap[trainingFile];
+      const parsedLesson = parseInt(savedLesson, 10);
+      const maxLesson = dataMap[trainingFile]?.lessons?.length - 1 || 0;
+      if (savedLesson !== undefined && !isNaN(parsedLesson) && parsedLesson >= 0 && parsedLesson <= maxLesson) {
+        setCurrentLesson(parsedLesson);
+        console.log(`Loaded lesson for ${trainingFile}:`, parsedLesson);
+      } else {
+        setCurrentLesson(0);
+        lessonMap[trainingFile] = 0;
+        localStorage.setItem('lessonHistory', JSON.stringify(lessonMap));
+        console.log(`No valid saved lesson for ${trainingFile}, initialized to 0`);
+      }
+    } catch (error) {
+      console.error('Failed to load lessonHistory for', trainingFile, ':', error);
+      setCurrentLesson(0);
+      try {
+        const savedLessons = localStorage.getItem('lessonHistory');
+        const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+        lessonMap[trainingFile] = 0;
+        localStorage.setItem('lessonHistory', JSON.stringify(lessonMap));
+      } catch (err) {
+        console.error('Failed to initialize lessonHistory for', trainingFile, ':', err);
+      }
+    }
+  }, [trainingFile, dataMap]);
 
   // Validate data and set lessonsData
   useEffect(() => {
@@ -141,6 +214,14 @@ function App() {
         if (result.valid) {
           setTrainingFile(defaultFile);
           setError(`Invalid data in ${dataMap[trainingFile]?.displayName || trainingFile}. Loaded ${dataMap[defaultFile].displayName} instead.`);
+          try {
+            const savedLessons = localStorage.getItem('lessonHistory');
+            const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+            lessonMap[defaultFile] = lessonMap[defaultFile] || 0;
+            localStorage.setItem('lessonHistory', JSON.stringify(lessonMap));
+          } catch (error) {
+            console.error('Failed to initialize lessonHistory for default file:', error);
+          }
         }
       }
 
@@ -151,11 +232,28 @@ function App() {
         setTrainingFile('fallback');
         setDataMap((prev) => ({ ...prev, 'fallback': fallbackData }));
         setTrainingFiles(['fallback']);
+        setCurrentLesson(0);
+        try {
+          const savedLessons = localStorage.getItem('lessonHistory');
+          const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+          lessonMap['fallback'] = 0;
+          localStorage.setItem('lessonHistory', JSON.stringify(lessonMap));
+        } catch (error) {
+          console.error('Failed to initialize lessonHistory for fallback:', error);
+        }
       } else {
         setLessonsData(result.data);
         if (currentLesson >= result.data.lessons.length || currentLesson < 0) {
           console.log('Resetting currentLesson to 0 due to invalid index');
           setCurrentLesson(0);
+          try {
+            const savedLessons = localStorage.getItem('lessonHistory');
+            const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+            lessonMap[trainingFile] = 0;
+            localStorage.setItem('lessonHistory', JSON.stringify(lessonMap));
+          } catch (error) {
+            console.error('Failed to reset lessonHistory for', trainingFile, ':', error);
+          }
         }
       }
     };
@@ -206,17 +304,18 @@ function App() {
     });
   };
 
-  // Handle reset to start
+  // Handle reset to start for current training file only
   const handleStartOver = () => {
-    console.log('Starting over: resetting to lessons.json and lesson 0');
-    setTrainingFile('lessons.json');
+    console.log(`Starting over for ${trainingFile}: resetting lesson to 0`);
     setCurrentLesson(0);
     try {
-      localStorage.setItem('trainingFile', 'lessons.json');
-      localStorage.setItem('currentLesson', '0');
-      console.log('Reset localStorage:', { trainingFile: 'lessons.json', currentLesson: 0 });
+      const savedLessons = localStorage.getItem('lessonHistory');
+      const lessonMap = savedLessons ? JSON.parse(savedLessons) : {};
+      lessonMap[trainingFile] = 0;
+      localStorage.setItem('lessonHistory', JSON.stringify(lessonMap));
+      console.log('Reset lessonHistory for', trainingFile, ':', lessonMap);
     } catch (error) {
-      console.error('Failed to reset localStorage:', error);
+      console.error('Failed to reset lessonHistory in localStorage:', error);
     }
   };
 
